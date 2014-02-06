@@ -1,18 +1,20 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2014-01-29T17:40:13
+# Project created by QtCreator 2014-02-05T18:18:06
 #
 #-------------------------------------------------
 
-QT       += core
+QT       += core gui
 
-QT       -= gui
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = Server
-CONFIG   += console
-CONFIG   -= app_bundle
-
 TEMPLATE = app
 
 
 SOURCES += main.cpp
+
+unix:!macx: LIBS += -L$$OUT_PWD/../Shared/ -lShared
+
+INCLUDEPATH += $$PWD/../Shared
+DEPENDPATH += $$PWD/../Shared

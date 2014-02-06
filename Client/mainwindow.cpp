@@ -1,5 +1,3 @@
-//obligatory header comment subversion test
-
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 

@@ -3,15 +3,15 @@
 #include <sys/socket.h>
 #include <unistd.h>
 #include <QTimer>
-#include "app.h"
+#include "serverapp.h"
 #include "universe.h"
 #include "simpledatamanager.h"
 
-int App::sighupFd[2];
-int App::sigtermFd[2];
-int App::sigintFd[2];
+int ServerApp::sighupFd[2];
+int ServerApp::sigtermFd[2];
+int ServerApp::sigintFd[2];
 
-App::App(QObject *parent) :
+ServerApp::ServerApp(QObject *parent) :
     QObject(parent)
 {
     // Create socket pairs for SIGHUP, SIGTERM, and SIGINT
@@ -44,7 +44,7 @@ App::App(QObject *parent) :
     connect(&tickTimer, SIGNAL(timeout()), this, SLOT(tick()));
 }
 
-void App::tick()
+void ServerApp::tick()
 {
     // Main server loop
     // Calculate time since last tick in ms
@@ -55,7 +55,7 @@ void App::tick()
     datamanager->saveBodies(universe->getBodies());
 }
 
-void App::start()
+void ServerApp::start()
 {
     // Start the simulation
     qDebug() << "Starting simulation...";
@@ -64,7 +64,7 @@ void App::start()
     timer.start();
 }
 
-void App::stop()
+void ServerApp::stop()
 {
     // Stop the simulation
     tickTimer.stop();
@@ -77,26 +77,26 @@ void App::stop()
 }
 
 // Unix signal handlers
-void App::hupSignalHandler(int)
+void ServerApp::hupSignalHandler(int)
 {
     char a = 1;
     ::write(sighupFd[0], &a, sizeof(a));
 }
 
-void App::termSignalHandler(int)
+void ServerApp::termSignalHandler(int)
 {
     char a = 1;
     ::write(sigtermFd[0], &a, sizeof(a));
 }
 
-void App::intSignalHandler(int)
+void ServerApp::intSignalHandler(int)
 {
     char a = 1;
     ::write(sigintFd[0], &a, sizeof(a));
 }
 
 // Qt SLOTs handlers
-void App::handleSigTerm()
+void ServerApp::handleSigTerm()
 {
     snTerm->setEnabled(false);
     char tmp;
@@ -108,7 +108,7 @@ void App::handleSigTerm()
     snTerm->setEnabled(true);
 }
 
-void App::handleSigHup()
+void ServerApp::handleSigHup()
 {
     snHup->setEnabled(false);
     char tmp;
@@ -120,7 +120,7 @@ void App::handleSigHup()
     snHup->setEnabled(true);
 }
 
-void App::handleSigInt()
+void ServerApp::handleSigInt()
 {
     snInt->setEnabled(false);
     char tmp;

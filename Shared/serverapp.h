@@ -10,11 +10,11 @@
 #include "universe.h"
 #include "shared_global.h"
 
-class SHAREDSHARED_EXPORT App : public QObject
+class SHAREDSHARED_EXPORT ServerApp : public QObject
 {
     Q_OBJECT
 public:
-    explicit App(QObject *parent = 0);
+    explicit ServerApp(QObject *parent = 0);
 
     // Unix signal handlers, called by system.
     static void hupSignalHandler(int unused);

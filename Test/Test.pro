@@ -1,21 +1,26 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2014-02-05T18:18:06
+# Project created by QtCreator 2014-02-10T18:54:57
 #
 #-------------------------------------------------
-QT       += core
+
+QT       += testlib
 
 QT       -= gui
 
+TARGET = tst_testvector
 CONFIG   += console
 CONFIG   -= app_bundle
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-
-TARGET = pixspaceserver
 TEMPLATE = app
 
-SOURCES += main.cpp
+
+SOURCES += tst_testvector.cpp \
+    main.cpp
+DEFINES += SRCDIR=\\\"$$PWD/\\\"
+
+HEADERS += \
+    tst_testvector.h
 
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../Shared/release/ -lpixspace
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../Shared/debug/ -lpixspace

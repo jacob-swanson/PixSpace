@@ -6,31 +6,33 @@
 
 QT       -= gui
 
-TARGET = Shared
+TARGET = pixspace
 TEMPLATE = lib
+CONFIG += staticlib
 
 DEFINES += SHARED_LIBRARY
 
-SOURCES += shared.cpp \
-    app.cpp \
-    body.cpp \
-    simpledatamanager.cpp \
-    universe.cpp \
-    vector.cpp
+SOURCES += private/body.cpp \
+    private/simpledatamanager.cpp \
+    private/universe.cpp \
+    private/vector.cpp \
+    private/serverapp.cpp
 
-HEADERS += shared.h\
-        shared_global.h \
-    app.h \
-    body.h \
-    datamanager.h \
-    simpledatamanager.h \
-    universe.h \
-    vector.h
+HEADERS += private/shared_global.h \
+    private/body.h \
+    private/datamanager.h \
+    private/simpledatamanager.h \
+    private/universe.h \
+    private/vector.h \
+    private/serverapp.h \
+    SimpleDataManager \
+    Universe \
+    Vector \
+    Body \
+    DataManager \
+    ServerApp
 
 unix {
     target.path = /usr/lib
     INSTALLS += target
 }
-
-SUBDIRS += \
-    Server.pro

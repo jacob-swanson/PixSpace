@@ -1,4 +1,5 @@
 #include <QDebug>
+#include <QFile>
 #include <QTextStream>
 #include "simpledatamanager.h"
 
@@ -9,14 +10,21 @@ SimpleDataManager::SimpleDataManager()
 
 void SimpleDataManager::saveBodies(QList<Body*> bodies)
 {
-    foreach(Body* b, bodies)
-    {
-        // Output x and y position of a moveable body
-        if (b->isMoveable())
+    QFile logFile("orbit.data");
+
+    if (logFile.open(QFile::WriteOnly | QFile::Append)) {
+        QTextStream out(&logFile);
+
+        foreach(Body* b, bodies)
         {
-            //qDebug() << qSetRealNumberPrecision(10) << b->getPosition().getX() << " " << b->getPosition().getY();// << " " << b->getAcceleration().getX() << " " << b->getAcceleration().getY() << " " << b->getVelocity().getX() << " " << b->getVelocity().getY();
+            // Output x and y position of a moveable body
+            if (b->isMoveable())
+            {
+                out << qSetRealNumberPrecision(10) << b->getPosition().getX() << " " << b->getPosition().getY();// << " " << b->getAcceleration().getX() << " " << b->getAcceleration().getY() << " " << b->getVelocity().getX() << " " << b->getVelocity().getY();
+            }
         }
     }
+
 }
 
 QList<Body*> SimpleDataManager::loadBodies()

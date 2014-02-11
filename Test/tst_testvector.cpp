@@ -1,6 +1,6 @@
 #include <QDebug>
 #include "tst_testvector.h"
-#include "vector.h"
+#include <Vector>
 
 TestVector::TestVector()
 {

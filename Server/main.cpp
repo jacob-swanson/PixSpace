@@ -2,7 +2,7 @@
 #include <QTimer>
 #include <signal.h>
 #include <QDebug>
-#include "serverapp.h"
+#include <ServerApp>
 
 // Source: http://qt-project.org/doc/qt-5/unix-signals.html
 static int setup_unix_signal_handlers()

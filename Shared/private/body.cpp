@@ -117,3 +117,7 @@ bool Body::isForcesEmpty()
     return this->forces.isEmpty();
 }
 
+void Body::setAffectedByGravity(bool affectedByGravity)
+{
+    this->affectedByGravity = affectedByGravity;
+}

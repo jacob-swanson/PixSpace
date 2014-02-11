@@ -101,3 +101,19 @@ void Body::setVelocity(double xvel, double yvel)
     this->velocity.setX(xvel);
     this->velocity.setY(yvel);
 }
+
+void Body::pushForce(Vector force)
+{
+    this->forces.push(force);
+}
+
+Vector Body::popForce()
+{
+    return this->forces.pop();
+}
+
+bool Body::isForcesEmpty()
+{
+    return this->forces.isEmpty();
+}
+

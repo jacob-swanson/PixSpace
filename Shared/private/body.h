@@ -1,6 +1,7 @@
 #ifndef BODY_H
 #define BODY_H
 #include <QString>
+#include <QStack>
 #include "vector.h"
 #include "shared_global.h"
 
@@ -88,15 +89,42 @@ public:
      */
     void setPosition(double xpos, double ypos);
 
+    /**
+     * @brief setMoveable If true, the Body's position will not be affected in the Universe's calculation
+     * @param moveable
+     */
     void setMoveable(bool moveable);
 
+    /**
+     * @brief setVelocity Set Body's velocity by using components
+     * @param xvel
+     * @param yvel
+     */
     void setVelocity(double xvel, double yvel);
 
+    /**
+     * @brief pushForce Push a new force onto the Stack
+     * @param force
+     */
+    void pushForce(Vector force);
+
+    /**
+     * @brief popForce Pop the top force and return it
+     * @return
+     */
+    Vector popForce();
+
+    /**
+     * @brief isForcesEmpty True if the Stack of forces is empty, false otherwise
+     * @return
+     */
+    bool isForcesEmpty();
 
 protected:
     Vector position;
     Vector velocity;
     Vector acceleration;
+    QStack<Vector> forces;
     double rotation;
     double mass;
     double diameter;

@@ -3,7 +3,7 @@
 
 Universe::Universe()
 {
-    this->timeAcceleration = 100;
+    this->timeAcceleration = 100000;
 }
 
 void Universe::simulateStep(double deltaTime)
@@ -12,7 +12,7 @@ void Universe::simulateStep(double deltaTime)
     foreach (Body* b1, this->bodies)
     {
         // Acceleration from all bodies
-        Vector accTotal;
+        //Vector accTotal;
 
         // Calculate force from Gravity from all other bodies
         foreach (Body* b2, this->bodies)
@@ -29,28 +29,32 @@ void Universe::simulateStep(double deltaTime)
                 double r2 = r * r;
                 double f = G * (combinedMass / r2);
 
-                // Acceleration due to gravity
-                double a = f / b1->getMass();
-
-                // Direction of acceleration
-                Vector accDir = delta.normalized();
-
-                // Total acceleration
-                accTotal += accDir * a;
+                // Add directional force to body
+                if (b1->isAffectedByGravity())
+                {
+                    Vector force = delta.normalized() * f;
+                    b1->pushForce(force);
+                }
             }
         }
-
-        // Set the acceleration
-        b1->setAcceleration(accTotal);
     }
 
     foreach (Body* b1, this->bodies)
     {
         // Update the velocity and position
-        if (b1->isMoveable())
+        while(!b1->isForcesEmpty())
         {
-            b1->updateVelocity(b1->getAcceleration()*this->timeAcceleration*deltaTime);
-            b1->updatePosition(b1->getVelocity()*this->timeAcceleration*deltaTime);
+            // Calculate acceleration from the force
+            Vector force = b1->popForce();
+            Vector acceleration = force / b1->getMass();
+
+            // Apply acceleration and velocity
+            b1->updateVelocity(acceleration * this->timeAcceleration * deltaTime);
+
+            if (b1->isMoveable())
+            {
+                b1->updatePosition(b1->getVelocity() * this->timeAcceleration * deltaTime);
+            }
         }
 
         // Tick the body

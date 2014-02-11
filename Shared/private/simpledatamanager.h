@@ -1,5 +1,6 @@
 #ifndef SIMPLEDATAMANAGER_H
 #define SIMPLEDATAMANAGER_H
+#include <QTextStream>
 #include "datamanager.h"
 #include "shared_global.h"
 

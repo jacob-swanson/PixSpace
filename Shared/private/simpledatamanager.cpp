@@ -4,8 +4,7 @@
 #include "simpledatamanager.h"
 
 SimpleDataManager::SimpleDataManager()
-{
-
+{    
 }
 
 void SimpleDataManager::saveBodies(QList<Body*> bodies)
@@ -20,7 +19,8 @@ void SimpleDataManager::saveBodies(QList<Body*> bodies)
             // Output x and y position of a moveable body
             if (b->isMoveable())
             {
-                out << qSetRealNumberPrecision(10) << b->getPosition().getX() << " " << b->getPosition().getY();// << " " << b->getAcceleration().getX() << " " << b->getAcceleration().getY() << " " << b->getVelocity().getX() << " " << b->getVelocity().getY();
+                //qDebug() << qSetRealNumberPrecision(10) << b->getPosition().getX() << " " << b->getPosition().getY();// << " " << b->getAcceleration().getX() << " " << b->getAcceleration().getY() << " " << b->getVelocity().getX() << " " << b->getVelocity().getY();
+                out << qSetRealNumberPrecision(10) << b->getPosition().getX() << " " << b->getPosition().getY() << "\n";// << " " << b->getAcceleration().getX() << " " << b->getAcceleration().getY() << " " << b->getVelocity().getX() << " " << b->getVelocity().getY();
             }
         }
     }

@@ -54,7 +54,7 @@ public:
     void updateVelocity(Vector velocity);
 
     /**
-     * @brief setVelocity Set Body's velocity by using components
+     * @brief setVelocity Set Body's velocity by using components (Units: m/s)
      * @param xvel
      * @param yvel
      */
@@ -108,13 +108,13 @@ public:
     void setAffectedByGravity(bool affectedByGravity);
 
     /**
-     * @brief pushForce Push a new force onto the Stack
+     * @brief pushForce Push a new force onto the Stack (Units: N)
      * @param force
      */
     void pushForce(Vector force);
 
     /**
-     * @brief popForce Pop the top force and return it
+     * @brief popForce Pop the top force and return it (Units: N)
      * @return
      */
     Vector popForce();

@@ -1,5 +1,6 @@
 #include "renderbody.h"
 
-RenderBody::RenderBody()
+RenderBody::RenderBody() :
+    Body()
 {
 }

@@ -17,7 +17,8 @@ SOURCES += private/body.cpp \
     private/universe.cpp \
     private/vector.cpp \
     private/serverapp.cpp \
-    private/renderbody.cpp
+    private/renderbody.cpp \
+    private/clientapp.cpp
 
 HEADERS += private/shared_global.h \
     private/body.h \
@@ -33,7 +34,8 @@ HEADERS += private/shared_global.h \
     DataManager \
     ServerApp \
     private/renderbody.h \
-    RenderBody
+    RenderBody \
+    private/clientapp.h
 
 unix {
     target.path = /usr/lib

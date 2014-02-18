@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += gui
+QT       += gui widgets
 
 TARGET = pixspace
 TEMPLATE = lib

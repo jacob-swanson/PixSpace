@@ -1,6 +1,8 @@
 #ifndef SIMPLEDATAMANAGER_H
 #define SIMPLEDATAMANAGER_H
 #include <QTextStream>
+#include <QString>
+#include <QtSql/QSqlDatabase>
 #include "datamanager.h"
 #include "shared_global.h"
 
@@ -21,6 +23,12 @@ public:
     QList<Body*> loadBodies();
 
     /**
+     * @brief loadShips Returns an empty list
+     * @return
+     */
+    QList<Body*> loadShip(QString id);
+
+    /**
      * @brief saveConfig Stub
      */
     void saveConfig(QHash<QString, QString>);
@@ -30,6 +38,9 @@ public:
      * @return
      */
     QHash<QString, QString> loadConfig();
+
+private:
+    QSqlDatabase db;
 };
 
 #endif // SIMPLEDATAMANAGER_H

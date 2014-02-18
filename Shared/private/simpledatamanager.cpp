@@ -1,10 +1,25 @@
 #include <QDebug>
 #include <QFile>
 #include <QTextStream>
+#include <QtSql/QSqlQuery>
+#include <QtSql/QSqlQueryModel>
+#include <QtSql/QSqlError>
 #include "simpledatamanager.h"
 
 SimpleDataManager::SimpleDataManager()
-{    
+{
+    db = QSqlDatabase::addDatabase( "QMYSQL" );
+    db.setHostName( "pavelow.eng.uah.edu" );
+    db.setPort(3300);
+    db.setDatabaseName( "cpe353" );
+    db.setUserName( "dummy" );
+    db.setPassword( "aeiou1234" );
+
+    if ( !db.open() )
+    {
+        qDebug() << db.lastError();
+        qDebug() << "Error: Unable to connect due to above error";
+    }
 }
 
 void SimpleDataManager::saveBodies(QList<Body*> bodies)
@@ -51,6 +66,17 @@ QList<Body*> SimpleDataManager::loadBodies()
 
     return bodies;
 }
+
+QList<Body*> SimpleDataManager::loadShip(QString id)
+{
+    QSqlQuery query;
+    query.prepare("SELECT Art "
+                  "FROM ships NATURAL JOIN art "
+                  "WHERE id=?");
+    query.bindValue(0, id);
+    query.exec();
+}
+
 
 void SimpleDataManager::saveConfig(QHash<QString, QString>)
 {

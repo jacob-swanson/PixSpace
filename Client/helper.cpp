@@ -61,10 +61,25 @@ Helper::Helper()
 
 void Helper::paint(QPainter *painter, QPaintEvent *event, int elapsed)
 {
+    painter->save();
     // Draw stuff
     painter->fillRect(event->rect(), background);
-    painter->setPen(textPen);
-    painter->setFont(textFont);
-    painter->drawText(QPoint(200, 200), QStringLiteral("Test"));
-    painter->drawPixmap(50, 50, this->ship);
+
+    int shipx = 50;
+    int shipy = 50;
+    int sizex = 200;
+    int sizey = 200;
+    int cx = sizex - shipx;
+    int cy = sizey - shipy;
+
+    // Center on ship
+    QTransform transform;
+    transform.translate(cx, cy);
+    painter->setWorldTransform(transform);
+
+    // Draw ship
+    painter->translate(shipx - this->ship.width()/2, shipy - this->ship.height()/2);
+    painter->drawPixmap(0, 0, this->ship);
+
+    painter->restore();
 }

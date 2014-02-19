@@ -70,8 +70,8 @@ QList<Body*> SimpleDataManager::loadBodies()
 bool SimpleDataManager::loadBodySprite(QString id, QString &sprite)
 {
     QSqlQuery query;
-    query.prepare("SELECT Sprite "
-                  "FROM ships NATURAL JOIN art "
+    query.prepare("SELECT sprite "
+                  "FROM body NATURAL JOIN sprite "
                   "WHERE id=?");
     query.bindValue(0, id);
 

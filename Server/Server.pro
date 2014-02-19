@@ -3,7 +3,7 @@
 # Project created by QtCreator 2014-02-05T18:18:06
 #
 #-------------------------------------------------
-QT       += core
+QT       += core sql
 
 QT       -= gui
 

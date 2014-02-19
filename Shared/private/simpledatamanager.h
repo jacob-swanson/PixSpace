@@ -23,10 +23,12 @@ public:
     QList<Body*> loadBodies();
 
     /**
-     * @brief loadShips Returns an empty list
-     * @return
+     * @brief loadBodySprite Loads a sprite in the xpm format
+     * @param id Id of the Sprite in the database
+     * @param sprite Returning variable for the sprite
+     * @return True if the art was loaded, false otherwise
      */
-    QList<Body*> loadShip(QString id);
+    bool loadBodySprite(QString id, QString &sprite);
 
     /**
      * @brief saveConfig Stub

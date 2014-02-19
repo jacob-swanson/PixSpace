@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += gui widgets
+QT       += gui widgets sql
 
 TARGET = pixspace
 TEMPLATE = lib

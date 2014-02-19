@@ -67,14 +67,26 @@ QList<Body*> SimpleDataManager::loadBodies()
     return bodies;
 }
 
-QList<Body*> SimpleDataManager::loadShip(QString id)
+bool SimpleDataManager::loadBodySprite(QString id, QString &sprite)
 {
     QSqlQuery query;
-    query.prepare("SELECT Art "
+    query.prepare("SELECT Sprite "
                   "FROM ships NATURAL JOIN art "
                   "WHERE id=?");
     query.bindValue(0, id);
+
     query.exec();
+
+    if (query.next())
+    {
+        sprite = query.value(0).toString();
+
+        return true;
+    }
+
+    qDebug() << "Sprite for: " << id << " not found in database.";
+
+    return false;
 }
 
 

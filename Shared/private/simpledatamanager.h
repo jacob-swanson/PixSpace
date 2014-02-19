@@ -28,7 +28,7 @@ public:
      * @param sprite Returning variable for the sprite
      * @return True if the art was loaded, false otherwise
      */
-    bool loadBodySprite(QString id, QString &sprite);
+    bool loadBodySprite(QString id, QString *sprite);
 
     /**
      * @brief saveConfig Stub

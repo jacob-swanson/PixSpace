@@ -8,12 +8,12 @@
 
 SimpleDataManager::SimpleDataManager()
 {
-    db = QSqlDatabase::addDatabase( "QMYSQL" );
-    db.setHostName( "pavelow.eng.uah.edu" );
-    db.setPort(3300);
-    db.setDatabaseName( "cpe353" );
-    db.setUserName( "dummy" );
-    db.setPassword( "aeiou1234" );
+    db = QSqlDatabase::addDatabase( "QMYSQL3" );
+    db.setHostName( "localhost" );
+    db.setPort(3306);
+    db.setDatabaseName( "pixspace" );
+    db.setUserName( "pixspace" );
+    db.setPassword( "pixspace" );
 
     if ( !db.open() )
     {
@@ -67,7 +67,7 @@ QList<Body*> SimpleDataManager::loadBodies()
     return bodies;
 }
 
-bool SimpleDataManager::loadBodySprite(QString id, QString &sprite)
+bool SimpleDataManager::loadBodySprite(QString id, QString *sprite)
 {
     QSqlQuery query;
     query.prepare("SELECT sprite "
@@ -79,7 +79,7 @@ bool SimpleDataManager::loadBodySprite(QString id, QString &sprite)
 
     if (query.next())
     {
-        sprite = query.value(0).toString();
+        *sprite = query.value(0).toString();
 
         return true;
     }

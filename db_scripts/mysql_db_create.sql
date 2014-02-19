@@ -20,4 +20,4 @@ ON UPDATE CASCADE
 ) Engine InnoDB;
 
 CREATE USER 'pixspace'@'localhost' IDENTIFIED BY 'pixspace';
-GRANT SELECT, INSERT, UPDATE, DELETE on pixpace.* TO 'pixspace'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE on pixspace.* TO 'pixspace'@'localhost';

@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += testlib
+QT       += testlib sql
 
 QT       -= gui
 
@@ -17,12 +17,14 @@ TEMPLATE = app
 
 SOURCES += tst_testvector.cpp \
     main.cpp \
-    tst_testbody.cpp
+    tst_testbody.cpp \
+    tst_testrenderbody.cpp
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
 
 HEADERS += \
     tst_testvector.h \
-    tst_testbody.h
+    tst_testbody.h \
+    tst_testrenderbody.h
 
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../Shared/release/ -lpixspace
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../Shared/debug/ -lpixspace

@@ -1,53 +1,9 @@
 #include "helper.h"
 
+#include <QDebug>
 #include <QPainter>
 #include <QPaintEvent>
-
-static char * ship_xpm[] = {
-"32 32 11 1",
-" 	c None",
-".	c #000000",
-"+	c #A0D3FF",
-"@	c #2B9EFF",
-"#	c #535353",
-"$	c #BABABA",
-"%	c #BFA87C",
-"&	c #8C0C0C",
-"*	c #E86902",
-"=	c #FF9600",
-"-	c #050505",
-"................................",
-"...............+................",
-"..............+++...............",
-"............+++++++.............",
-"...........@+++++++@............",
-"..........#.@@+++@@.#...........",
-".........#$$..@@@..$$#..........",
-".........#%%$$...$$%%#..........",
-".........#%%%$$$$$%%%#..........",
-"........#&&%%%%%%%%%&&#.........",
-"........#&&&%%%%%%%&&&#.........",
-".......#&&&&&&%%%&&&&&&#........",
-".......##&&&&&&$&&&&&&##........",
-".........#####&$&#####..........",
-"......###....#&$&#....###.......",
-"......$$$####.#$#.#####$$.......",
-"......$$$$$$$#.#.#$$$$$$$.......",
-"......$$$$$$$$#.#$$$$$$$$.......",
-"......$$$$$$$$.#.$$$$$$$$.......",
-"......$$$$$$$$.$.$$$$$$$$.......",
-"......$$$$$$$.$$$.$$$$$$$.......",
-".....#$$$$$$$.$$$.$$$$$$$#......",
-".....#$$$$$$$.$$$.$$$$$$$#......",
-".....###$$$$.$$$$$.$$$$###......",
-"....########.$$$$$.########.....",
-"....########.#####.########.....",
-"....#.......#######.......#.....",
-"......*****.........*****.......",
-".....=****=....-...=*****=......",
-"......=***=........===**==......",
-"......====...........===........",
-"................................"};
+#include "../Shared/SimpleDataManager"
 
 Helper::Helper()
 {
@@ -56,7 +12,18 @@ Helper::Helper()
 
     background = QBrush(QColor(Qt::black));
 
-    ship = QPixmap(ship_xpm);
+    QString sprite;
+    SimpleDataManager dm;
+    if (dm.loadBodySprite(QString("a"), &sprite))
+    {
+        qDebug() << sprite;
+    }
+    else
+    {
+        qDebug() << "Could not load sprite";
+    }
+
+    //ship = QPixmap(ship_xpm);
 }
 
 void Helper::paint(QPainter *painter, QPaintEvent *event, int elapsed)
@@ -73,13 +40,13 @@ void Helper::paint(QPainter *painter, QPaintEvent *event, int elapsed)
     int cy = sizey - shipy;
 
     // Center on ship
-    QTransform transform;
-    transform.translate(cx, cy);
-    painter->setWorldTransform(transform);
+//    QTransform transform;
+//    transform.translate(cx, cy);
+//    painter->setWorldTransform(transform);
 
-    // Draw ship
-    painter->translate(shipx - this->ship.width()/2, shipy - this->ship.height()/2);
-    painter->drawPixmap(0, 0, this->ship);
+//    // Draw ship
+//    painter->translate(shipx - this->ship.width()/2, shipy - this->ship.height()/2);
+//    painter->drawPixmap(0, 0, this->ship);
 
     painter->restore();
 }

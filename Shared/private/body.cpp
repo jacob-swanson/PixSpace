@@ -121,3 +121,9 @@ void Body::setAffectedByGravity(bool affectedByGravity)
 {
     this->affectedByGravity = affectedByGravity;
 }
+
+
+QString Body::getId()
+{
+    return this->id;
+}

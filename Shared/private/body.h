@@ -125,6 +125,12 @@ public:
      */
     bool isForcesEmpty();
 
+    /**
+     * @brief getId Get the id of the body
+     * @return
+     */
+    QString getId();
+
 protected:
     Vector position;
     Vector velocity;

@@ -5,6 +5,7 @@
 #include <QPixmap>
 #include <QGraphicsPixmapItem>
 #include <QString>
+#include <QImage>
 
 class RenderBody : public Body
 {
@@ -17,6 +18,7 @@ public:
     void collisionOccurred(RenderBody);
     QGraphicsPixmapItem* getGraphicsItem();
     void loadImageByteArray(QString bodyId);
+    void applyMask(QImage* image, QImage* mask);
 
 private:
     QString spritePath;

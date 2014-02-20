@@ -29,7 +29,7 @@ public:
      * @param sprite Returning variable for the sprite
      * @return True if the art was loaded, false otherwise
      */
-    bool loadBodySprite(QString id, QByteArray *sprite);
+    bool loadBodySprite(QString id, QByteArray *sprite, QByteArray *mask);
 
     /**
      * @brief saveConfig Stub

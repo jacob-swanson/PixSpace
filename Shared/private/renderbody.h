@@ -21,6 +21,7 @@ public:
 private:
     QString spritePath;
     QByteArray rawSprite;
+    QByteArray rawMask;
     QPixmap sprite;
     QGraphicsPixmapItem *spriteGraphicsItem;
 };

@@ -67,10 +67,10 @@ QList<Body*> SimpleDataManager::loadBodies()
     return bodies;
 }
 
-bool SimpleDataManager::loadBodySprite(QString id, QByteArray *sprite)
+bool SimpleDataManager::loadBodySprite(QString id, QByteArray *sprite, QByteArray *mask)
 {
     QSqlQuery query;
-    query.prepare("SELECT sprite "
+    query.prepare("SELECT sprite, mask "
                   "FROM body NATURAL JOIN sprite "
                   "WHERE id=?");
     query.bindValue(0, id);
@@ -80,6 +80,7 @@ bool SimpleDataManager::loadBodySprite(QString id, QByteArray *sprite)
     if (query.next())
     {
         *sprite = query.value(0).toByteArray();
+        *mask = query.value(1).toByteArray();
 
         return true;
     }

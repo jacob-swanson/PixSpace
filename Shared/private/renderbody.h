@@ -3,7 +3,7 @@
 
 #include "body.h"
 #include <QPixmap>
-#include <QGraphicsItem>
+#include <QGraphicsPixmapItem>
 #include <QString>
 
 class RenderBody : public Body
@@ -15,14 +15,14 @@ public:
     void tick(double);
     void setSpritePath(QString spritePath);
     void collisionOccurred(RenderBody);
-    QPixmap getGraphicsItem();
+    QGraphicsPixmapItem* getGraphicsItem();
     void loadImageByteArray(QString bodyId);
 
 private:
     QString spritePath;
     QByteArray rawSprite;
     QPixmap sprite;
-    //QGraphicsItem *graphicsItem;
+    QGraphicsPixmapItem *spriteGraphicsItem;
 };
 
 #endif // RENDERBODY_H

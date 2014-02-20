@@ -33,7 +33,7 @@ void Helper::paint(QPainter *painter, QPaintEvent *event, int elapsed)
 
     // Draw ship
     //painter->translate(shipx - this->ship.width()/2, shipy - this->ship.height()/2);
-    painter->drawPixmap(200 - this->body.getGraphicsItem().width()/2, 200 - this->body.getGraphicsItem().height()/2, this->body.getGraphicsItem());
+    //painter->drawPixmap(200 - this->body.getGraphicsItem().width()/2, 200 - this->body.getGraphicsItem().height()/2, this->body.getGraphicsItem());
 
     painter->restore();
 }

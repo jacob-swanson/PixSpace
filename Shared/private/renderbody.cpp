@@ -24,28 +24,32 @@ void RenderBody::loadImageByteArray(QString bodyId)
 
 void RenderBody::createGraphic()
 {
-    //    QColor black;
-    //    QColor red;
 
-    //    black.setBlue(0);
-    //    black.setRed(0);
-    //    black.setGreen(0);
+    QImage image;
+    image.loadFromData(this->rawSprite);
 
-    //    red.setRed(0);
-    //    red.setBlue(255);
-    //    red.setGreen(0);
+    // Apply image filters
+//    QColor black;
+//    QColor red;
 
-//        QImage image;
-//        image.loadFromData(rawSprite);
-//    //    for (int x = 0; x < image.size().width(); x++) {
-//    //        for (int y = 0; y < image.size().height(); y++) {
-//    //            if (image.pixel(x, y) == black.rgb()) {
-//    //                image.setPixel(x, y, red.rgb());
-//    //            }
-//    //        }
-//    //    }
-//        this->ship.convertFromImage(image);
-    this->sprite.loadFromData(this->rawSprite);
+//    black.setBlue(0);
+//    black.setRed(0);
+//    black.setGreen(0);
+
+//    red.setRed(0);
+//    red.setBlue(255);
+//    red.setGreen(0);
+
+//    for (int x = 0; x < image.size().width(); x++) {
+//        for (int y = 0; y < image.size().height(); y++) {
+//            if (image.pixel(x, y) == black.rgb()) {
+//                image.setPixel(x, y, red.rgb());
+//            }
+//        }
+//    }
+
+    this->sprite.convertFromImage(image);
+    this->spriteGraphicsItem = new QGraphicsPixmapItem(this->sprite);
 }
 
 void RenderBody::tick(double)
@@ -64,7 +68,7 @@ void RenderBody::collisionOccurred(RenderBody)
 
 }
 
-QPixmap RenderBody::getGraphicsItem()
+QGraphicsPixmapItem* RenderBody::getGraphicsItem()
 {
-    return this->sprite;
+    return this->spriteGraphicsItem;
 }

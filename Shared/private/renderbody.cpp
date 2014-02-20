@@ -1,25 +1,51 @@
 #include "renderbody.h"
+#include "simpledatamanager.h"
+#include <QDebug>
 
-RenderBody::RenderBody(QString spritePath) :
+RenderBody::RenderBody() :
     Body()
 {
-    this->setSpritePath(spritePath);
-    createGraphic(); // this will load the graphic from spritePath
-
 }
 
 void RenderBody::render()
 {
 
+}
 
+void RenderBody::loadImageByteArray(QString bodyId)
+{
+    SimpleDataManager dm;
+    if (!dm.loadBodySprite(bodyId, &this->rawSprite))
+    {
+        // TODO: Exception
+        qDebug() << "Could not load sprite";
+    }
 }
 
 void RenderBody::createGraphic()
 {
-    //load pixmap from spritePath
-    sprite = new QPixmap();
-    sprite->load(spritePath);
-    this->graphicsItem = new QGraphicsPixmapItem(*sprite);
+    //    QColor black;
+    //    QColor red;
+
+    //    black.setBlue(0);
+    //    black.setRed(0);
+    //    black.setGreen(0);
+
+    //    red.setRed(0);
+    //    red.setBlue(255);
+    //    red.setGreen(0);
+
+//        QImage image;
+//        image.loadFromData(rawSprite);
+//    //    for (int x = 0; x < image.size().width(); x++) {
+//    //        for (int y = 0; y < image.size().height(); y++) {
+//    //            if (image.pixel(x, y) == black.rgb()) {
+//    //                image.setPixel(x, y, red.rgb());
+//    //            }
+//    //        }
+//    //    }
+//        this->ship.convertFromImage(image);
+    this->sprite.loadFromData(this->rawSprite);
 }
 
 void RenderBody::tick(double)
@@ -38,7 +64,7 @@ void RenderBody::collisionOccurred(RenderBody)
 
 }
 
-void RenderBody::getGraphicsItem()
+QPixmap RenderBody::getGraphicsItem()
 {
-
+    return this->sprite;
 }

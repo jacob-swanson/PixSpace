@@ -5,6 +5,7 @@
 #include <QPen>
 #include <QPaintEvent>
 #include <QBrush>
+#include <RenderBody>
 
 class Helper
 {
@@ -18,7 +19,7 @@ private:
     QFont textFont;
     QPen textPen;
     QBrush background;
-    QPixmap ship;
+    RenderBody body;
 };
 
 #endif

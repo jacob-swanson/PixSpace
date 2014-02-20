@@ -4,22 +4,25 @@
 #include "body.h"
 #include <QPixmap>
 #include <QGraphicsItem>
+#include <QString>
 
 class RenderBody : public Body
 {
 public:
-    RenderBody(QString spritePath);
+    RenderBody();
     void render();
     void createGraphic();
     void tick(double);
     void setSpritePath(QString spritePath);
     void collisionOccurred(RenderBody);
-    void getGraphicsItem();
+    QPixmap getGraphicsItem();
+    void loadImageByteArray(QString bodyId);
 
 private:
     QString spritePath;
-    QPixmap *sprite;
-    QGraphicsItem *graphicsItem;
+    QByteArray rawSprite;
+    QPixmap sprite;
+    //QGraphicsItem *graphicsItem;
 };
 
 #endif // RENDERBODY_H

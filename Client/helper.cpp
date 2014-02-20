@@ -3,6 +3,9 @@
 #include <QDebug>
 #include <QPainter>
 #include <QPaintEvent>
+#include <QTextStream>
+#include <vector>
+#include <QColor>
 #include "../Shared/SimpleDataManager"
 
 Helper::Helper()
@@ -12,7 +15,7 @@ Helper::Helper()
 
     background = QBrush(QColor(Qt::black));
 
-    QString sprite;
+    QByteArray sprite;
     SimpleDataManager dm;
     if (dm.loadBodySprite(QString("a"), &sprite))
     {
@@ -22,11 +25,28 @@ Helper::Helper()
     {
         qDebug() << "Could not load sprite";
     }
+    QColor black;
+    QColor red;
 
-    QByteArray ba = sprite.toLocal8Bit();
-    const char *ship_xpm = ba.data();
-    this->ship = QPixmap(ship_xpm);
-    qDebug() << ship;
+    black.setBlue(0);
+    black.setRed(0);
+    black.setGreen(0);
+
+    red.setRed(0);
+    red.setBlue(255);
+    red.setGreen(0);
+
+    QImage image;
+    image.loadFromData(sprite);
+    for (int x = 0; x < image.size().width(); x++) {
+        for (int y = 0; y < image.size().height(); y++) {
+            if (image.pixel(x, y) == black.rgb()) {
+                image.setPixel(x, y, red.rgb());
+            }
+        }
+    }
+    this->ship.convertFromImage(image);
+
 }
 
 void Helper::paint(QPainter *painter, QPaintEvent *event, int elapsed)

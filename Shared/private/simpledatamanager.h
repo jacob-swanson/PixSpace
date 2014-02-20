@@ -3,6 +3,7 @@
 #include <QTextStream>
 #include <QString>
 #include <QtSql/QSqlDatabase>
+#include <QByteArray>
 #include "datamanager.h"
 #include "shared_global.h"
 
@@ -28,7 +29,7 @@ public:
      * @param sprite Returning variable for the sprite
      * @return True if the art was loaded, false otherwise
      */
-    bool loadBodySprite(QString id, QString *sprite);
+    bool loadBodySprite(QString id, QByteArray *sprite);
 
     /**
      * @brief saveConfig Stub

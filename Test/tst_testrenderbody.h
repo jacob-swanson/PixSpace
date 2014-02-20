@@ -10,7 +10,6 @@ public:
     explicit TestRenderBody(QObject *parent = 0);
 
 private Q_SLOTS:
-    void testGetSprite();
 
 };
 

@@ -67,7 +67,7 @@ QList<Body*> SimpleDataManager::loadBodies()
     return bodies;
 }
 
-bool SimpleDataManager::loadBodySprite(QString id, QString *sprite)
+bool SimpleDataManager::loadBodySprite(QString id, QByteArray *sprite)
 {
     QSqlQuery query;
     query.prepare("SELECT sprite "
@@ -79,7 +79,7 @@ bool SimpleDataManager::loadBodySprite(QString id, QString *sprite)
 
     if (query.next())
     {
-        *sprite = query.value(0).toString();
+        *sprite = query.value(0).toByteArray();
 
         return true;
     }

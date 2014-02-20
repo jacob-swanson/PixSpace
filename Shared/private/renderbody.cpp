@@ -1,6 +1,6 @@
 #include "renderbody.h"
-#include "simpledatamanager.h"
 #include <QDebug>
+#include "dbdatamanager.h"
 
 RenderBody::RenderBody() :
     Body()
@@ -9,14 +9,12 @@ RenderBody::RenderBody() :
 
 void RenderBody::render()
 {
-
 }
 
 void RenderBody::loadImageByteArray(QString bodyId)
 {
     // DB access here
-    SimpleDataManager dm;
-    if (!dm.loadBodySprite(bodyId, &this->rawSprite, &this->rawMask))
+    if (!DBDataManager::instance()->loadBodySprite(bodyId, &this->rawSprite, &this->rawMask))
     {
         // TODO: Exception
         qDebug() << "Could not load sprite";

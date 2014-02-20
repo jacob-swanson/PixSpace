@@ -6,11 +6,28 @@
 #include <QByteArray>
 #include "datamanager.h"
 #include "shared_global.h"
+#include <QMutex>
 
 class SHAREDSHARED_EXPORT SimpleDataManager: public DataManager
 {
 public:
-    SimpleDataManager();
+    static SimpleDataManager* instance()
+    {
+        static QMutex mutex;
+        if (!m_Instance)
+        {
+            mutex.lock();
+
+            if (!m_Instance)
+            {
+                m_Instance = new SimpleDataManager;
+            }
+
+            mutex.unlock();
+        }
+
+        return m_Instance;
+    }
 
     /**
      * @brief saveBodies Output body parameters to command line
@@ -43,7 +60,14 @@ public:
     QHash<QString, QString> loadConfig();
 
 private:
+    SimpleDataManager() {}
+//    SimpleDataManager(const SimpleDataManager &); // Hide copy constructor
+//    SimpleDataManager& operator=(const SimpleDataManager &); // Hide assign operation
+
+    static SimpleDataManager* m_Instance;
+
     QSqlDatabase db;
+
 };
 
 #endif // SIMPLEDATAMANAGER_H

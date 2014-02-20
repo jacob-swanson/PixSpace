@@ -34,7 +34,6 @@ ServerApp::ServerApp(QObject *parent) :
 
     // Create objects
     this->universe = new Universe();
-    this->datamanager = new SimpleDataManager();
 
     // Load save data
     this->universe->setBodies(this->datamanager->loadBodies());

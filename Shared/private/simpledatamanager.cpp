@@ -6,21 +6,21 @@
 #include <QtSql/QSqlError>
 #include "simpledatamanager.h"
 
-SimpleDataManager::SimpleDataManager()
-{
-    db = QSqlDatabase::addDatabase( "QMYSQL3" );
-    db.setHostName( "localhost" );
-    db.setPort(3306);
-    db.setDatabaseName( "pixspace" );
-    db.setUserName( "pixspace" );
-    db.setPassword( "pixspace" );
+//SimpleDataManager::SimpleDataManager()
+//{
+//    db = QSqlDatabase::addDatabase( "QMYSQL3" );
+//    db.setHostName( "localhost" );
+//    db.setPort(3306);
+//    db.setDatabaseName( "pixspace" );
+//    db.setUserName( "pixspace" );
+//    db.setPassword( "pixspace" );
 
-    if ( !db.open() )
-    {
-        qDebug() << db.lastError();
-        qDebug() << "Error: Unable to connect due to above error";
-    }
-}
+//    if ( !db.open() )
+//    {
+//        qDebug() << db.lastError();
+//        qDebug() << "Error: Unable to connect due to above error";
+//    }
+//}
 
 void SimpleDataManager::saveBodies(QList<Body*> bodies)
 {

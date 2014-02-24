@@ -21,7 +21,7 @@ ON UPDATE CASCADE
 ) Engine InnoDB;
 
 CREATE USER 'pixspace'@'%' IDENTIFIED BY '%';
-GRANT SELECT, INSERT, UPDATE, DELETE on pixspace.* TO 'pixspace'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE on pixspace.* TO 'pixspace'@'%';
 
 INSERT INTO sprite (spriteId, sprite, mask) VALUES (
 'ship1',

@@ -1,3 +1,3 @@
 DROP DATABASE pixspace;
-DROP USER 'pixspace'@'%';
+DROP USER 'pixspace';
 

@@ -20,7 +20,7 @@ ON DELETE CASCADE
 ON UPDATE CASCADE
 ) Engine InnoDB;
 
-CREATE USER 'pixspace'@'localhost' IDENTIFIED BY 'pixspace';
+CREATE USER 'pixspace'@'%' IDENTIFIED BY '%';
 GRANT SELECT, INSERT, UPDATE, DELETE on pixspace.* TO 'pixspace'@'localhost';
 
 INSERT INTO sprite (spriteId, sprite, mask) VALUES (

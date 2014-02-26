@@ -22,6 +22,8 @@ private Q_SLOTS:
 //    void testTick();
     void testAffectedByGravity();
     void testForces();
+    void TestRead();
+    void TestWrite();
 
 };
 

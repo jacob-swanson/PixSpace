@@ -192,5 +192,17 @@ Vector Vector::sub(const Vector& right) const
 
     Vector result(x, y);
     return result;
-
 }
+
+void Vector::read(const QJsonObject &json)
+{
+    this->setX(json["x"].toDouble());
+    this->setY(json["y"].toDouble());
+}
+
+void Vector::write(QJsonObject &json) const
+{
+    json["x"] = this->x;
+    json["y"] = this->y;
+}
+

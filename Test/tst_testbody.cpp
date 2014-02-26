@@ -83,3 +83,13 @@ void TestBody::testForces()
     QCOMPARE(b.popForce(), Vector(1.0,1.0));
     QVERIFY(b.isForcesEmpty());
 }
+
+void TestVector::TestRead()
+{
+
+}
+
+void TestVector::TestWrite()
+{
+
+}

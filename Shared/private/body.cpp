@@ -122,8 +122,65 @@ void Body::setAffectedByGravity(bool affectedByGravity)
     this->affectedByGravity = affectedByGravity;
 }
 
-
 QString Body::getId()
 {
     return this->id;
 }
+
+void Body::setDiameter(double diameter)
+{
+    this->diameter = diameter;
+}
+
+double Body::getDiameter()
+{
+    return this->diameter;
+}
+
+void Body::setRotation(double rotation)
+{
+    this->rotation = rotation;
+}
+
+double Body::getRotation()
+{
+    return this->rotation;
+}
+
+void Body::read(const QJsonObject &json)
+{
+    this->position.read(json["position"].toObject());
+    this->velocity.read(json["velocity"].toObject());
+    this->acceleration.read(json["acceleration"].toObject());
+
+    this->setAffectedByGravity(json["gravity"].toBool());
+    this->setMass(json["mass"].toDouble());
+    this->setMoveable(json["moveable"].toBool());
+
+    this->setDiameter(json["diameter"].toDouble());
+    this->setRotation(json["rotation"].toDouble());
+}
+
+void Body::write(QJsonObject &json) const
+{
+    QJsonObject positionObject;
+    this->position.write(positionObject);
+
+    QJsonObject velocityObject;
+    this->velocity.write(velocityObject);
+
+    QJsonObject accelerationObject;
+    this->acceleration.write(accelerationObject);
+
+    json["position"] = positionObject;
+    json["velocity"] = velocityObject;
+    json["acceleration"] = accelerationObject;
+
+    json["gravity"] = this->affectedByGravity;
+    json["mass"] = this->mass;
+    json["moveable"] = this->moveable;
+    json["diameter"] = this->diameter;
+    json["rotation"] = this->rotation;
+}
+
+

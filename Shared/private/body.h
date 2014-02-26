@@ -2,6 +2,7 @@
 #define BODY_H
 #include <QString>
 #include <QStack>
+#include <QJsonObject>
 #include "vector.h"
 #include "shared_global.h"
 
@@ -130,6 +131,34 @@ public:
      * @return
      */
     QString getId();
+
+    /**
+     * @brief setDiameter Set the diameter (Units: m)
+     * @return
+     */
+    void setDiameter(double diameter);
+
+    /**
+     * @brief getDiameter Get the diameter (Units: m)
+     * @return
+     */
+    double getDiameter();
+
+    /**
+     * @brief setRotation Set the rotation (Units: Degrees)
+     * @return
+     */
+    void setRotation(double rotation);
+
+    /**
+     * @brief getRotation Get the rotation (Units: Degrees)
+     * @return
+     */
+    double getRotation();
+
+    // Serialization
+    void read(const QJsonObject &json);
+    void write(QJsonObject &json) const;
 
 protected:
     Vector position;

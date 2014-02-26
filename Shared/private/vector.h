@@ -1,5 +1,6 @@
 #ifndef VECTOR_H
 #define VECTOR_H
+#include <QJsonObject>
 #include "shared_global.h"
 
 class SHAREDSHARED_EXPORT Vector
@@ -68,6 +69,10 @@ public:
     // Relational and comparison operators
     bool operator==(const Vector& right) const;
     bool operator!=(const Vector& right) const;
+
+    // Serialization
+    void read(const QJsonObject &json);
+    void write(QJsonObject &json) const;
 
 private:
     double x, y;

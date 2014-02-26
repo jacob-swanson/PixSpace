@@ -24,7 +24,10 @@ private Q_SLOTS:
     void TestCompoundMultiply();
     void TestCompoundDivide();
     void TestEquals();
-    void TestNotEquals();};
+    void TestNotEquals();
+    void TestRead();
+    void TestWrite();
+};
 
 
 

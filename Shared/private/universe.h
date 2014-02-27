@@ -2,6 +2,7 @@
 #define UNIVERSE_H
 
 #include <QList>
+#include <QJsonArray>
 
 #include "body.h"
 #include "shared_global.h"
@@ -47,6 +48,18 @@ public:
      * @param deltaTime
      */
     void simulateStep(double deltaTime);
+
+    /**
+     * @brief read Read in from the given JSON object
+     * @param json
+     */
+    void read(const QJsonObject &json);
+
+    /**
+     * @brief write Write to the given JSON object
+     * @param json
+     */
+    void write(QJsonObject &json) const;
 
 private:
     // List of all bodies in simulation

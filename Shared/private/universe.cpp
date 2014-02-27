@@ -82,3 +82,34 @@ void Universe::setBodies(QList<Body *> bodies)
     // Set bodies
     this->bodies = bodies;
 }
+
+void Universe::read(const QJsonObject &json)
+{
+    // Read in the Universe
+    this->timeAcceleration = json["timeacceleration"].toDouble();
+
+    QJsonArray bodyArray = json["bodies"].toArray();
+    for (int i = 0; i < bodyArray.size(); i++)
+    {
+        QJsonObject bodyObject = bodyArray[i].toObject();
+
+        Body* b = new Body();
+        b->read(bodyObject);
+        this->pushBodies(b);
+    }
+}
+
+void Universe::write(QJsonObject &json) const
+{
+    // Write to JSON
+    json["timeacceleration"] = this->timeAcceleration;
+
+    QJsonArray bodyArray;
+    foreach(Body* b, this->bodies)
+    {
+        QJsonObject bodyObject;
+        b->write(bodyObject);
+        bodyArray.append(bodyObject);
+    }
+    json["bodies"] = bodyArray;
+}

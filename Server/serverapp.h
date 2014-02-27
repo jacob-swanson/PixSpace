@@ -6,6 +6,8 @@
 #include <QElapsedTimer>
 #include <QTimer>
 
+#include <DataManager>
+#include <Universe>
 #include "datamanager.h"
 #include "universe.h"
 #include "shared_global.h"

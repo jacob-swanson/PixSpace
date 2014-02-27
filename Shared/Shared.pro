@@ -15,16 +15,13 @@ DEFINES += SHARED_LIBRARY
 SOURCES += private/body.cpp \
     private/universe.cpp \
     private/vector.cpp \
-    private/serverapp.cpp \
     private/renderbody.cpp \
-    private/clientapp.cpp \
     private/datamanager.cpp
 
 HEADERS += \
     private/body.h \
     private/universe.h \
     private/vector.h \
-    private/serverapp.h \
     Universe \
     Vector \
     Body \
@@ -32,7 +29,6 @@ HEADERS += \
     ServerApp \
     private/renderbody.h \
     RenderBody \
-    private/clientapp.h \
     private/datamanager.h
 
 unix {

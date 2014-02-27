@@ -29,7 +29,7 @@ public:
      * @brief getPosition Get the position in the simulation (Units: meters)
      * @return
      */
-    Vector getPosition();
+    Vector getPosition() const;
 
     /**
      * @brief updatePosition Add position to the current position in the simulation (Units: m)
@@ -54,7 +54,7 @@ public:
      * @brief getVelocity Get the velocity in the simulation (Units: m/s)
      * @return
      */
-    Vector getVelocity();
+    Vector getVelocity() const;
 
     /**
      * @brief updateVelocity Add velocity to the current amount in the simulation (Units: m/s)
@@ -79,7 +79,7 @@ public:
      * @brief getAcceleration Get the acceleration in the simulation (Units: m/s^2)
      * @return
      */
-    Vector getAcceleration();
+    Vector getAcceleration() const;
 
     /**
      * @brief setAcceleration Set the acceleration in the simulation (Units: m/s^2)
@@ -91,7 +91,7 @@ public:
      * @brief getMass Get the mass in the simulation (Units: kg)
      * @return
      */
-    double getMass();
+    double getMass() const;
 
     /**
      * @brief setMass Set the mass in the simulation (Units: kg)
@@ -103,7 +103,7 @@ public:
      * @brief isMoveable True if the body will be moved by gravity; otherwise false.
      * @return
      */
-    bool isMoveable();
+    bool isMoveable() const;
 
     /**
      * @brief setMoveable If true, the Body's position will not be affected in the Universe's calculation
@@ -115,7 +115,7 @@ public:
      * @brief isAffectedByGravity True if gravity affects the body, false otherwise
      * @return
      */
-    bool isAffectedByGravity();
+    bool isAffectedByGravity() const;
 
     /**
      * @brief setAffectedByGravity Set true to have gravity forces calculated by Universe
@@ -138,13 +138,13 @@ public:
      * @brief isForcesEmpty True if the Stack of forces is empty, false otherwise
      * @return
      */
-    bool isForcesEmpty();
+    bool isForcesEmpty() const;
 
     /**
      * @brief getId Get the identifier
      * @return
      */
-    QString getId();
+    QString getId() const;
 
     /**
      * @brief setDiameter Set the diameter (Units: m)
@@ -156,7 +156,7 @@ public:
      * @brief getDiameter Get the diameter (Units: m)
      * @return
      */
-    double getDiameter();
+    double getDiameter() const;
 
     /**
      * @brief setRotation Set the rotation (Units: Degrees)
@@ -168,7 +168,7 @@ public:
      * @brief getRotation Get the rotation (Units: Degrees)
      * @return
      */
-    double getRotation();
+    double getRotation() const;
 
     /**
      * @brief read Read in from the given JSON object

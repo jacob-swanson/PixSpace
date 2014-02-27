@@ -59,7 +59,7 @@ void Universe::simulateStep(double deltaTime)
     }
 }
 
-QList<Body*>& Universe::getBodies()
+QList<Body*> Universe::getBodies() const
 {
     // Return list of bodies
     return this->bodies;

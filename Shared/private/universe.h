@@ -25,7 +25,7 @@ public:
      * @brief getBodies Get a QList of all of the Bodies in the simulation
      * @return
      */
-    QList<Body*>& getBodies();
+    QList<Body*> getBodies() const;
 
     /**
      * @brief pushBodies Push a new Body to the current List

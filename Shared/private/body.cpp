@@ -16,13 +16,13 @@ void Body::tick(double deltaTime)
     // Nothing to be done
 }
 
-Vector Body::getPosition()
+Vector Body::getPosition() const
 {
     // Return position vector
     return this->position;
 }
 
-double Body::getMass()
+double Body::getMass() const
 {
     // Return mass
     return this->mass;
@@ -34,7 +34,7 @@ void Body::setAcceleration(Vector acceleration)
     this->acceleration = acceleration;
 }
 
-bool Body::isMoveable()
+bool Body::isMoveable() const
 {
     // Return moveable
     return this->moveable;
@@ -46,7 +46,7 @@ void Body::updateVelocity(Vector velocity)
     this->velocity += velocity;
 }
 
-Vector Body::getAcceleration()
+Vector Body::getAcceleration() const
 {
     // Get acceleration
     return this->acceleration;
@@ -58,13 +58,13 @@ void Body::updatePosition(Vector position)
     this->position += position;
 }
 
-Vector Body::getVelocity()
+Vector Body::getVelocity() const
 {
     // Get velocity
     return this->velocity;
 }
 
-bool Body::isAffectedByGravity()
+bool Body::isAffectedByGravity() const
 {
     // Get affected by gravity
     return this->affectedByGravity;
@@ -120,7 +120,7 @@ Vector Body::popForce()
     return this->forces.pop();
 }
 
-bool Body::isForcesEmpty()
+bool Body::isForcesEmpty() const
 {
     // Check if the forces stack is empty
     return this->forces.isEmpty();
@@ -132,7 +132,7 @@ void Body::setAffectedByGravity(bool affectedByGravity)
     this->affectedByGravity = affectedByGravity;
 }
 
-QString Body::getId()
+QString Body::getId() const
 {
     // Get the id
     return this->id;
@@ -144,7 +144,7 @@ void Body::setDiameter(double diameter)
     this->diameter = diameter;
 }
 
-double Body::getDiameter()
+double Body::getDiameter() const
 {
     // Get the diameter
     return this->diameter;
@@ -156,7 +156,7 @@ void Body::setRotation(double rotation)
     this->rotation = rotation;
 }
 
-double Body::getRotation()
+double Body::getRotation() const
 {
     // Get the rotation
     return this->rotation;

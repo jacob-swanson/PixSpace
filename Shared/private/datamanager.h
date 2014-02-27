@@ -35,19 +35,19 @@ public:
      * @param sprite Returning variable for the sprite
      * @return True if the art was loaded, false otherwise
      */
-    bool loadBodySprite(QString id, QByteArray *sprite, QByteArray *mask);
+    bool loadBodySprite(QString id, QByteArray *sprite, QByteArray *mask) const;
 
     /**
      * @brief saveBodies Save a list of Bodies
      * @param bodies
      */
-    void saveBodies(QList<Body*> bodies);
+    void saveBodies(QList<Body*> bodies) const;
 
     /**
      * @brief loadBodies Load a list of Bodies
      * @return
      */
-    QList<Body*> loadBodies();
+    QList<Body*> loadBodies() const;
 
 private:
     // Hide constructor

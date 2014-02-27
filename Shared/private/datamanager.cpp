@@ -43,7 +43,7 @@ DataManager::DataManager()
     }
 }
 
-bool DataManager::loadBodySprite(QString id, QByteArray *sprite, QByteArray *mask)
+bool DataManager::loadBodySprite(QString id, QByteArray *sprite, QByteArray *mask) const
 {
     QSqlQuery query;
     query.prepare("SELECT sprite, mask "
@@ -66,7 +66,7 @@ bool DataManager::loadBodySprite(QString id, QByteArray *sprite, QByteArray *mas
     return false;
 }
 
-void DataManager::saveBodies(QList<Body*> bodies)
+void DataManager::saveBodies(QList<Body*> bodies) const
 {
     QFile logFile("orbit.data");
 
@@ -86,7 +86,7 @@ void DataManager::saveBodies(QList<Body*> bodies)
 
 }
 
-QList<Body*> DataManager::loadBodies()
+QList<Body*> DataManager::loadBodies() const
 {
     // Create Moon and Earth
     QList<Body*> bodies;

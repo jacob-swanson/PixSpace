@@ -20,7 +20,7 @@ SOURCES += private/body.cpp \
     private/clientapp.cpp \
     private/datamanager.cpp
 
-HEADERS += private/shared_global.h \
+HEADERS += \
     private/body.h \
     private/universe.h \
     private/vector.h \

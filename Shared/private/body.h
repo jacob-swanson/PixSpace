@@ -62,6 +62,12 @@ public:
     void setVelocity(double xvel, double yvel);
 
     /**
+     * @brief setVelocity Set Body's velocity (Units: m/s)
+     * @param velocity
+     */
+    void setVelocity(Vector velocity);
+
+    /**
      * @brief getAcceleration Get the acceleration of the Body (Units: m/s^2)
      * @return
      */

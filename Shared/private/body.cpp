@@ -102,6 +102,11 @@ void Body::setVelocity(double xvel, double yvel)
     this->velocity.setY(yvel);
 }
 
+void Body::setVelocity(Vector velocity)
+{
+    this->velocity = velocity;
+}
+
 void Body::pushForce(Vector force)
 {
     this->forces.push(force);

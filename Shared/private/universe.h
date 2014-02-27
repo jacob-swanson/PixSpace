@@ -6,32 +6,39 @@
 #include "body.h"
 #include "shared_global.h"
 
+// Gravitational constant, G
 #define G 6.67e-11
 
+/**
+ * @brief The Universe class Runs simulation on all given Bodies
+ */
 class SHAREDSHARED_EXPORT Universe
 {
 public:
+    /**
+     * @brief Universe Create an empty Universe
+     */
     Universe();
 
     /**
-     * @brief getBodies Get a QList of all of the bodies in the simulation
+     * @brief getBodies Get a QList of all of the Bodies in the simulation
      * @return
      */
     QList<Body*>& getBodies();
 
     /**
-     * @brief pushBodies Push a new body to the current list
+     * @brief pushBodies Push a new Body to the current List
      */
     void pushBodies(Body*);
 
     /**
-     * @brief removeBody Remove a body from the Universe
-     * @return Returns true on success; otherwise returns false
+     * @brief removeBody Remove a Body from the Universe
+     * @return Returns True on success; otherwise returns False
      */
     bool removeBody(Body*);
 
     /**
-     * @brief setBodies Replace all of the current bodies
+     * @brief setBodies Replace all of the current Bodies with a new List
      */
     void setBodies(QList<Body*>);
 
@@ -42,8 +49,11 @@ public:
     void simulateStep(double deltaTime);
 
 private:
-    QList<Body*> bodies;    // List of all bodies in simulation
-    double timeAcceleration;    // Amount to accelerate time by
+    // List of all bodies in simulation
+    QList<Body*> bodies;
+
+    // Amount to accelerate time by
+    double timeAcceleration;
 };
 
 #endif // UNIVERSE_H

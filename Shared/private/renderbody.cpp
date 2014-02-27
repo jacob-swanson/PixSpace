@@ -5,13 +5,9 @@ RenderBody::RenderBody() :
 {
 }
 
-void RenderBody::render()
-{
-}
-
 void RenderBody::loadImageByteArray(QString bodyId)
 {
-    // DB access here
+    // Database access here
     if (!DataManager::instance()->loadBodySprite(bodyId, &this->rawSprite, &this->rawMask))
     {
         // TODO: Exception
@@ -90,23 +86,14 @@ void RenderBody::applyMask(QImage* image, QImage* mask)
     }
 }
 
-void RenderBody::tick(double)
+void RenderBody::tick(double deltaTime)
 {
-
-}
-
-
-void RenderBody::setSpritePath(QString spritePath)
-{
-    this->spritePath = spritePath;
-}
-
-void RenderBody::collisionOccurred(RenderBody)
-{
-
+    // Call the parent version of tick
+    Body::tick(deltaTime);
 }
 
 QGraphicsPixmapItem* RenderBody::getGraphicsItem()
 {
+    // Get the graphics item
     return this->spriteGraphicsItem;
 }

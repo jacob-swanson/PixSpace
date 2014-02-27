@@ -104,56 +104,67 @@ void Body::setVelocity(double xvel, double yvel)
 
 void Body::setVelocity(Vector velocity)
 {
+    // Set velocity
     this->velocity = velocity;
 }
 
 void Body::pushForce(Vector force)
 {
+    // Push a force onto the stack
     this->forces.push(force);
 }
 
 Vector Body::popForce()
 {
+    // Pop a force off of the stack
     return this->forces.pop();
 }
 
 bool Body::isForcesEmpty()
 {
+    // Check if the forces stack is empty
     return this->forces.isEmpty();
 }
 
 void Body::setAffectedByGravity(bool affectedByGravity)
 {
+    // Set affectedByGravity
     this->affectedByGravity = affectedByGravity;
 }
 
 QString Body::getId()
 {
+    // Get the id
     return this->id;
 }
 
 void Body::setDiameter(double diameter)
 {
+    // Set the diameter
     this->diameter = diameter;
 }
 
 double Body::getDiameter()
 {
+    // Get the diameter
     return this->diameter;
 }
 
 void Body::setRotation(double rotation)
 {
+    // Set the rotation
     this->rotation = rotation;
 }
 
 double Body::getRotation()
 {
+    // Get the rotation
     return this->rotation;
 }
 
 void Body::read(const QJsonObject &json)
 {
+    // Read in parameters from a JSON object
     this->position.read(json["position"].toObject());
     this->velocity.read(json["velocity"].toObject());
     this->acceleration.read(json["acceleration"].toObject());
@@ -168,6 +179,7 @@ void Body::read(const QJsonObject &json)
 
 void Body::write(QJsonObject &json) const
 {
+    // Write out "this" to a JSON object
     QJsonObject positionObject;
     this->position.write(positionObject);
 

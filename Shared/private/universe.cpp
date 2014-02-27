@@ -2,25 +2,24 @@
 
 Universe::Universe()
 {
+    // Set 100,000x time acceleration
     this->timeAcceleration = 100000;
 }
 
 void Universe::simulateStep(double deltaTime)
 {
-    // Loop through all bodies in Universe
+    // Loop through all Bodies in Universe calculating forces
     foreach (Body* b1, this->bodies)
     {
-        // Acceleration from all bodies
-        //Vector accTotal;
-
-        // Calculate force from Gravity from all other bodies
+        // Calculate force from Gravity from all other Bodies
         foreach (Body* b2, this->bodies)
         {
+            // If the Bodies are not the same, and the target Body is affected by gravity
             if ((b1 != b2) && b1->isAffectedByGravity()) {
-                // Distance vector between bodies
+                // Distance Vector between Bodies
                 Vector delta = b2->getPosition() - b1->getPosition();
 
-                // Magnitude of distance vector
+                // Magnitude of distance Vector
                 double r = delta.length();
 
                 // Force of gravity
@@ -28,16 +27,14 @@ void Universe::simulateStep(double deltaTime)
                 double r2 = r * r;
                 double f = G * (combinedMass / r2);
 
-                // Add directional force to body
-                if (b1->isAffectedByGravity())
-                {
-                    Vector force = delta.normalized() * f;
-                    b1->pushForce(force);
-                }
+                // Add directional force to Body
+                Vector force = delta.normalized() * f;
+                b1->pushForce(force);
             }
         }
     }
 
+    // Loop through all Bodies again to update their position, velocity, and acceleration
     foreach (Body* b1, this->bodies)
     {
         // Update the velocity and position
@@ -50,13 +47,14 @@ void Universe::simulateStep(double deltaTime)
             // Apply acceleration and velocity
             b1->updateVelocity(acceleration * this->timeAcceleration * deltaTime);
 
+            // If the Body is moveable, move it
             if (b1->isMoveable())
             {
                 b1->updatePosition(b1->getVelocity() * this->timeAcceleration * deltaTime);
             }
         }
 
-        // Tick the body
+        // Tick the body after it has been moved
         b1->tick(deltaTime);
     }
 }

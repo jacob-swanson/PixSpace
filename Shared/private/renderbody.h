@@ -10,24 +10,56 @@
 #include "body.h"
 #include "shared_global.h"
 
+/**
+ * @brief The RenderBody class Body class that will be rendered on screen, client-side
+ */
 class SHAREDSHARED_EXPORT RenderBody : public Body
 {
 public:
+    /**
+     * @brief RenderBody Initialize a RenderBody with default values
+     */
     RenderBody();
-    void render();
+
+    /**
+     * @brief createGraphic Create the QGraphicsPixmapItem with the mask applied
+     */
     void createGraphic();
+
+    /**
+     * @brief tick Update RenderBody specific things
+     */
     void tick(double);
-    void setSpritePath(QString spritePath);
-    void collisionOccurred(RenderBody);
+
+    /**
+     * @brief getGraphicsItem Get the Body's QGraphicsItem for adding to the QGraphicsScene
+     * @return
+     */
     QGraphicsPixmapItem* getGraphicsItem();
+
+    /**
+     * @brief loadImageByteArray Load the Body's sprite and mask via the bodyId
+     * @param bodyId
+     */
     void loadImageByteArray(QString bodyId);
-    void applyMask(QImage* image, QImage* mask);
+
 
 private:
-    QString spritePath;
+    /**
+     * @brief applyMask Randomly generate the colors from the mask
+     * @param image
+     * @param mask
+     */
+    void applyMask(QImage* image, QImage* mask);
+
+    // Raw PNG data for sprite and mask
     QByteArray rawSprite;
     QByteArray rawMask;
+
+    // Sprite to be rendered on the screen
     QPixmap sprite;
+
+    // GraphicsItem to be loaded into the QGraphicsScene
     QGraphicsPixmapItem *spriteGraphicsItem;
 };
 

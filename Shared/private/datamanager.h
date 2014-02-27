@@ -12,17 +12,20 @@
 #include "body.h"
 #include "shared_global.h"
 
+/**
+ * @brief The DataManager class Manages saving and loading
+ */
 class SHAREDSHARED_EXPORT DataManager
 {
 public:
     /**
-     * @brief instance Get the instance
+     * @brief instance Get the singleton instance
      * @return
      */
     static DataManager* instance();
 
     /**
-     * @brief drop Destroy the singleton
+     * @brief drop Destroy the singleton instance
      */
     static void drop();
 
@@ -35,13 +38,13 @@ public:
     bool loadBodySprite(QString id, QByteArray *sprite, QByteArray *mask);
 
     /**
-     * @brief saveBodies Save a list of bodies to the database
+     * @brief saveBodies Save a list of Bodies
      * @param bodies
      */
     void saveBodies(QList<Body*> bodies);
 
     /**
-     * @brief loadBodies Load a list of body
+     * @brief loadBodies Load a list of Bodies
      * @return
      */
     QList<Body*> loadBodies();

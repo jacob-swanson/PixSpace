@@ -8,87 +8,93 @@
 #include "vector.h"
 #include "shared_global.h"
 
+/**
+ * @brief The Body class Base class for Bodies in the simulation
+ */
 class SHAREDSHARED_EXPORT Body
 {
 public:
+    /**
+     * @brief Body Initialize a Body with default values (usually 0)
+     */
     Body();
 
     /**
-     * @brief tick Run any body specific code
+     * @brief tick Stub function to be implemented by a child class
      * @param deltaTime Time since the last tick
      */
     void tick(double deltaTime);
 
     /**
-     * @brief getPosition Get the position of the Body (Units: meters)
+     * @brief getPosition Get the position in the simulation (Units: meters)
      * @return
      */
     Vector getPosition();
 
     /**
-     * @brief updatePosition Add position to the current position (Units: m)
+     * @brief updatePosition Add position to the current position in the simulation (Units: m)
      * @param position
      */
     void updatePosition(Vector position);
 
     /**
-     * @brief setPosition Set the position of the body (Units: m)
+     * @brief setPosition Set the position in the simulation (Units: m)
      * @param position
      */
     void setPosition(Vector position);
 
     /**
-     * @brief setPosition Set the position of the body (Units: m)
+     * @brief setPosition Set the position in the simulation (Units: m)
      * @param xpos
      * @param ypos
      */
     void setPosition(double xpos, double ypos);
 
     /**
-     * @brief getVelocity Get the velocity of the Body (Units: m/s)
+     * @brief getVelocity Get the velocity in the simulation (Units: m/s)
      * @return
      */
     Vector getVelocity();
 
     /**
-     * @brief updateVelocity Add velocity to the current amount (Units: m/s)
+     * @brief updateVelocity Add velocity to the current amount in the simulation (Units: m/s)
      * @param velocity
      */
     void updateVelocity(Vector velocity);
 
     /**
-     * @brief setVelocity Set Body's velocity by using components (Units: m/s)
+     * @brief setVelocity Set Body's velocity in the simulation (Units: m/s)
      * @param xvel
      * @param yvel
      */
     void setVelocity(double xvel, double yvel);
 
     /**
-     * @brief setVelocity Set Body's velocity (Units: m/s)
+     * @brief setVelocity Set Body's velocity in the simulation (Units: m/s)
      * @param velocity
      */
     void setVelocity(Vector velocity);
 
     /**
-     * @brief getAcceleration Get the acceleration of the Body (Units: m/s^2)
+     * @brief getAcceleration Get the acceleration in the simulation (Units: m/s^2)
      * @return
      */
     Vector getAcceleration();
 
     /**
-     * @brief setAcceleration Set the acceleration of the Body (Units: m/s^2)
+     * @brief setAcceleration Set the acceleration in the simulation (Units: m/s^2)
      * @param acceleration
      */
     void setAcceleration(Vector acceleration);
 
     /**
-     * @brief getMass Get the mass of the body (Units: kg)
+     * @brief getMass Get the mass in the simulation (Units: kg)
      * @return
      */
     double getMass();
 
     /**
-     * @brief setMass Set the mass of the body (Units: kg)
+     * @brief setMass Set the mass in the simulation (Units: kg)
      * @param mass
      */
     void setMass(double mass);
@@ -135,7 +141,7 @@ public:
     bool isForcesEmpty();
 
     /**
-     * @brief getId Get the id of the body
+     * @brief getId Get the identifier
      * @return
      */
     QString getId();
@@ -164,21 +170,32 @@ public:
      */
     double getRotation();
 
-    // Serialization
+    /**
+     * @brief read Read in from the given JSON object
+     * @param json
+     */
     void read(const QJsonObject &json);
+
+    /**
+     * @brief write Write to the given JSON object
+     * @param json
+     */
     void write(QJsonObject &json) const;
 
 protected:
+    // Simulation variables
     Vector position;
     Vector velocity;
     Vector acceleration;
     QStack<Vector> forces;
-    double rotation;
     double mass;
-    double diameter;
-    bool moveable;
-    QString name;
     bool affectedByGravity;
+    bool moveable;
+
+    // Other variables
+    double rotation;
+    double diameter;
+    QString name;
 
 private:
     QString id;

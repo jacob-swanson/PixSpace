@@ -43,6 +43,17 @@ public:
      */
     void loadImageByteArray(QString bodyId);
 
+    /**
+     * @brief read Read in from the given JSON object
+     * @param json
+     */
+    void read(const QJsonObject &json);
+
+    /**
+     * @brief write Write to the given JSON object
+     * @param json
+     */
+    void write(QJsonObject &json) const;
 
 private:
     /**

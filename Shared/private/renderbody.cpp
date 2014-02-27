@@ -97,3 +97,19 @@ QGraphicsPixmapItem* RenderBody::getGraphicsItem()
     // Get the graphics item
     return this->spriteGraphicsItem;
 }
+
+void RenderBody::read(const QJsonObject &json)
+{
+    // Read in a JSON object
+    this->rawSprite = QByteArray::fromBase64(json["sprite"].toString().toLocal8Bit());
+    this->rawMask = QByteArray::fromBase64(json["mask"].toString().toLocal8Bit());
+}
+
+void RenderBody::write(QJsonObject &json) const
+{
+    // Write to a JSON object
+    Body::write(json);
+
+    json["sprite"] = QString(this->rawSprite.toBase64());
+    json["mask"] = QString(this->rawMask.toBase64());
+}

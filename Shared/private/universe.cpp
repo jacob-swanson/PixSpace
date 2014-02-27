@@ -88,6 +88,8 @@ void Universe::read(const QJsonObject &json)
     // Read in the Universe
     this->timeAcceleration = json["timeacceleration"].toDouble();
 
+    // Empty out Bodies just in case
+    this->bodies.clear();
     QJsonArray bodyArray = json["bodies"].toArray();
     for (int i = 0; i < bodyArray.size(); i++)
     {

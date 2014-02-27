@@ -3,16 +3,16 @@
 
 #include <QObject>
 #include <QSocketNotifier>
-#include <QElapsedTimer>
 #include <QTimer>
+#include <QElapsedTimer>
 
-#include <DataManager>
+#include <unistd.h>
+#include <sys/socket.h>
+
 #include <Universe>
-#include "datamanager.h"
-#include "universe.h"
-#include "shared_global.h"
+#include <DataManager>
 
-class SHAREDSHARED_EXPORT ServerApp : public QObject
+class ServerApp : public QObject
 {
     Q_OBJECT
 public:

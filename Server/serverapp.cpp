@@ -1,11 +1,4 @@
-#include <QDebug>
-#include <QElapsedTimer>
-#include <sys/socket.h>
-#include <unistd.h>
-#include <QTimer>
 #include "serverapp.h"
-#include "universe.h"
-#include "datamanager.h"
 
 int ServerApp::sighupFd[2];
 int ServerApp::sigtermFd[2];

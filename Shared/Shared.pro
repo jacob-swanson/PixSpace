@@ -18,7 +18,7 @@ SOURCES += private/body.cpp \
     private/renderbody.cpp \
     private/datamanager.cpp
 
-HEADERS += \
+HEADERS += private/shared_global.h \
     private/body.h \
     private/universe.h \
     private/vector.h \
@@ -26,7 +26,6 @@ HEADERS += \
     Vector \
     Body \
     DataManager \
-    ServerApp \
     private/renderbody.h \
     RenderBody \
     private/datamanager.h

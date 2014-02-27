@@ -1,6 +1,9 @@
 #ifndef VECTOR_H
 #define VECTOR_H
+
 #include <QJsonObject>
+#include <cmath>
+
 #include "shared_global.h"
 
 class SHAREDSHARED_EXPORT Vector

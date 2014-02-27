@@ -1,13 +1,16 @@
 #ifndef RENDERBODY_H
 #define RENDERBODY_H
 
-#include "body.h"
 #include <QPixmap>
 #include <QGraphicsPixmapItem>
 #include <QString>
 #include <QImage>
 
-class RenderBody : public Body
+#include "datamanager.h"
+#include "body.h"
+#include "shared_global.h"
+
+class SHAREDSHARED_EXPORT RenderBody : public Body
 {
 public:
     RenderBody();

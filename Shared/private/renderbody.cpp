@@ -1,6 +1,4 @@
 #include "renderbody.h"
-#include <QDebug>
-#include "datamanager.h"
 
 RenderBody::RenderBody() :
     Body()

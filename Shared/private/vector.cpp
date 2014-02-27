@@ -1,4 +1,3 @@
-#include <cmath>
 #include "vector.h"
 
 Vector::Vector()

@@ -1,4 +1,3 @@
-#include <QDebug>
 #include "universe.h"
 
 Universe::Universe()

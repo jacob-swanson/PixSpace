@@ -1,17 +1,18 @@
 #ifndef DATAMANAGER_H
 #define DATAMANAGER_H
+
 #include <QMutex>
 #include <QString>
 #include <QDebug>
 #include <QFile>
-#include <QTextStream>
 #include <QtSql/QSqlQuery>
 #include <QtSql/QSqlQueryModel>
 #include <QtSql/QSqlError>
 
 #include "body.h"
+#include "shared_global.h"
 
-class DataManager
+class SHAREDSHARED_EXPORT DataManager
 {
 public:
     /**

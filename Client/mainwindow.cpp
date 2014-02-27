@@ -1,12 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#include <QGridLayout>
-#include <QTimer>
-#include <QGraphicsView>
-#include <RenderBody>
-#include "spacegraphicsscene.h"
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)

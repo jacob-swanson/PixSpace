@@ -1,8 +1,10 @@
 #ifndef BODY_H
 #define BODY_H
+
 #include <QString>
 #include <QStack>
 #include <QJsonObject>
+
 #include "vector.h"
 #include "shared_global.h"
 

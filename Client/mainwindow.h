@@ -2,6 +2,14 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QGridLayout>
+#include <QTimer>
+#include <QGraphicsView>
+
+#include <RenderBody>
+
+#include "spacegraphicsscene.h"
+
 
 namespace Ui {
 class MainWindow;

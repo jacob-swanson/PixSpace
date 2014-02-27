@@ -1,10 +1,10 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "widget.h"
 
 #include <QGridLayout>
 #include <QTimer>
 #include <QGraphicsView>
+#include <RenderBody>
 #include "spacegraphicsscene.h"
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -13,15 +13,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-//    Widget *native = new Widget(&helper, this);
-
     QGridLayout *gridLayout = new QGridLayout;
-//    gridLayout->addWidget(native, 0, 0);
     this->ui->centralWidget->setLayout(gridLayout);
-
-//    QTimer *timer = new QTimer(this);
-//    connect(timer, SIGNAL(timeout()), native, SLOT(animate()));
-//    timer->start(50);
 
     QGraphicsView *view = new QGraphicsView();
     view->setBackgroundBrush(QBrush(Qt::black, Qt::SolidPattern));

@@ -1,34 +1,62 @@
 #ifndef DATAMANAGER_H
 #define DATAMANAGER_H
-#include <QList>
-#include <QHash>
-#include "body.h"
-#include "shared_global.h"
+#include <QMutex>
+#include <QString>
+#include <QDebug>
+#include <QFile>
+#include <QTextStream>
+#include <QtSql/QSqlQuery>
+#include <QtSql/QSqlQueryModel>
+#include <QtSql/QSqlError>
 
-class SHAREDSHARED_EXPORT DataManager
+#include "body.h"
+
+class DataManager
 {
 public:
     /**
-     * @brief saveBodies Save given list of bodies
-     */
-    virtual void saveBodies(QList<Body*>) = 0;
-
-    /**
-     * @brief loadBodies Load a list of bodies
+     * @brief instance Get the instance
      * @return
      */
-    virtual QList<Body*> loadBodies() = 0;
+    static DataManager* instance();
 
     /**
-     * @brief saveConfig Save a map of settings
+     * @brief drop Destroy the singleton
      */
-    virtual void saveConfig(QHash<QString, QString>) = 0;
+    static void drop();
 
     /**
-     * @brief loadConfig Load a map of settings
+     * @brief loadBodySprite Loads the data for a sprite
+     * @param id Id of the Sprite in the database
+     * @param sprite Returning variable for the sprite
+     * @return True if the art was loaded, false otherwise
+     */
+    bool loadBodySprite(QString id, QByteArray *sprite, QByteArray *mask);
+
+    /**
+     * @brief saveBodies Save a list of bodies to the database
+     * @param bodies
+     */
+    void saveBodies(QList<Body*> bodies);
+
+    /**
+     * @brief loadBodies Load a list of body
      * @return
      */
-    virtual QHash<QString, QString> loadConfig() = 0;
+    QList<Body*> loadBodies();
+
+private:
+    // Hide constructor
+    DataManager();
+
+    // Hide copy constructor
+    DataManager(const DataManager &);
+
+    // High assignment operator
+    DataManager& operator=(const DataManager &);
+
+    static DataManager* m_Instance;
+    QSqlDatabase db;
 };
 
 #endif // DATAMANAGER_H

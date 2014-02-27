@@ -2,7 +2,6 @@
 #include <QTimer>
 #include "tst_testvector.h"
 #include "tst_testbody.h"
-#include "tst_testrenderbody.h"
 
 int main(int argc, char *argv[])
 {

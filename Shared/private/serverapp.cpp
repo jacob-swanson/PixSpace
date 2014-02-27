@@ -5,7 +5,7 @@
 #include <QTimer>
 #include "serverapp.h"
 #include "universe.h"
-#include "simpledatamanager.h"
+#include "datamanager.h"
 
 int ServerApp::sighupFd[2];
 int ServerApp::sigtermFd[2];

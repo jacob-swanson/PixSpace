@@ -14,13 +14,9 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    helper.cpp \
-    widget.cpp \
     spacegraphicsscene.cpp
 
 HEADERS  += mainwindow.h \
-    helper.h \
-    widget.h \
     spacegraphicsscene.h
 
 FORMS    += mainwindow.ui

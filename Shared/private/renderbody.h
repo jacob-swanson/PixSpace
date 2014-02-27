@@ -44,6 +44,12 @@ public:
     void loadImageByteArray(QString bodyId);
 
     /**
+     * @brief getSprite Get the raw sprite
+     * @return
+     */
+    QByteArray getSprite();
+
+    /**
      * @brief read Read in from the given JSON object
      * @param json
      */

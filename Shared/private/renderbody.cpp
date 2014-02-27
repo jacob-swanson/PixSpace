@@ -98,6 +98,12 @@ QGraphicsPixmapItem* RenderBody::getGraphicsItem() const
     return this->spriteGraphicsItem;
 }
 
+QByteArray RenderBody::getSprite()
+{
+    return this->rawSprite;
+}
+
+
 void RenderBody::read(const QJsonObject &json)
 {
     // Read in a JSON object

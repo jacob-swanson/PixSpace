@@ -2,6 +2,7 @@
 #define TST_TESTBODY_H
 
 #include <QObject>
+#include <QtTest>
 
 class TestBody : public QObject
 {

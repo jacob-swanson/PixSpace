@@ -3,7 +3,6 @@
 NetworkServer::NetworkServer(QObject *parent) :
     QTcpServer(parent)
 {
-    listen(QHostAddress::Any);
 }
 
 void NetworkServer::incomingConnection(qintptr socketDescriptor)

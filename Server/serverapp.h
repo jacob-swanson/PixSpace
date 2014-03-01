@@ -12,6 +12,8 @@
 #include <Universe>
 #include <DataManager>
 
+#include "networkserver.h"
+
 class ServerApp : public QObject
 {
     Q_OBJECT
@@ -73,6 +75,7 @@ private:
     // Data structures
     Universe *universe;
     DataManager *datamanager;
+    NetworkServer *server;
 
     // Timers
     QElapsedTimer timer;

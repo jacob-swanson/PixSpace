@@ -31,6 +31,10 @@ ServerApp::ServerApp(QObject *parent) :
     // Load save data
     this->universe->setBodies(this->datamanager->loadBodies());
 
+    // Start listening
+    this->server = new NetworkServer(this);
+    this->server->listen(QHostAddress::Any, 6886);
+
     // Setup timers
     tickTimer.setInterval(16);
     connect(&tickTimer, SIGNAL(timeout()), this, SLOT(tick()));

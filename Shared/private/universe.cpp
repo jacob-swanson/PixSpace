@@ -1,6 +1,6 @@
 #include "universe.h"
 
-Universe::Universe()
+Universe::Universe() : QObject(0)
 {
     // Set 100,000x time acceleration
     this->timeAcceleration = 100000;
@@ -56,6 +56,9 @@ void Universe::simulateStep(double deltaTime)
 
         // Tick the body after it has been moved
         b1->tick(deltaTime);
+
+        // Emit the finished signal
+        emit stepFinished();
     }
 }
 

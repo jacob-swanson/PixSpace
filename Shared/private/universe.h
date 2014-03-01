@@ -3,6 +3,7 @@
 
 #include <QList>
 #include <QJsonArray>
+#include <QObject>
 
 #include "body.h"
 #include "shared_global.h"
@@ -13,8 +14,10 @@
 /**
  * @brief The Universe class Runs simulation on all given Bodies
  */
-class SHAREDSHARED_EXPORT Universe
+class SHAREDSHARED_EXPORT Universe : public QObject
 {
+    Q_OBJECT
+
 public:
     /**
      * @brief Universe Create an empty Universe
@@ -60,6 +63,12 @@ public:
      * @param json
      */
     void write(QJsonObject &json) const;
+
+signals:
+    /**
+     * @brief stepFinished Signal emitted when simulateStep() completes
+     */
+    void stepFinished();
 
 private:
     // List of all bodies in simulation

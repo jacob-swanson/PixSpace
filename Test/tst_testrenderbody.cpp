@@ -5,7 +5,7 @@ TestRenderBody::TestRenderBody(QObject *parent) :
 {
 }
 
-void testRead()
+void TestRenderBody::testRead()
 {
     RenderBody b;
 
@@ -20,7 +20,7 @@ void testRead()
     QVERIFY(false);
 }
 
-void testWrite()
+void TestRenderBody::testWrite()
 {
-
+    QVERIFY(false);
 }

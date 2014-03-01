@@ -1,6 +1,7 @@
 #include "universe.h"
 
-Universe::Universe() : QObject(0)
+Universe::Universe() :
+    QObject(0)
 {
     // Set 100,000x time acceleration
     this->timeAcceleration = 100000;

@@ -7,7 +7,8 @@ NetworkServer::NetworkServer(QObject *parent) :
 
 void NetworkServer::incomingConnection(qintptr socketDescriptor)
 {
-    Connection * connection = new Connection(this);
+    // Convert socketDescriptor to Connection
+    Connection *connection = new Connection(this);
     connection->setSocketDescriptor(socketDescriptor);
     emit newConnection(connection);
 }

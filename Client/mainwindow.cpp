@@ -35,7 +35,7 @@ MainWindow::MainWindow(QWidget *parent) :
     body3.getGraphicsItem()->setPos(500, 500);
     space->addItem(body3.getGraphicsItem());
 
-    this->connection = new Connection();
+    this->connection = new Connection("Client1");
 
     // TODO: Host and port from config
     this->connection->connectToHost("localhost", 6886);

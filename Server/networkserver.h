@@ -12,12 +12,24 @@ class NetworkServer : public QTcpServer
 public:
     explicit NetworkServer(QObject *parent = 0);
 
+    /**
+     * @brief broadcastMessage Send a message to all clients
+     * @param message
+     */
+    void broadcastMessage(QString message);
+
 signals:
     /**
      * @brief newConnection Emitted when a new Connection is received
      * @param connection
      */
     void newConnection(Connection *connection);
+
+    /**
+     * @brief disconnection Emitted when a Connection disconnects
+     * @param username Username from the Connection
+     */
+    void disconnection(QString username);
 
 protected:
     /**
@@ -26,7 +38,14 @@ protected:
      */
     void incomingConnection(qintptr socketDescriptor);
 
+private slots:
+    /**
+     * @brief clientDisconnected Remove a Connection from clients
+     */
+    void clientDisconnected();
+
 private:
+    // List of clients
     QList<Connection*> clients;
 };
 

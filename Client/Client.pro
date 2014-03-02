@@ -14,12 +14,10 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    spacegraphicsscene.cpp \
-    networkclient.cpp
+    spacegraphicsscene.cpp
 
 HEADERS  += mainwindow.h \
-    spacegraphicsscene.h \
-    networkclient.h
+    spacegraphicsscene.h
 
 FORMS    += mainwindow.ui
 

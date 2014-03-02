@@ -12,6 +12,7 @@ void NetworkServer::incomingConnection(qintptr socketDescriptor)
     connection->setSocketDescriptor(socketDescriptor);
 
     connect(connection, SIGNAL(disconnected()), this, SLOT(clientDisconnected()));
+    connect(connection, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(displayError()));
     emit newConnection(connection);
 }
 
@@ -33,8 +34,17 @@ void NetworkServer::clientDisconnected()
 
 void NetworkServer::broadcastMessage(QString message)
 {
+    // Send message to all clients
     foreach (Connection* connection, this->clients)
     {
         connection->sendMessage(message);
     }
 }
+
+void NetworkServer::displayError()
+{
+    Connection *connection = qobject_cast<Connection*>(sender());
+
+    qDebug() << "The following error occured: " << connection->errorString();
+}
+

@@ -44,7 +44,12 @@ private slots:
      */
     void clientDisconnected();
 
-private:
+    /**
+     * @brief displayError Print out a socket error
+     */
+    void displayError();
+
+private:    
     // List of clients
     QList<Connection*> clients;
 };

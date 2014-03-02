@@ -17,8 +17,7 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     serverapp.cpp \
-    networkserver.cpp \
-    connection.cpp
+    networkserver.cpp
 
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../Shared/release/ -lpixspace
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../Shared/debug/ -lpixspace
@@ -35,5 +34,4 @@ else:unix: PRE_TARGETDEPS += $$OUT_PWD/../Shared/libpixspace.a
 
 HEADERS += \
     serverapp.h \
-    networkserver.h \
-    connection.h
+    networkserver.h

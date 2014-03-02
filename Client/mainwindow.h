@@ -5,8 +5,10 @@
 #include <QGridLayout>
 #include <QTimer>
 #include <QGraphicsView>
+#include <QDebug>
 
 #include <RenderBody>
+#include <Connection>
 
 #include "spacegraphicsscene.h"
 
@@ -23,8 +25,12 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+private slots:
+    void message();
+
 private:
     Ui::MainWindow *ui;
+    Connection *connection;
 };
 
 #endif // MAINWINDOW_H

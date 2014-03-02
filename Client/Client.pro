@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql
+QT       += core gui sql network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -14,10 +14,12 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    spacegraphicsscene.cpp
+    spacegraphicsscene.cpp \
+    networkclient.cpp
 
 HEADERS  += mainwindow.h \
-    spacegraphicsscene.h
+    spacegraphicsscene.h \
+    networkclient.h
 
 FORMS    += mainwindow.ui
 

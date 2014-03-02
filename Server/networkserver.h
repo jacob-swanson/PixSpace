@@ -2,8 +2,9 @@
 #define NETWORKSERVER_H
 
 #include <QTcpServer>
+#include <QList>
 
-#include "connection.h"
+#include <Connection>
 
 class NetworkServer : public QTcpServer
 {
@@ -16,6 +17,9 @@ signals:
 
 protected:
     void incomingConnection(qintptr socketDescriptor);
+
+private:
+    QList<Connection*> clients;
 };
 
 #endif // NETWORKSERVER_H

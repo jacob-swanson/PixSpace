@@ -8,7 +8,8 @@ static const char SeparatorToken = ' ';
 Connection::Connection(QObject *parent) :
     QTcpSocket(parent)
 {
-    this->greetingMessage = "undefined";
+    // TODO: Get greeting from config
+    this->greetingMessage = "PIXSPACE 0.1";
     this->username = "unknown";
     this->state = WaitingForGreeting;
     this->currentDataType = Undefined;

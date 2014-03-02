@@ -34,9 +34,19 @@ MainWindow::MainWindow(QWidget *parent) :
     body3.createGraphic();
     body3.getGraphicsItem()->setPos(500, 500);
     space->addItem(body3.getGraphicsItem());
+
+    this->connection = new Connection();
+
+    // TODO: Host and port from config
+    this->connection->connectToHost("localhost", 6886);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::message()
+{
+    qDebug() << "Ready fo use.";
 }

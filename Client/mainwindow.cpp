@@ -39,6 +39,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // TODO: Host and port from config
     this->connection->connectToHost("localhost", 6886);
+    connect(this->connection, SIGNAL(newMessage(QString,QString)), this, SLOT(messageReceived(QString,QString)));
 }
 
 MainWindow::~MainWindow()
@@ -46,7 +47,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::message()
+void MainWindow::messageReceived(QString username, QString message)
 {
-    qDebug() << "Ready fo use.";
+    qDebug() << "Message: " << username << " " << message;
 }

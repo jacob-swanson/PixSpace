@@ -26,7 +26,7 @@ public:
     ~MainWindow();
 
 private slots:
-    void message();
+    void messageReceived(QString username, QString message);
 
 private:
     Ui::MainWindow *ui;

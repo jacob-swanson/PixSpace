@@ -31,6 +31,19 @@ signals:
      */
     void finished();
 
+private slots:
+    /**
+     * @brief displayConnection Display the username of a new connection
+     * @param connection
+     */
+    void displayConnection(Connection* connection);
+
+    /**
+     * @brief displayDisconnection Display the username of a connection that has disconnectes
+     * @param username
+     */
+    void displayDisconnection(QString username);
+
 public slots:
     /**
      * @brief tick Tick the simulation

@@ -33,7 +33,12 @@ ServerApp::ServerApp(QObject *parent) :
 
     // Start listening
     this->server = new NetworkServer(this);
+    // TODO: Get port from config
     this->server->listen(QHostAddress::Any, 6886);
+
+    // Connect signals for TCP server
+    connect(server, SIGNAL(newConnection(Connection*)), this, SLOT(displayConnection(Connection*)));
+    connect(server, SIGNAL(disconnection(QString)), this, SLOT(displayDisconnection(QString));
 
     // Setup timers
     tickTimer.setInterval(16);
@@ -126,4 +131,14 @@ void ServerApp::handleSigInt()
     this->stop();
 
     snInt->setEnabled(true);
+}
+
+void ServerApp::displayConnection(Connection *connection)
+{
+    qDebug() << "User Connected: " << connection->getName();
+}
+
+void ServerApp::displayDisconnection(QString username)
+{
+    qDebug() << "User Disconnected: " << username;
 }

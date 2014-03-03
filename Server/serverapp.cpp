@@ -36,9 +36,11 @@ ServerApp::ServerApp(QObject *parent) :
     // TODO: Get port from config
     this->server->listen(QHostAddress::Any, 6886);
 
+    qDebug() << "Listening on: " << this->server->serverAddress().toString() << ":" << this->server->serverPort();
+
     // Connect signals for TCP server
     connect(server, SIGNAL(newConnection(Connection*)), this, SLOT(displayConnection(Connection*)));
-    connect(server, SIGNAL(disconnection(QString)), this, SLOT(displayDisconnection(QString));
+    connect(server, SIGNAL(disconnection(QString)), this, SLOT(displayDisconnection(QString)));
 
     // Setup timers
     tickTimer.setInterval(16);

@@ -13,13 +13,17 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
-    spacegraphicsscene.cpp
+    spacegraphicsscene.cpp \
+    proxywidget.cpp \
+    connectiondialog.cpp
 
-HEADERS  += mainwindow.h \
-    spacegraphicsscene.h
+HEADERS  += \
+    spacegraphicsscene.h \
+    proxywidget.h \
+    connectiondialog.h
 
-FORMS    += mainwindow.ui
+FORMS    += \
+    connectiondialog.ui
 
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../Shared/release/ -lpixspace
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../Shared/debug/ -lpixspace

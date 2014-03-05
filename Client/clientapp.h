@@ -8,6 +8,7 @@
 #include <QGraphicsScene>
 
 #include <RenderBody>
+#include <Connection>
 
 #include "connectiondialog.h"
 
@@ -39,10 +40,25 @@ private slots:
      */
     void exitClient();
 
+    /**
+     * @brief connectionSuccessful The connection to the server was successful
+     */
+    void connectionSuccessful();
+
+    /**
+     * @brief disconnectConnection Destroy the connection
+     */
+    void disconnectConnection();
+
+    /**
+     * @brief displayConnectionError Print out a connection error
+     */
+    void displayConnectionError();
+
 private:
     QGraphicsView* view;
     QGraphicsScene* scene;
-
+    Connection* connection;
 };
 
 #endif // CLIENTAPP_H

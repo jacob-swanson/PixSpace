@@ -32,7 +32,12 @@ void ClientApp::connectToServer(QString address, int port, QString name)
     qDebug() << "Port: " << port;
     qDebug() << "Name: " << name;
 
-    this->scene->clear();
+    this->connection = new Connection(name, this);
+    this->connection->connectToHost(address, port);
+
+    connect(this->connection, SIGNAL(readyForUse()), this, SLOT(connectionSuccessful()));
+    connect(this->connection, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(displayConnectionError()));
+    connect(this->connection, SIGNAL(disconnected()), this, SLOT(disconnectConnection()));
 }
 
 void ClientApp::show()
@@ -45,4 +50,22 @@ void ClientApp::exitClient()
 {
     // Exit the application
     QCoreApplication::quit();
+}
+
+void ClientApp::connectionSuccessful()
+{
+    // Clear out the scene to prepair for the game loading
+    this->scene->clear();
+}
+
+void ClientApp::displayConnectionError()
+{
+    qDebug() << "Connection error: " << this->connection->errorString();
+}
+
+void ClientApp::disconnectConnection()
+{
+    this->connection->disconnectFromHost();
+
+    this->connection->deleteLater();
 }

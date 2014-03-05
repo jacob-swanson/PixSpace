@@ -16,11 +16,30 @@ public:
     explicit ConnectionDialog(QWidget *parent = 0);
     ~ConnectionDialog();
 
+signals:
+    /**
+     * @brief connectToServer Emitted with new connection details
+     * @param address
+     * @param port
+     * @param name
+     */
+    void connectToServer(QString address, int port, QString name);
+
+    /**
+     * @brief quit Emitted when the "Quit Game" button is pressed
+     */
+    void quit();
+
 private slots:
-    void layoutDirectionChanged(int index);
-    void spacingChanged(int spacing);
-    void fontChanged(const QFont &font);
-    void styleChanged(const QString &styleName);
+    /**
+     * @brief connectButtonClicked Handle the connect button click event, emits connectToServer()
+     */
+    void connectButtonClicked();
+
+    /**
+     * @brief quitButtonClicked Handle the quit button click event, emits quit()
+     */
+    void quitButtonClicked();
 
 private:
     Ui::ConnectionDialog *ui;

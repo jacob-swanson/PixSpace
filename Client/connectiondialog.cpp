@@ -1,27 +1,23 @@
 #include "connectiondialog.h"
 #include "ui_connectiondialog.h"
 
+#include <QDebug>
+
 ConnectionDialog::ConnectionDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ConnectionDialog)
 {
     ui->setupUi(this);
-    ui->layoutDirection->setCurrentIndex(layoutDirection() != Qt::LeftToRight);
 
-    foreach (QString styleName, QStyleFactory::keys()) {
-        ui->style->addItem(styleName);
-        if (style()->objectName().toLower() == styleName.toLower())
-            ui->style->setCurrentIndex(ui->style->count() - 1);
-    }
+    // Setup validators
+    QIntValidator* portVal = new QIntValidator(0, 65535);
+    this->ui->lineEditPort->setValidator(portVal);
 
-    connect(ui->layoutDirection, SIGNAL(activated(int)),
-            this, SLOT(layoutDirectionChanged(int)));
-    connect(ui->spacing, SIGNAL(valueChanged(int)),
-            this, SLOT(spacingChanged(int)));
-    connect(ui->fontComboBox, SIGNAL(currentFontChanged(QFont)),
-            this, SLOT(fontChanged(QFont)));
-    connect(ui->style, SIGNAL(activated(QString)),
-            this, SLOT(styleChanged(QString)));
+    // TODO: Validator for Name and IP
+
+    // Connect signals
+    connect(this->ui->pushButtonJoin, SIGNAL(clicked()), this, SLOT(connectButtonClicked()));
+    connect(this->ui->pushButtonQuit, SIGNAL(clicked()), this, SLOT(quitButtonClicked()));
 }
 
 ConnectionDialog::~ConnectionDialog()
@@ -29,35 +25,15 @@ ConnectionDialog::~ConnectionDialog()
     delete ui;
 }
 
-void ConnectionDialog::layoutDirectionChanged(int index)
+void ConnectionDialog::connectButtonClicked()
 {
-    setLayoutDirection(index == 0 ? Qt::LeftToRight : Qt::RightToLeft);
+    emit connectToServer(
+                this->ui->lineEditAddress->text(),
+                this->ui->lineEditPort->text().toInt(),
+                this->ui->lineEditName->text());
 }
 
-void ConnectionDialog::spacingChanged(int spacing)
+void ConnectionDialog::quitButtonClicked()
 {
-    layout()->setSpacing(spacing);
-    adjustSize();
-}
-
-void ConnectionDialog::fontChanged(const QFont &font)
-{
-    setFont(font);
-}
-
-static void setStyleHelper(QWidget *widget, QStyle *style)
-{
-    widget->setStyle(style);
-    widget->setPalette(style->standardPalette());
-    foreach (QObject *child, widget->children()) {
-        if (QWidget *childWidget = qobject_cast<QWidget *>(child))
-            setStyleHelper(childWidget, style);
-    }
-}
-
-void ConnectionDialog::styleChanged(const QString &styleName)
-{
-    QStyle *style = QStyleFactory::create(styleName);
-    if (style)
-        setStyleHelper(this, style);
+    emit quit();
 }

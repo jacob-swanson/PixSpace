@@ -13,14 +13,12 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-    spacegraphicsscene.cpp \
-    proxywidget.cpp \
-    connectiondialog.cpp
+    connectiondialog.cpp \
+    clientapp.cpp
 
 HEADERS  += \
-    spacegraphicsscene.h \
-    proxywidget.h \
-    connectiondialog.h
+    connectiondialog.h \
+    clientapp.h
 
 FORMS    += \
     connectiondialog.ui

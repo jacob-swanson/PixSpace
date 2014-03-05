@@ -46,14 +46,14 @@ private slots:
     void connectionSuccessful();
 
     /**
-     * @brief disconnectConnection Destroy the connection
-     */
-    void disconnectConnection();
-
-    /**
-     * @brief displayConnectionError Print out a connection error
+     * @brief displayConnectionError Print out a connection error, destroy the connection, and open the connection dialog
      */
     void displayConnectionError();
+
+    /**
+     * @brief showConnectionDialog Show the connection dialog
+     */
+    void showConnectionDialog();
 
 private:
     QGraphicsView* view;

@@ -9,13 +9,7 @@ ClientApp::ClientApp(QObject *parent) :
     this->scene = new QGraphicsScene();
     view->setScene(this->scene);
 
-    // Setup the server connection dialog
-    ConnectionDialog* dialog = new ConnectionDialog();
-    this->scene->addWidget(dialog, Qt::Dialog | Qt::WindowTitleHint);
-
-    connect(dialog, SIGNAL(connectToServer(QString,int,QString)),
-            this, SLOT(connectToServer(QString,int,QString)));
-    connect(dialog, SIGNAL(quit()), this, SLOT(exitClient()));
+    this->showConnectionDialog();
 
 //    RenderBody body2;
 //    body2.loadImageByteArray("a");
@@ -37,7 +31,6 @@ void ClientApp::connectToServer(QString address, int port, QString name)
 
     connect(this->connection, SIGNAL(readyForUse()), this, SLOT(connectionSuccessful()));
     connect(this->connection, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(displayConnectionError()));
-    connect(this->connection, SIGNAL(disconnected()), this, SLOT(disconnectConnection()));
 }
 
 void ClientApp::show()
@@ -61,11 +54,23 @@ void ClientApp::connectionSuccessful()
 void ClientApp::displayConnectionError()
 {
     qDebug() << "Connection error: " << this->connection->errorString();
+
+    // Destory the connection
+    this->connection->disconnectFromHost();
+    this->connection->deleteLater();
+
+    // Show the connection dialog
+    this->scene->clear();
+    this->showConnectionDialog();
 }
 
-void ClientApp::disconnectConnection()
+void ClientApp::showConnectionDialog()
 {
-    this->connection->disconnectFromHost();
+    // Setup the server connection dialog
+    ConnectionDialog* dialog = new ConnectionDialog();
+    this->scene->addWidget(dialog, Qt::Dialog | Qt::WindowTitleHint);
 
-    this->connection->deleteLater();
+    connect(dialog, SIGNAL(connectToServer(QString,int,QString)),
+            this, SLOT(connectToServer(QString,int,QString)));
+    connect(dialog, SIGNAL(quit()), this, SLOT(exitClient()));
 }

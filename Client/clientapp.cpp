@@ -17,6 +17,8 @@ ClientApp::ClientApp(QObject *parent) :
 //    body2.getGraphicsItem()->setPos(100, 100);
 //    space.addItem(body2.getGraphicsItem());
 //    view.centerOn(body2.getGraphicsItem());
+
+    this->universe = new Universe();
 }
 
 void ClientApp::connectToServer(QString address, int port, QString name)
@@ -31,7 +33,7 @@ void ClientApp::connectToServer(QString address, int port, QString name)
 
     connect(this->connection, SIGNAL(readyForUse()), this, SLOT(connectionSuccessful()));
     connect(this->connection, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(displayConnectionError()));
-    connect(this->connection, SIGNAL(newMessage(QString,QString)), this, SLOT(printMessage(QString,QString)));
+    connect(this->connection, SIGNAL(newMessage(QString,QString)), this, SLOT(receiveMessage(QString,QString)));
 }
 
 void ClientApp::show()
@@ -76,7 +78,10 @@ void ClientApp::showConnectionDialog()
     connect(dialog, SIGNAL(quit()), this, SLOT(exitClient()));
 }
 
-void ClientApp::printMessage(QString username, QString message)
+void ClientApp::receiveMessage(QString username, QString message)
 {
-    qDebug() << username << ":" << message;
+    QJsonDocument universeDocument = QJsonDocument::fromJson(message.toLocal8Bit());
+
+    // Assuming the the message will be Universe JSON
+    this->universe->read(universeDocument.object());
 }

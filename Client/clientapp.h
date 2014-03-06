@@ -6,9 +6,11 @@
 #include <QCoreApplication>
 #include <QGraphicsProxyWidget>
 #include <QGraphicsScene>
+#include <QJsonDocument>
 
 #include <RenderBody>
 #include <Connection>
+#include <Universe>
 
 #include "connectiondialog.h"
 
@@ -55,12 +57,19 @@ private slots:
      */
     void showConnectionDialog();
 
-    void printMessage(QString username, QString message);
+    /**
+     * @brief receiveMessage Handle a message from the Connection
+     * @param username
+     * @param message
+     */
+    void receiveMessage(QString username, QString message);
 
 private:
     QGraphicsView* view;
     QGraphicsScene* scene;
     Connection* connection;
+
+    Universe* universe;
 };
 
 #endif // CLIENTAPP_H

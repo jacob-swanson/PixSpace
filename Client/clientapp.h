@@ -65,6 +65,9 @@ private slots:
     void receiveMessage(QString username, QString message);
 
 private:
+
+    void replaceBodiesInScene();
+
     QGraphicsView* view;
     QGraphicsScene* scene;
     Connection* connection;

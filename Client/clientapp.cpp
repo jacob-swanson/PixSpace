@@ -84,16 +84,15 @@ void ClientApp::receiveMessage(QString username, QString message)
 void ClientApp::replaceBodiesInScene()
 {
     this->scene->clear();
-//    RenderBody body2;
-//    body2.loadImageByteArray("a");
-//    body2.createGraphic();
-//    body2.getGraphicsItem()->setPos(100, 100);
-//    space.addItem(body2.getGraphicsItem());
     foreach(Body* b, this->universe->getBodies())
     {
         RenderBody* rb = new RenderBody();
         rb->loadImageByteArray("a");
         rb->createGraphic();
-        rb->getGraphicsItem()->setPos(b->getPosition().getX() / 1000, b->getPosition().getY() / 1000);
+        qDebug() << b->getPosition().getX() / 1000000 << " " << b->getPosition().getY() / 1000000;
+        rb->getGraphicsItem()->setPos(b->getPosition().getX() / 1000000, b->getPosition().getY() / 1000000);
+        this->scene->addItem(rb->getGraphicsItem());
+        if (b->isMoveable())
+            this->view->centerOn(rb->getGraphicsItem()->pos());
     }
 }

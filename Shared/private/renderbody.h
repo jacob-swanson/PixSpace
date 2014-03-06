@@ -35,7 +35,7 @@ public:
      * @brief getGraphicsItem Get the Body's QGraphicsItem for adding to the QGraphicsScene
      * @return
      */
-    QGraphicsPixmapItem* getGraphicsItem() const;
+    QGraphicsPixmapItem* getGraphicsItem();
 
     /**
      * @brief loadImageByteArray Load the Body's sprite and mask via the bodyId

@@ -92,7 +92,7 @@ void RenderBody::tick(double deltaTime)
     Body::tick(deltaTime);
 }
 
-QGraphicsPixmapItem* RenderBody::getGraphicsItem() const
+QGraphicsPixmapItem* RenderBody::getGraphicsItem()
 {
     // Get the graphics item
     return this->spriteGraphicsItem;

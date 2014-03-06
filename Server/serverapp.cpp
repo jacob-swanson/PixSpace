@@ -45,7 +45,7 @@ ServerApp::ServerApp(QObject *parent) :
 
     // Setup timers
     // TODO: Get time from the config
-    tickTimer.setInterval(3000);
+    tickTimer.setInterval(30);
     connect(&tickTimer, SIGNAL(timeout()), this, SLOT(tick())); 
 }
 

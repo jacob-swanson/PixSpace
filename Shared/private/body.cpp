@@ -8,6 +8,8 @@ Body::Body()
     rotation = 0;
     mass = 0;
     diameter = 0;
+
+    this->id = qrand();
 }
 
 void Body::tick(double deltaTime)
@@ -132,7 +134,7 @@ void Body::setAffectedByGravity(bool affectedByGravity)
     this->affectedByGravity = affectedByGravity;
 }
 
-QString Body::getId() const
+int Body::getId() const
 {
     // Get the id
     return this->id;
@@ -162,6 +164,16 @@ double Body::getRotation() const
     return this->rotation;
 }
 
+void Body::setServer(bool isServer)
+{
+    this->serverBody = isServer;
+}
+
+bool Body::isServer()
+{
+    return this->serverBody;
+}
+
 void Body::read(const QJsonObject &json)
 {
     // Read in parameters from a JSON object
@@ -172,6 +184,8 @@ void Body::read(const QJsonObject &json)
     this->setAffectedByGravity(json["gravity"].toBool());
     this->setMass(json["mass"].toDouble());
     this->setMoveable(json["moveable"].toBool());
+    this->id = json["id"].toInt();
+    this->serverBody = json["server"].toBool();
 
     this->setDiameter(json["diameter"].toDouble());
     this->setRotation(json["rotation"].toDouble());
@@ -198,6 +212,8 @@ void Body::write(QJsonObject &json) const
     json["moveable"] = this->moveable;
     json["diameter"] = this->diameter;
     json["rotation"] = this->rotation;
+    json["id"] = this->id;
+    json["server"] = this->serverBody;
 }
 
 

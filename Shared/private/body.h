@@ -4,6 +4,7 @@
 #include <QString>
 #include <QStack>
 #include <QJsonObject>
+#include <QtGlobal>
 
 #include "vector.h"
 #include "shared_global.h"
@@ -144,7 +145,7 @@ public:
      * @brief getId Get the identifier
      * @return
      */
-    QString getId() const;
+    int getId() const;
 
     /**
      * @brief setDiameter Set the diameter (Units: m)
@@ -169,6 +170,18 @@ public:
      * @return
      */
     double getRotation() const;
+
+    /**
+     * @brief setServer Set true if the body exists on the server, false otherwise
+     * @param isServer
+     */
+    void setServer(bool isServer);
+
+    /**
+     * @brief isServer Returns true if the body exists on the server, false otherwise
+     * @return
+     */
+    bool isServer();
 
     /**
      * @brief read Read in from the given JSON object
@@ -196,9 +209,10 @@ protected:
     double rotation;
     double diameter;
     QString name;
+    bool serverBody;
 
 private:
-    QString id;
+    int id;
 };
 
 #endif // BODY_H

@@ -1,4 +1,5 @@
 #include "datamanager.h"
+#include "renderbody.h"
 
 DataManager* DataManager::m_Instance = 0;
 
@@ -91,8 +92,13 @@ QList<Body*> DataManager::loadBodies() const
     // Create Moon and Earth
     QList<Body*> bodies;
 
-    Body* b1 = new Body();
-    Body* b2 = new Body();
+    RenderBody* b1 = new RenderBody();
+    RenderBody* b2 = new RenderBody();
+    b1->setServer(true);
+    b2->setServer(true);
+
+    b1->loadImageByteArray("b");
+    b2->loadImageByteArray("a");
 
     // Moon
     b1->setMass(7.3459e22);

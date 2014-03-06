@@ -5,7 +5,7 @@ Universe::Universe() :
     QObject(0)
 {
     // Set 100,000x time acceleration
-    this->timeAcceleration = 100000;
+    this->timeAcceleration = 10000;
 }
 
 void Universe::simulateStep(double deltaTime)
@@ -88,13 +88,24 @@ void Universe::setBodies(QList<Body *> bodies)
     this->bodies = bodies;
 }
 
+void Universe::clearServerBodies()
+{
+    for (int i = 0; i < this->bodies.length(); i++)
+    {
+        if (this->bodies.at(i)->isServer())
+        {
+            this->bodies.removeAt(i);
+        }
+    }
+}
+
 void Universe::read(const QJsonObject &json)
 {
     // Read in the Universe
     this->timeAcceleration = json["timeacceleration"].toDouble();
 
     // Empty out Bodies just in case
-    this->bodies.clear();
+    this->clearServerBodies();
     QJsonArray bodyArray = json["bodies"].toArray();
     for (int i = 0; i < bodyArray.size(); i++)
     {

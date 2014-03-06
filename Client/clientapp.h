@@ -66,7 +66,7 @@ private slots:
 
 private:
 
-    void replaceBodiesInScene();
+    void updateServerBodies();
 
     QGraphicsView* view;
     QGraphicsScene* scene;

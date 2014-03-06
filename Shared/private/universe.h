@@ -53,6 +53,11 @@ public:
     void simulateStep(double deltaTime);
 
     /**
+     * @brief clearServerBodies Remove the server bodies from the Universes
+     */
+    void clearServerBodies();
+
+    /**
      * @brief read Read in from the given JSON object
      * @param json
      */

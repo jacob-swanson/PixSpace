@@ -64,7 +64,7 @@ void ClientApp::showConnectionDialog()
 {
     // Setup the server connection dialog
     ConnectionDialog* dialog = new ConnectionDialog();
-    this->scene->addWidget(dialog, Qt::Dialog | Qt::WindowTitleHint);
+    QGraphicsProxyWidget* item = this->scene->addWidget(dialog, Qt::Dialog | Qt::WindowTitleHint);
 
     connect(dialog, SIGNAL(connectToServer(QString,int,QString)),
             this, SLOT(connectToServer(QString,int,QString)));
@@ -78,18 +78,17 @@ void ClientApp::receiveMessage(QString username, QString message)
     // Assuming the the message will be Universe JSON
     this->universe->read(universeDocument.object());
 
-    this->replaceBodiesInScene();
+    this->updateServerBodies();
 }
 
-void ClientApp::replaceBodiesInScene()
+void ClientApp::updateServerBodies()
 {
     this->scene->clear();
     foreach(Body* b, this->universe->getBodies())
     {
-        RenderBody* rb = new RenderBody();
-        rb->loadImageByteArray("a");
+        RenderBody* rb = (RenderBody*)b;
+//        rb->loadImageByteArray("b");
         rb->createGraphic();
-        qDebug() << b->getPosition().getX() / 1000000 << " " << b->getPosition().getY() / 1000000;
         rb->getGraphicsItem()->setPos(b->getPosition().getX() / 1000000, b->getPosition().getY() / 1000000);
         this->scene->addItem(rb->getGraphicsItem());
         if (b->isMoveable())

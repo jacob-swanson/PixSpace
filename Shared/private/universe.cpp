@@ -1,5 +1,6 @@
 #include "universe.h"
 
+#include <QDebug>
 Universe::Universe() :
     QObject(0)
 {
@@ -57,10 +58,10 @@ void Universe::simulateStep(double deltaTime)
 
         // Tick the body after it has been moved
         b1->tick(deltaTime);
-
-        // Emit the finished signal
-        emit stepFinished();
     }
+
+    // Emit the finished signal
+    emit stepFinished();
 }
 
 QList<Body*> Universe::getBodies() const

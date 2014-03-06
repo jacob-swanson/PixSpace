@@ -55,6 +55,8 @@ private slots:
      */
     void showConnectionDialog();
 
+    void printMessage(QString username, QString message);
+
 private:
     QGraphicsView* view;
     QGraphicsScene* scene;

@@ -18,6 +18,12 @@ public:
      */
     void broadcastMessage(QString message);
 
+    /**
+     * @brief broadcastJson Broadcast a QByteArray, it is expected to be JSON
+     * @param message
+     */
+    void broadcastJson(QByteArray message);
+
 signals:
     /**
      * @brief newConnection Emitted when a new Connection is received

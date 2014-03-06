@@ -5,6 +5,7 @@
 #include <QSocketNotifier>
 #include <QTimer>
 #include <QElapsedTimer>
+#include <QJsonDocument>
 
 #include <unistd.h>
 #include <sys/socket.h>
@@ -74,6 +75,8 @@ public slots:
      * @brief handleSigInt Called when SIGINT occurs
      */
     void handleSigInt();
+
+    void broadcastBodies();
 
 private:
     // Sockets

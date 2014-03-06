@@ -11,6 +11,8 @@ void NetworkServer::incomingConnection(qintptr socketDescriptor)
     Connection *connection = new Connection("Server", this);
     connection->setSocketDescriptor(socketDescriptor);
 
+    this->clients.push_back(connection);
+
     connect(connection, SIGNAL(disconnected()), this, SLOT(clientDisconnected()));
     connect(connection, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(displayError()));
     emit newConnection(connection);
@@ -48,3 +50,10 @@ void NetworkServer::displayError()
     qDebug() << "The following error occured: " << connection->errorString();
 }
 
+void NetworkServer::broadcastJson(QByteArray message)
+{
+    foreach (Connection* connection, this->clients)
+    {
+        connection->sendMessage(QString(message));
+    }
+}

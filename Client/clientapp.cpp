@@ -31,6 +31,7 @@ void ClientApp::connectToServer(QString address, int port, QString name)
 
     connect(this->connection, SIGNAL(readyForUse()), this, SLOT(connectionSuccessful()));
     connect(this->connection, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(displayConnectionError()));
+    connect(this->connection, SIGNAL(newMessage(QString,QString)), this, SLOT(printMessage(QString,QString)));
 }
 
 void ClientApp::show()
@@ -73,4 +74,9 @@ void ClientApp::showConnectionDialog()
     connect(dialog, SIGNAL(connectToServer(QString,int,QString)),
             this, SLOT(connectToServer(QString,int,QString)));
     connect(dialog, SIGNAL(quit()), this, SLOT(exitClient()));
+}
+
+void ClientApp::printMessage(QString username, QString message)
+{
+    qDebug() << username << ":" << message;
 }

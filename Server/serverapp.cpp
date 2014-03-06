@@ -41,10 +41,12 @@ ServerApp::ServerApp(QObject *parent) :
     // Connect signals for TCP server
     connect(server, SIGNAL(newConnection(Connection*)), this, SLOT(displayConnection(Connection*)));
     connect(server, SIGNAL(disconnection(QString)), this, SLOT(displayDisconnection(QString)));
+    connect(this->universe, SIGNAL(stepFinished()), this, SLOT(broadcastBodies()));
 
     // Setup timers
-    tickTimer.setInterval(16);
-    connect(&tickTimer, SIGNAL(timeout()), this, SLOT(tick()));
+    // TODO: Get time from the config
+    tickTimer.setInterval(3000);
+    connect(&tickTimer, SIGNAL(timeout()), this, SLOT(tick())); 
 }
 
 void ServerApp::tick()
@@ -143,4 +145,13 @@ void ServerApp::displayConnection(Connection *connection)
 void ServerApp::displayDisconnection(QString username)
 {
     qDebug() << "User Disconnected: " << username;
+}
+
+void ServerApp::broadcastBodies()
+{
+    QJsonObject universeObject;
+    this->universe->write(universeObject);
+
+    QJsonDocument jsonDocument(universeObject);
+    this->server->broadcastJson(jsonDocument.toJson());
 }

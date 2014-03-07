@@ -105,15 +105,34 @@ void Universe::read(const QJsonObject &json)
     this->timeAcceleration = json["timeacceleration"].toDouble();
 
     // Empty out Bodies just in case
-    this->clearServerBodies();
+    //this->clearServerBodies();
     QJsonArray bodyArray = json["bodies"].toArray();
     for (int i = 0; i < bodyArray.size(); i++)
     {
         QJsonObject bodyObject = bodyArray[i].toObject();
 
-        Body* b = new Body();
-        b->read(bodyObject);
-        this->pushBodies(b);
+        // Find Body if exists
+        Body* b = NULL;
+        foreach(Body* searchBody, this->bodies)
+        {
+            if (b->getId() == bodyObject["id"].toInt())
+            {
+                b = searchBody;
+            }
+        }
+
+        if (b == NULL)
+        {
+            // New Body
+            b = new Body();
+            b->read(bodyObject);
+            this->pushBodies(b);
+        }
+        else
+        {
+            // Existing Body
+            b->read(bodyObject);
+        }
     }
 }
 

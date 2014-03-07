@@ -5,30 +5,27 @@ RenderBody::RenderBody() :
 {
 }
 
-void RenderBody::loadImageByteArray(QString bodyId)
-{
-    // Database access here
-    if (!DataManager::instance()->loadBodySprite(bodyId, &this->rawSprite, &this->rawMask))
-    {
-        // TODO: Exception
-        qDebug() << "Could not load sprite";
-    }
-}
-
 void RenderBody::createGraphic()
 {
     // Create QImages so they can be manipulated pixel by pixel
-    QImage image;
-    image.loadFromData(this->rawSprite);
-    QImage mask;
-    mask.loadFromData(this->rawMask);
+    QImage image(this->assetName);
+    QImage mask(this->assetName + "Mask");
+
+    if (!image.isNull())
+    {
+        qDebug() << "There was a problem loading asset: " << this->assetName;
+    }
 
     // Apply image filters
-    this->applyMask(&image, &mask);
+    if (!mask.isNull())
+    {
+        this->applyMask(&image, &mask);
+    }
 
     // Create the pixmap and graphics item for rendering
-    this->sprite.convertFromImage(image);
-    this->spriteGraphicsItem = new QGraphicsPixmapItem(this->sprite);
+    QPixmap pixmap;
+    pixmap.convertFromImage(image);
+    this->spriteGraphicsItem = new QGraphicsPixmapItem(pixmap);
 }
 
 void RenderBody::applyMask(QImage* image, QImage* mask)
@@ -98,19 +95,22 @@ QGraphicsPixmapItem* RenderBody::getGraphicsItem()
     return this->spriteGraphicsItem;
 }
 
-QByteArray RenderBody::getSprite()
+void RenderBody::setAssetPath(QString path)
 {
-    return this->rawSprite;
+    this->assetName = path;
 }
 
+QString RenderBody::getAssetPath()
+{
+    return this->assetName;
+}
 
 void RenderBody::read(const QJsonObject &json)
 {
     // Read in a JSON object
     Body::read(json);
 
-    this->rawSprite = QByteArray::fromBase64(json["sprite"].toString().toLocal8Bit());
-    this->rawMask = QByteArray::fromBase64(json["mask"].toString().toLocal8Bit());
+    this->assetName = json["asset"].toString();
 }
 
 void RenderBody::write(QJsonObject &json) const
@@ -118,6 +118,5 @@ void RenderBody::write(QJsonObject &json) const
     // Write to a JSON object
     Body::write(json);
 
-    json["sprite"] = QString(this->rawSprite.toBase64());
-    json["mask"] = QString(this->rawMask.toBase64());
+    json["asset"] = this->assetName;
 }

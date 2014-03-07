@@ -86,8 +86,8 @@ void ClientApp::updateServerBodies()
     this->scene->clear();
     foreach(Body* b, this->universe->getBodies())
     {
-        RenderBody* rb = (RenderBody*)b;
-//        rb->loadImageByteArray("b");
+        RenderBody* rb = new RenderBody();
+        rb->setAssetPath(":/ships/SpaceShuttle");
         rb->createGraphic();
         rb->getGraphicsItem()->setPos(b->getPosition().getX() / 1000000, b->getPosition().getY() / 1000000);
         this->scene->addItem(rb->getGraphicsItem());

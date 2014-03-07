@@ -38,16 +38,16 @@ public:
     QGraphicsPixmapItem* getGraphicsItem();
 
     /**
-     * @brief loadImageByteArray Load the Body's sprite and mask via the bodyId
-     * @param bodyId
+     * @brief setAssetPath Set the asset path
+     * @param path
      */
-    void loadImageByteArray(QString bodyId);
+    void setAssetPath(QString path);
 
     /**
-     * @brief getSprite Get the raw sprite
+     * @brief getAssetPath
      * @return
      */
-    QByteArray getSprite();
+    QString getAssetPath();
 
     /**
      * @brief read Read in from the given JSON object
@@ -69,12 +69,8 @@ private:
      */
     void applyMask(QImage* image, QImage* mask);
 
-    // Raw PNG data for sprite and mask
-    QByteArray rawSprite;
-    QByteArray rawMask;
-
-    // Sprite to be rendered on the screen
-    QPixmap sprite;
+    // QResource path
+    QString assetName;
 
     // GraphicsItem to be loaded into the QGraphicsScene
     QGraphicsPixmapItem *spriteGraphicsItem;

@@ -92,13 +92,10 @@ QList<Body*> DataManager::loadBodies() const
     // Create Moon and Earth
     QList<Body*> bodies;
 
-    RenderBody* b1 = new RenderBody();
-    RenderBody* b2 = new RenderBody();
+    Body* b1 = new Body();
+    Body* b2 = new Body();
     b1->setServer(true);
     b2->setServer(true);
-
-    b1->loadImageByteArray("b");
-    b2->loadImageByteArray("a");
 
     // Moon
     b1->setMass(7.3459e22);

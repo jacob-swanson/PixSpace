@@ -9,14 +9,14 @@ void TestRenderBody::testRead()
 {
     RenderBody b;
 
-    b.loadImageByteArray("a");
+    //b.loadImageByteArray("a");
     b.createGraphic();
 
     QJsonObject json;
     b.read(json);
 
     qDebug() << json["sprite"];
-    qDebug() << b.getSprite();
+    //qDebug() << b.getSprite();
     QVERIFY(false);
 }
 

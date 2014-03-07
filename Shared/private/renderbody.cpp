@@ -119,4 +119,5 @@ void RenderBody::write(QJsonObject &json) const
     Body::write(json);
 
     json["asset"] = this->assetName;
+    json["type"] = "RenderBody";
 }

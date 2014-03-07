@@ -214,6 +214,8 @@ void Body::write(QJsonObject &json) const
     json["rotation"] = this->rotation;
     json["id"] = this->id;
     json["server"] = this->serverBody;
+
+    json["type"] = "Body";
 }
 
 

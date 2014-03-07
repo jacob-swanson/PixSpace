@@ -206,5 +206,7 @@ void Vector::write(QJsonObject &json) const
     // Write to JSON object
     json["x"] = this->x;
     json["y"] = this->y;
+
+    json["type"] = "Vector";
 }
 

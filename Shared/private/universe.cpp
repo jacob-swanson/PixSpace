@@ -149,4 +149,6 @@ void Universe::write(QJsonObject &json) const
         bodyArray.append(bodyObject);
     }
     json["bodies"] = bodyArray;
+
+    json["type"] = "Universe";
 }

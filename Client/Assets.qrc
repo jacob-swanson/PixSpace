@@ -3,5 +3,6 @@
         <file alias="SpaceShuttle">Assets/SpaceShuttle.png</file>
         <file alias="SpaceShuttleMask">Assets/SpaceShuttleMask.png</file>
         <file alias="Pig">Assets/PeegSpace.png</file>
+        <file alias="PigMask">Assets/PeegSpace_Mask.png</file>
     </qresource>
 </RCC>

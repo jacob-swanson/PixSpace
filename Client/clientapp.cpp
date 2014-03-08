@@ -17,6 +17,7 @@ ClientApp::ClientApp(QObject *parent) :
     this->controller = new PlayerController();
 
     connect(&this->tickTimer, SIGNAL(timeout()), this, SLOT(tickSimulation()));
+    connect(this, SIGNAL(tickFinished()), this, SLOT(sendClientBody()));
 }
 
 void ClientApp::connectToServer(QString address, int port, QString name)

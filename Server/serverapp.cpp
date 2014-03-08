@@ -162,4 +162,6 @@ void ServerApp::receiveMessage(QString username, QString message)
     QJsonDocument universeDocument = QJsonDocument::fromJson(message.toLocal8Bit());
 
     this->universe->read(universeDocument.object());
+
+    qDebug() << this->universe->getBodies().count();
 }

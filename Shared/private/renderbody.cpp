@@ -3,17 +3,33 @@
 RenderBody::RenderBody() :
     Body()
 {
+    this->spriteGraphicsItem = NULL;
 }
 
-void RenderBody::createGraphic()
+
+RenderBody::RenderBody(QString assetPath) :
+    Body()
+{
+    this->spriteGraphicsItem = NULL;
+    this->assetPath = assetPath;
+}
+
+bool RenderBody::createGraphic()
 {
     // Create QImages so they can be manipulated pixel by pixel
-    QImage image(this->assetName);
-    QImage mask(this->assetName + "Mask");
+    QImage image(this->assetPath);
+    QImage mask(this->assetPath + "Mask");
 
-    if (!image.isNull())
+    if (image.isNull())
     {
-        qDebug() << "There was a problem loading asset: " << this->assetName;
+        qDebug() << "There was a problem loading asset: " << this->assetPath;
+        return false;
+    }
+
+    // Not a fatal error
+    if (mask.isNull())
+    {
+        qDebug() << "There was a problem loading asset: " << this->assetPath + "Mask";
     }
 
     // Apply image filters
@@ -25,7 +41,17 @@ void RenderBody::createGraphic()
     // Create the pixmap and graphics item for rendering
     QPixmap pixmap;
     pixmap.convertFromImage(image);
-    this->spriteGraphicsItem = new QGraphicsPixmapItem(pixmap);
+
+    if (pixmap.isNull())
+    {
+        qDebug() << "There was a problem creating a pixmap for asset: " << this->assetPath;
+        return false;
+    }
+    else
+    {
+        this->spriteGraphicsItem = new QGraphicsPixmapItem(pixmap);
+        return true;
+    }
 }
 
 void RenderBody::applyMask(QImage* image, QImage* mask)
@@ -95,14 +121,14 @@ QGraphicsPixmapItem* RenderBody::getGraphicsItem()
     return this->spriteGraphicsItem;
 }
 
-void RenderBody::setAssetPath(QString path)
+void RenderBody::setAssetPath(QString assetPath)
 {
-    this->assetName = path;
+    this->assetPath = assetPath;
 }
 
 QString RenderBody::getAssetPath()
 {
-    return this->assetName;
+    return this->assetPath;
 }
 
 void RenderBody::read(const QJsonObject &json)
@@ -110,7 +136,7 @@ void RenderBody::read(const QJsonObject &json)
     // Read in a JSON object
     Body::read(json);
 
-    this->assetName = json["asset"].toString();
+    this->assetPath = json["asset"].toString();
 }
 
 void RenderBody::write(QJsonObject &json) const
@@ -118,6 +144,6 @@ void RenderBody::write(QJsonObject &json) const
     // Write to a JSON object
     Body::write(json);
 
-    json["asset"] = this->assetName;
-    json["type"] = "RenderBody";
+    json["asset"] = this->assetPath;
+    json["type"] = QString("RenderBody");
 }

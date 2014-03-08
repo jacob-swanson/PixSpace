@@ -17,14 +17,20 @@ class SHAREDSHARED_EXPORT RenderBody : public Body
 {
 public:
     /**
-     * @brief RenderBody Initialize a RenderBody with default values
+     * @brief RenderBody Initialize a RenderBody without an asset. This can be dangerous.
      */
     RenderBody();
 
     /**
-     * @brief createGraphic Create the QGraphicsPixmapItem with the mask applied
+     * @brief RenderBody Initialize a RenderBody with the given asset
      */
-    void createGraphic();
+    RenderBody(QString assetPath);
+
+    /**
+     * @brief createGraphic Create the QGraphicsPixmapItem with the mask applied
+     * @return True if the graphic was created successfully, false otherwise
+     */
+    bool createGraphic();
 
     /**
      * @brief tick Update RenderBody specific things
@@ -41,7 +47,7 @@ public:
      * @brief setAssetPath Set the asset path
      * @param path
      */
-    void setAssetPath(QString path);
+    void setAssetPath(QString assetPath);
 
     /**
      * @brief getAssetPath
@@ -70,7 +76,7 @@ private:
     void applyMask(QImage* image, QImage* mask);
 
     // QResource path
-    QString assetName;
+    QString assetPath;
 
     // GraphicsItem to be loaded into the QGraphicsScene
     QGraphicsPixmapItem *spriteGraphicsItem;

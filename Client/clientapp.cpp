@@ -12,6 +12,10 @@ ClientApp::ClientApp(QObject *parent) :
     this->showConnectionDialog();
 
     this->universe = new Universe();
+
+    this->tickTimer.setInterval(15);
+
+    connect(&this->tickTimer, SIGNAL(timeout()), this, SLOT(tickSimulation()));
 }
 
 void ClientApp::connectToServer(QString address, int port, QString name)
@@ -45,6 +49,7 @@ void ClientApp::connectionSuccessful()
 {
     // Clear out the scene to prepair for the game loading
     this->scene->clear();
+    this->tickTimer.start();
 }
 
 void ClientApp::displayConnectionError()
@@ -77,21 +82,40 @@ void ClientApp::receiveMessage(QString username, QString message)
 
     // Assuming the the message will be Universe JSON
     this->universe->read(universeDocument.object());
-
-    this->updateServerBodies();
 }
 
 void ClientApp::updateServerBodies()
 {
-    this->scene->clear();
+//    this->scene->clear();
+//    foreach(Body* b, this->universe->getBodies())
+//    {
+//        this->scene->addItem(rb->getGraphicsItem());
+//        if (b->isMoveable())
+//            this->view->centerOn(rb->getGraphicsItem()->pos());
+//    }
+}
+
+void ClientApp::tickSimulation()
+{
     foreach(Body* b, this->universe->getBodies())
     {
-        RenderBody* rb = new RenderBody();
-        rb->setAssetPath(":/ships/SpaceShuttle");
-        rb->createGraphic();
-        rb->getGraphicsItem()->setPos(b->getPosition().getX() / 1000000, b->getPosition().getY() / 1000000);
-        this->scene->addItem(rb->getGraphicsItem());
-        if (b->isMoveable())
-            this->view->centerOn(rb->getGraphicsItem()->pos());
+        RenderBody* rb = (RenderBody*)b;
+        QGraphicsPixmapItem* item = NULL;
+        item = rb->getGraphicsItem();
+
+        if (item == NULL)
+        {
+            if (rb->createGraphic())
+            {
+                item = rb->getGraphicsItem();
+                item->setPos(b->getPosition().getX() / 1000000, b->getPosition().getY() / 1000000);
+                this->scene->addItem(item);
+            }
+        }
+        else
+        {
+            item->setPos(b->getPosition().getX() / 1000000, b->getPosition().getY() / 1000000);
+        }
+
     }
 }

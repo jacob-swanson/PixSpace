@@ -115,7 +115,7 @@ void Universe::read(const QJsonObject &json)
         Body* b = NULL;
         foreach(Body* searchBody, this->bodies)
         {
-            if (b->getId() == bodyObject["id"].toInt())
+            if (searchBody->getId() == bodyObject["id"].toInt())
             {
                 b = searchBody;
             }
@@ -124,13 +124,13 @@ void Universe::read(const QJsonObject &json)
         if (b == NULL)
         {
             // New Body
-            if (bodyObject["type"] == "Body")
+            if (bodyObject["type"].toString() == "Body")
             {
                 b = new Body();
                 b->read(bodyObject);
                 this->pushBodies(b);
             }
-            else if (bodyObject["type"] == "RenderBody")
+            else if (bodyObject["type"].toString() == "RenderBody")
             {
                 b = new RenderBody();
                 b->read(bodyObject);
@@ -163,5 +163,5 @@ void Universe::write(QJsonObject &json) const
     }
     json["bodies"] = bodyArray;
 
-    json["type"] = "Universe";
+    json["type"] = QString("Universe");
 }

@@ -64,6 +64,8 @@ private slots:
      */
     void receiveMessage(QString username, QString message);
 
+    void tickSimulation();
+
 private:
 
     void updateServerBodies();
@@ -73,6 +75,8 @@ private:
     Connection* connection;
 
     Universe* universe;
+
+    QTimer tickTimer;
 };
 
 #endif // CLIENTAPP_H

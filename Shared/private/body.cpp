@@ -215,7 +215,7 @@ void Body::write(QJsonObject &json) const
     json["id"] = this->id;
     json["server"] = this->serverBody;
 
-    json["type"] = "Body";
+    json["type"] = QString("Body");
 }
 
 

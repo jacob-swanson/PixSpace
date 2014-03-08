@@ -6,6 +6,7 @@
 #include <QObject>
 
 #include "body.h"
+#include "renderbody.h"
 #include "shared_global.h"
 
 // Gravitational constant, G

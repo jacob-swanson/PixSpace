@@ -24,7 +24,7 @@ public:
      * @brief tick Stub function to be implemented by a child class
      * @param deltaTime Time since the last tick
      */
-    void tick(double deltaTime);
+    virtual void tick(double deltaTime);
 
     /**
      * @brief getPosition Get the position in the simulation (Units: meters)
@@ -187,13 +187,13 @@ public:
      * @brief read Read in from the given JSON object
      * @param json
      */
-    void read(const QJsonObject &json);
+    virtual void read(const QJsonObject &json);
 
     /**
      * @brief write Write to the given JSON object
      * @param json
      */
-    void write(QJsonObject &json) const;
+    virtual void write(QJsonObject &json) const;
 
 protected:
     // Simulation variables

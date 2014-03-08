@@ -92,8 +92,8 @@ QList<Body*> DataManager::loadBodies() const
     // Create Moon and Earth
     QList<Body*> bodies;
 
-    Body* b1 = new Body();
-    Body* b2 = new Body();
+    RenderBody* b1 = new RenderBody(":/ships/SpaceShuttle");
+    RenderBody* b2 = new RenderBody(":/ships/SpaceShuttle");
     b1->setServer(true);
     b2->setServer(true);
 

@@ -207,6 +207,6 @@ void Vector::write(QJsonObject &json) const
     json["x"] = this->x;
     json["y"] = this->y;
 
-    json["type"] = "Vector";
+    json["type"] = QString("Vector");
 }
 

@@ -1,6 +1,8 @@
 #ifndef CLIENTAPP_H
 #define CLIENTAPP_H
 
+#include <cmath>
+
 #include <QObject>
 #include <QGraphicsView>
 #include <QCoreApplication>
@@ -68,7 +70,12 @@ private slots:
 
 private:
 
-    void updateServerBodies();
+    /**
+     * @brief getPixelFromSimulation Scale down the value from the simulation to fit on a screen
+     * @param value Value to scale down
+     * @return
+     */
+    int getPixelFromSimulation(const double value) const;
 
     QGraphicsView* view;
     QGraphicsScene* scene;

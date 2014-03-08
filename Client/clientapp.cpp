@@ -84,38 +84,39 @@ void ClientApp::receiveMessage(QString username, QString message)
     this->universe->read(universeDocument.object());
 }
 
-void ClientApp::updateServerBodies()
-{
-//    this->scene->clear();
-//    foreach(Body* b, this->universe->getBodies())
-//    {
-//        this->scene->addItem(rb->getGraphicsItem());
-//        if (b->isMoveable())
-//            this->view->centerOn(rb->getGraphicsItem()->pos());
-//    }
-}
-
 void ClientApp::tickSimulation()
 {
     foreach(Body* b, this->universe->getBodies())
     {
-        RenderBody* rb = (RenderBody*)b;
-        QGraphicsPixmapItem* item = NULL;
-        item = rb->getGraphicsItem();
+        RenderBody* rb = dynamic_cast<RenderBody*>(b);
+        if (rb != NULL)
+        {
+            QGraphicsPixmapItem* item = NULL;
+            item = rb->getGraphicsItem();
 
-        if (item == NULL)
-        {
-            if (rb->createGraphic())
+            // Update the graphical component
+            if (item == NULL)
             {
-                item = rb->getGraphicsItem();
-                item->setPos(b->getPosition().getX() / 1000000, b->getPosition().getY() / 1000000);
-                this->scene->addItem(item);
+                if (rb->createGraphic())
+                {
+                    item = rb->getGraphicsItem();
+                    item->setPos(this->getPixelFromSimulation(b->getPosition().getX()), this->getPixelFromSimulation(b->getPosition().getY()));
+                    this->scene->addItem(item);
+                }
             }
-        }
-        else
-        {
-            item->setPos(b->getPosition().getX() / 1000000, b->getPosition().getY() / 1000000);
+            else
+            {
+                item->setPos(this->getPixelFromSimulation(b->getPosition().getX()), this->getPixelFromSimulation(b->getPosition().getY()));
+            }
         }
 
     }
+}
+
+int ClientApp::getPixelFromSimulation(const double value) const
+{
+    double newValue = value / 1000000.0;
+    double roundedValue = round(newValue);
+
+    return (int)roundedValue;
 }

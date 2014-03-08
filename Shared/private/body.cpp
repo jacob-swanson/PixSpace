@@ -10,6 +10,7 @@ Body::Body()
     diameter = 0;
 
     this->id = qrand();
+    this->serverBody = false;
 }
 
 void Body::tick(double deltaTime)

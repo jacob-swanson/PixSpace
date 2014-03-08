@@ -42,6 +42,7 @@ ServerApp::ServerApp(QObject *parent) :
     connect(server, SIGNAL(newConnection(Connection*)), this, SLOT(displayConnection(Connection*)));
     connect(server, SIGNAL(disconnection(QString)), this, SLOT(displayDisconnection(QString)));
     connect(this->universe, SIGNAL(stepFinished()), this, SLOT(broadcastBodies()));
+    connect(server, SIGNAL(newMessage(QString,QString)), this, SLOT(receiveMessage(QString,QString)));
 
     // Setup timers
     // TODO: Get time from the config
@@ -154,4 +155,11 @@ void ServerApp::broadcastBodies()
 
     QJsonDocument jsonDocument(universeObject);
     this->server->broadcastJson(jsonDocument.toJson());
+}
+
+void ServerApp::receiveMessage(QString username, QString message)
+{
+    QJsonDocument universeDocument = QJsonDocument::fromJson(message.toLocal8Bit());
+
+    this->universe->read(universeDocument.object());
 }

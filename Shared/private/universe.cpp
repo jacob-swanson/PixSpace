@@ -13,25 +13,28 @@ void Universe::simulateStep(double deltaTime)
     // Loop through all Bodies in Universe calculating forces
     foreach (Body* b1, this->bodies)
     {
-        // Calculate force from Gravity from all other Bodies
-        foreach (Body* b2, this->bodies)
+        if (b1->isServer() && b1->isAffectedByGravity())
         {
-            // If the Bodies are not the same, and the target Body is affected by gravity
-            if ((b1 != b2) && b1->isAffectedByGravity()) {
-                // Distance Vector between Bodies
-                Vector delta = b2->getPosition() - b1->getPosition();
+            // Calculate force from Gravity from all other Bodies
+            foreach (Body* b2, this->bodies)
+            {
+                // If the Bodies are not the same, and the target Body is affected by gravity
+                if ((b1 != b2) && b2->isServer()) {
+                    // Distance Vector between Bodies
+                    Vector delta = b2->getPosition() - b1->getPosition();
 
-                // Magnitude of distance Vector
-                double r = delta.length();
+                    // Magnitude of distance Vector
+                    double r = delta.length();
 
-                // Force of gravity
-                double combinedMass = b1->getMass() * b2->getMass();
-                double r2 = r * r;
-                double f = G * (combinedMass / r2);
+                    // Force of gravity
+                    double combinedMass = b1->getMass() * b2->getMass();
+                    double r2 = r * r;
+                    double f = G * (combinedMass / r2);
 
-                // Add directional force to Body
-                Vector force = delta.normalized() * f;
-                b1->pushForce(force);
+                    // Add directional force to Body
+                    Vector force = delta.normalized() * f;
+                    b1->pushForce(force);
+                }
             }
         }
     }
@@ -39,25 +42,29 @@ void Universe::simulateStep(double deltaTime)
     // Loop through all Bodies again to update their position, velocity, and acceleration
     foreach (Body* b1, this->bodies)
     {
-        // Update the velocity and position
-        while(!b1->isForcesEmpty())
+        // Only update server objects
+        if (b1->isServer())
         {
-            // Calculate acceleration from the force
-            Vector force = b1->popForce();
-            Vector acceleration = force / b1->getMass();
-
-            // Apply acceleration and velocity
-            b1->updateVelocity(acceleration * this->timeAcceleration * deltaTime);
-
-            // If the Body is moveable, move it
-            if (b1->isMoveable())
+            // Update the velocity and position
+            while(!b1->isForcesEmpty())
             {
-                b1->updatePosition(b1->getVelocity() * this->timeAcceleration * deltaTime);
-            }
-        }
+                // Calculate acceleration from the force
+                Vector force = b1->popForce();
+                Vector acceleration = force / b1->getMass();
 
-        // Tick the body after it has been moved
-        b1->tick(deltaTime);
+                // Apply acceleration and velocity
+                b1->updateVelocity(acceleration * this->timeAcceleration * deltaTime);
+
+                // If the Body is moveable, move it
+                if (b1->isMoveable())
+                {
+                    b1->updatePosition(b1->getVelocity() * this->timeAcceleration * deltaTime);
+                }
+            }
+
+            // Tick the body after it has been moved
+            b1->tick(deltaTime);
+        }
     }
 
     // Emit the finished signal
@@ -104,8 +111,6 @@ void Universe::read(const QJsonObject &json)
     // Read in the Universe
     this->timeAcceleration = json["timeacceleration"].toDouble();
 
-    // Empty out Bodies just in case
-    //this->clearServerBodies();
     QJsonArray bodyArray = json["bodies"].toArray();
     for (int i = 0; i < bodyArray.size(); i++)
     {
@@ -118,6 +123,7 @@ void Universe::read(const QJsonObject &json)
             if (searchBody->getId() == bodyObject["id"].toInt())
             {
                 b = searchBody;
+                break;
             }
         }
 

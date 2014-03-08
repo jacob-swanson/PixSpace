@@ -2,5 +2,6 @@
     <qresource prefix="/ships">
         <file alias="SpaceShuttle">Assets/SpaceShuttle.png</file>
         <file alias="SpaceShuttleMask">Assets/SpaceShuttleMask.png</file>
+        <file alias="Pig">Assets/PeegSpace.png</file>
     </qresource>
 </RCC>

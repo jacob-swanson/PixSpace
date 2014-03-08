@@ -15,6 +15,8 @@ void NetworkServer::incomingConnection(qintptr socketDescriptor)
 
     connect(connection, SIGNAL(disconnected()), this, SLOT(clientDisconnected()));
     connect(connection, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(displayError()));
+    connect(connection, SIGNAL(newMessage(QString,QString)), this, SLOT(receiveMessage(QString,QString)));
+
     emit newConnection(connection);
 }
 
@@ -56,4 +58,9 @@ void NetworkServer::broadcastJson(QByteArray message)
     {
         connection->sendMessage(QString(message));
     }
+}
+
+void NetworkServer::receiveMessage(QString username, QString message)
+{
+    emit newMessage(username, message);
 }

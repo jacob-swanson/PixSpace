@@ -15,6 +15,7 @@
 #include <Universe>
 
 #include "connectiondialog.h"
+#include "playercontroller.h"
 
 class ClientApp : public QObject
 {
@@ -71,6 +72,17 @@ private slots:
      */
     void tickSimulation();
 
+    /**
+     * @brief sendBodies Send client bodies to server.
+     */
+    void sendClientBody();
+
+signals:
+    /**
+     * @brief tickFinished Emitted when a Simulation tick is finished
+     */
+    void tickFinished();
+
 private:
 
     /**
@@ -87,6 +99,8 @@ private:
     Universe* universe;
 
     QTimer tickTimer;
+
+    PlayerController* controller;
 };
 
 #endif // CLIENTAPP_H

@@ -37,6 +37,13 @@ signals:
      */
     void disconnection(QString username);
 
+    /**
+     * @brief newMessage Emitted when a new message is received from a Connection
+     * @param username
+     * @param message
+     */
+    void newMessage(QString username, QString message);
+
 protected:
     /**
      * @brief incomingConnection Convert socketDescriptor to a Connection, and emit newConnection with it
@@ -54,6 +61,13 @@ private slots:
      * @brief displayError Print out a socket error
      */
     void displayError();
+
+    /**
+     * @brief receiveMessage Relay a message from a connected Connection
+     * @param username
+     * @param message
+     */
+    void receiveMessage(QString username, QString message);
 
 private:    
     // List of clients

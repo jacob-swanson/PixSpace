@@ -45,6 +45,13 @@ private slots:
      */
     void displayDisconnection(QString username);
 
+    /**
+     * @brief handleMessage Handle a message from a client
+     * @param username
+     * @param message
+     */
+    void receiveMessage(QString username, QString message);
+
 public slots:
     /**
      * @brief tick Tick the simulation
@@ -76,6 +83,9 @@ public slots:
      */
     void handleSigInt();
 
+    /**
+     * @brief broadcastBodies Broadcast the Universe to all
+     */
     void broadcastBodies();
 
 private:

@@ -1,6 +1,7 @@
 #include <QCoreApplication>
 #include <QTimer>
 #include <QDebug>
+#include <QtGlobal>
 
 #include <signal.h>
 
@@ -38,6 +39,7 @@ static int setup_unix_signal_handlers()
 
 int main(int argc, char *argv[])
 {
+    qsrand(time(NULL));
     QCoreApplication a(argc, argv);
     setup_unix_signal_handlers();
 

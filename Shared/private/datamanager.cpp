@@ -94,6 +94,7 @@ QList<Body*> DataManager::loadBodies() const
 
     RenderBody* b1 = new RenderBody(":/ships/SpaceShuttle");
     RenderBody* b2 = new RenderBody(":/ships/SpaceShuttle");
+    RenderBody* b3 = new RenderBody(":/ships/Pig");
     b1->setServer(true);
     b2->setServer(true);
 
@@ -107,9 +108,14 @@ QList<Body*> DataManager::loadBodies() const
     b2->setPosition(0, 0);
     b2->setMoveable(false);
 
+    b3->setMass(1);
+    b3->setPosition(2e8, 2e8);
+    b3->setVelocity(0, 0);
+
     // Add Earth and Sun to list
     bodies.push_back(b1);
     bodies.push_back(b2);
+    bodies.push_back(b3);
 
     return bodies;
 }

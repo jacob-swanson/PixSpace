@@ -14,6 +14,7 @@ ClientApp::ClientApp(QObject *parent) :
     this->universe = new Universe();
 
     this->tickTimer.setInterval(15);
+    this->controller = new PlayerController();
 
     connect(&this->tickTimer, SIGNAL(timeout()), this, SLOT(tickSimulation()));
 }
@@ -50,6 +51,11 @@ void ClientApp::connectionSuccessful()
     // Clear out the scene to prepair for the game loading
     this->scene->clear();
     this->tickTimer.start();
+
+    RenderBody* b = new RenderBody(":/ships/Pig");
+    b->setPosition(-2.0e8, -2.0e8);
+    this->controller->possess(b);
+    this->universe->pushBodies(b);
 }
 
 void ClientApp::displayConnectionError()
@@ -110,6 +116,8 @@ void ClientApp::tickSimulation()
             }
         }
     }
+
+    emit tickFinished();
 }
 
 int ClientApp::getPixelFromSimulation(const double value) const
@@ -118,4 +126,13 @@ int ClientApp::getPixelFromSimulation(const double value) const
     double roundedValue = round(newValue);
 
     return (int)roundedValue;
+}
+
+void ClientApp::sendClientBody()
+{
+    QJsonObject universeObject;
+    this->universe->write(universeObject);
+
+    QJsonDocument jsonDocument(universeObject);
+    this->connection->sendMessage(jsonDocument.toJson());
 }

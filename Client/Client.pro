@@ -14,11 +14,15 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
     connectiondialog.cpp \
-    clientapp.cpp
+    clientapp.cpp \
+    controller.cpp \
+    playercontroller.cpp
 
 HEADERS  += \
     connectiondialog.h \
-    clientapp.h
+    clientapp.h \
+    controller.h \
+    playercontroller.h
 
 FORMS    += \
     connectiondialog.ui

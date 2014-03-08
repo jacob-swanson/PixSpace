@@ -109,7 +109,6 @@ void ClientApp::tickSimulation()
                 item->setPos(this->getPixelFromSimulation(b->getPosition().getX()), this->getPixelFromSimulation(b->getPosition().getY()));
             }
         }
-
     }
 }
 

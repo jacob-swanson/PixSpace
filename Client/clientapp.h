@@ -66,6 +66,9 @@ private slots:
      */
     void receiveMessage(QString username, QString message);
 
+    /**
+     * @brief tickSimulation Update the client side simulation
+     */
     void tickSimulation();
 
 private:

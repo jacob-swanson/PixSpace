@@ -71,7 +71,7 @@ void ClientApp::displayConnectionError()
 {
     qDebug() << "Connection error: " << this->connection->errorString();
 
-    // Destory the connection
+    // Destroy the connection
     this->connection->disconnectFromHost();
     this->connection->deleteLater();
 

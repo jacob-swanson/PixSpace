@@ -3,6 +3,11 @@
 PlayerController::PlayerController(QObject *parent) :
     Controller(parent)
 {
+    // TODO: Load keybindings from storage (DB or local file) so that they can be user configured
+    this->keybindings.forward = Qt::Key_W;
+    this->keybindings.backward = Qt::Key_S;
+    this->keybindings.turnLeft = Qt::Key_A;
+    this->keybindings.turnRight = Qt::Key_D;
 }
 
 void PlayerController::tick(double deltaTime)
@@ -42,5 +47,21 @@ void PlayerController::write(QJsonObject &json)
 
 void PlayerController::handleKeyPress(int key)
 {
-
+    // TODO: Handle more than just movement
+    if (key == keybindings.forward)
+    {
+        qDebug() << "Move ship forward";
+    }
+    else if (key == keybindings.backward)
+    {
+        qDebug() << "Move ship backward";
+    }
+    else if (key == keybindings.turnLeft)
+    {
+        qDebug() << "Turn ship left.";
+    }
+    else if (key == keybindings.turnRight)
+    {
+        qDebug() << "Turn ship right.";
+    }
 }

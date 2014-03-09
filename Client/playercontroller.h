@@ -3,8 +3,17 @@
 
 #include <RenderBody>
 #include <Vector>
-
+#include <QDebug>
 #include "controller.h"
+
+// Struct to store keybindings for the controller
+struct keybinding
+{
+    int forward;
+    int backward;
+    int turnLeft;
+    int turnRight;
+};
 
 class PlayerController : public Controller
 {
@@ -24,6 +33,8 @@ public slots:
 
 private:
     RenderBody* body;
+    // Keybindings will be stored in here
+    keybinding keybindings;
 
 };
 

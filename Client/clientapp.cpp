@@ -6,7 +6,7 @@ ClientApp::ClientApp(QObject *parent) :
     // Setup the GraphicsView and GraphicsScene
     this->view = new QGraphicsView();
     view->setBackgroundBrush(QBrush(Qt::black, Qt::SolidPattern));
-    this->scene = new QGraphicsScene();
+    this->scene = new ClientGraphicsScene;
     view->setScene(this->scene);
 
     this->showConnectionDialog();
@@ -15,6 +15,9 @@ ClientApp::ClientApp(QObject *parent) :
 
     this->tickTimer.setInterval(15);
     this->controller = new PlayerController();
+
+    // Connect the keypress signal to the controller's keypress handler
+    connect(this->scene, SIGNAL(keyPressed(int)), this->controller, SLOT(handleKeyPress(int)));
 
     connect(&this->tickTimer, SIGNAL(timeout()), this, SLOT(tickSimulation()));
     connect(this, SIGNAL(tickFinished()), this, SLOT(sendClientBody()));

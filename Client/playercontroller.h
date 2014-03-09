@@ -33,7 +33,6 @@ public slots:
 
 private:
     RenderBody* body;
-    // Keybindings will be stored in here
     keybinding keybindings;
 
 };

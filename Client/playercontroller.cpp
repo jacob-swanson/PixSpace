@@ -48,6 +48,8 @@ void PlayerController::write(QJsonObject &json)
 void PlayerController::handleKeyPress(int key)
 {
     // TODO: Handle more than just movement
+    // TDOO: Convert into calls to make ship move
+    // A switch statement does not work as it seems to require constants, and keybindings will be loaded in later
     if (key == keybindings.forward)
     {
         qDebug() << "Move ship forward";

@@ -16,13 +16,15 @@ SOURCES += main.cpp\
     connectiondialog.cpp \
     clientapp.cpp \
     controller.cpp \
-    playercontroller.cpp
+    playercontroller.cpp \
+    clientgraphicsscene.cpp
 
 HEADERS  += \
     connectiondialog.h \
     clientapp.h \
     controller.h \
-    playercontroller.h
+    playercontroller.h \
+    clientgraphicsscene.h
 
 FORMS    += \
     connectiondialog.ui

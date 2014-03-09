@@ -9,6 +9,7 @@
 #include <QGraphicsProxyWidget>
 #include <QGraphicsScene>
 #include <QJsonDocument>
+#include <QKeyEvent>
 
 #include <RenderBody>
 #include <Connection>
@@ -17,6 +18,7 @@
 
 #include "connectiondialog.h"
 #include "playercontroller.h"
+#include "clientgraphicsscene.h"
 
 class ClientApp : public QObject
 {

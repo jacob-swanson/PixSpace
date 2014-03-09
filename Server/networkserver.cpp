@@ -16,8 +16,7 @@ void NetworkServer::incomingConnection(qintptr socketDescriptor)
     connect(connection, SIGNAL(disconnected()), this, SLOT(clientDisconnected()));
     connect(connection, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(displayError()));
     connect(connection, SIGNAL(newMessage(QString,QString)), this, SLOT(receiveMessage(QString,QString)));
-
-    emit newConnection(connection);
+    connect(connection, SIGNAL(readyForUse()), this, SLOT(clientConnected()));
 }
 
 void NetworkServer::clientDisconnected()
@@ -34,6 +33,13 @@ void NetworkServer::clientDisconnected()
 
     // Delete the object
     connection->deleteLater();
+}
+
+void NetworkServer::clientConnected()
+{
+    Connection *connection = qobject_cast<Connection*>(sender());
+
+    emit newConnection(connection);
 }
 
 void NetworkServer::broadcastMessage(QString message)

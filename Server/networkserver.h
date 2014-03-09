@@ -58,6 +58,11 @@ private slots:
     void clientDisconnected();
 
     /**
+     * @brief clientConnected
+     */
+    void clientConnected();
+
+    /**
      * @brief displayError Print out a socket error
      */
     void displayError();

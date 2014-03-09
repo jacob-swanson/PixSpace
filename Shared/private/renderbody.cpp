@@ -53,6 +53,7 @@ bool RenderBody::createGraphic()
     else
     {
         this->spriteGraphicsItem = new QGraphicsPixmapItem(pixmap);
+        this->spriteGraphicsItem->setTransformOriginPoint(pixmap.width() / 2, pixmap.height() / 2);
         return true;
     }
 }

@@ -10,6 +10,7 @@
 #include <QGraphicsScene>
 #include <QJsonDocument>
 #include <QKeyEvent>
+#include <QElapsedTimer>
 
 #include <RenderBody>
 #include <Connection>
@@ -111,6 +112,8 @@ private:
     QTimer tickTimer;
 
     PlayerController* controller;
+
+    QElapsedTimer timer;
 };
 
 #endif // CLIENTAPP_H

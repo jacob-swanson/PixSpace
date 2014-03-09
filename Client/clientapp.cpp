@@ -28,6 +28,7 @@ ClientApp::ClientApp(QObject *parent) :
 
 void ClientApp::bodyNotFound(Body *body)
 {
+    // If the body isn't the one we're controlling, remove its graphics item
     if (body->getId() != this->controller->getPossessed()->getId())
     {
         RenderBody* b = dynamic_cast<RenderBody*>(body);
@@ -38,6 +39,7 @@ void ClientApp::bodyNotFound(Body *body)
     }
     else
     {
+        // The ship will be removed from the universe, so we need to add it back
         this->universe->pushBodies(body);
     }
 }
@@ -121,6 +123,8 @@ void ClientApp::receiveMessage(QString username, QString message)
 
 void ClientApp::tickSimulation()
 {
+    double deltaTime = ((double)this->timer.restart()/1000.0);
+
     foreach(Body* b, this->universe->getBodies())
     {
         RenderBody* rb = dynamic_cast<RenderBody*>(b);
@@ -136,15 +140,19 @@ void ClientApp::tickSimulation()
                 {
                     item = rb->getGraphicsItem();
                     item->setPos(this->getPixelFromSimulation(b->getPosition().getX()), this->getPixelFromSimulation(b->getPosition().getY()));
+                    item->setRotation(rb->getRotation());
                     this->scene->addItem(item);
                 }
             }
             else
             {
                 item->setPos(this->getPixelFromSimulation(b->getPosition().getX()), this->getPixelFromSimulation(b->getPosition().getY()));
+                item->setRotation(rb->getRotation());
             }
         }
     }
+
+    this->controller->tick(deltaTime);
 
     emit tickFinished();
 }

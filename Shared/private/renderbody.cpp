@@ -17,19 +17,19 @@ RenderBody::RenderBody(QString assetPath) :
 bool RenderBody::createGraphic()
 {
     // Create QImages so they can be manipulated pixel by pixel
-    QImage image(this->assetPath);
-    QImage mask(this->assetPath + "Mask");
+    QImage image(this->imagePath + this->assetPath);
+    QImage mask(this->maskPath + this->assetPath);
 
     if (image.isNull())
     {
-        qDebug() << "There was a problem loading asset: " << this->assetPath;
+        qDebug() << "There was a problem loading asset: " << this->imagePath + this->assetPath;
         return false;
     }
 
     // Not a fatal error
     if (mask.isNull())
     {
-        qDebug() << "There was a problem loading asset: " << this->assetPath + "Mask";
+        qDebug() << "There was a problem loading asset: " << this->maskPath + this->assetPath;
     }
 
     // Apply image filters
@@ -44,7 +44,7 @@ bool RenderBody::createGraphic()
 
     if (pixmap.isNull())
     {
-        qDebug() << "There was a problem creating a pixmap for asset: " << this->assetPath;
+        qDebug() << "There was a problem creating a pixmap for asset: " << this->imagePath + this->assetPath;
         return false;
     }
     else

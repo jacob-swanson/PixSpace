@@ -53,7 +53,7 @@ void ClientApp::connectionSuccessful()
     this->scene->clear();
     this->tickTimer.start();
 
-    RenderBody* b = new RenderBody(":/ships/Pig");
+    RenderBody* b = new RenderBody("FireflyShip");
     b->setPosition(-2.0e8, -2.0e8);
     this->controller->possess(b);
     this->universe->pushBodies(b);

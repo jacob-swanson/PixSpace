@@ -80,6 +80,10 @@ private:
 
     // GraphicsItem to be loaded into the QGraphicsScene
     QGraphicsPixmapItem *spriteGraphicsItem;
+
+    // Asset Resource File Paths
+    const QString imagePath = ":/bodies/";
+    const QString maskPath = ":/bodies-mask/";
 };
 
 #endif // RENDERBODY_H

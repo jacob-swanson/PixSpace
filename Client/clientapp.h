@@ -80,6 +80,11 @@ private slots:
      */
     void sendClientBody();
 
+    /**
+     * @brief bodyNotFound Handles the case when a body is not in the received Universe
+     * Will add back the player's ship because it will be removed.
+     * @param body
+     */
     void bodyNotFound(Body* body);
 
 signals:

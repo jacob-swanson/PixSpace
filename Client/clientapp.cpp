@@ -90,7 +90,6 @@ void ClientApp::displayConnectionError()
 
     // Destroy the connection
     this->connection->disconnectFromHost();
-    this->connection->deleteLater();
 
     // Show the connection dialog
     delete this->universe;
@@ -104,6 +103,8 @@ void ClientApp::showConnectionDialog()
     // Setup the server connection dialog
     ConnectionDialog* dialog = new ConnectionDialog();
     QGraphicsProxyWidget* item = this->scene->addWidget(dialog, Qt::Dialog | Qt::WindowTitleHint);
+
+    this->view->centerOn(item);
 
     connect(dialog, SIGNAL(connectToServer(QString,int,QString)),
             this, SLOT(connectToServer(QString,int,QString)));

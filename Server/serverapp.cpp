@@ -191,5 +191,4 @@ void ServerApp::receiveMessage(QString username, QString message)
     }
 
     b->read(shipObject);
-
 }

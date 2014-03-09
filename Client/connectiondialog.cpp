@@ -13,7 +13,9 @@ ConnectionDialog::ConnectionDialog(QWidget *parent) :
     QIntValidator* portVal = new QIntValidator(0, 65535);
     this->ui->lineEditPort->setValidator(portVal);
 
-    // TODO: Validator for Name and IP
+    // TODO: Validator for Name
+    QRegularExpressionValidator* ipValid = new QRegularExpressionValidator(QRegularExpression("^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$"), this->ui->lineEditAddress);
+    this->ui->lineEditAddress->setValidator(ipValid);
 
     // Connect signals
     connect(this->ui->pushButtonJoin, SIGNAL(clicked()), this, SLOT(connectButtonClicked()));

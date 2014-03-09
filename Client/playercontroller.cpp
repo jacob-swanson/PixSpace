@@ -20,6 +20,11 @@ void PlayerController::possess(Body *body)
     this->body = dynamic_cast<RenderBody*>(body);
 }
 
+Body* PlayerController::getPossessed()
+{
+    return this->body;
+}
+
 void PlayerController::unPossess()
 {
     this->body = NULL;

@@ -77,6 +77,8 @@ signals:
      */
     void stepFinished();
 
+    void bodyNotFound(Body *body);
+
 private:
     // List of all bodies in simulation
     QList<Body*> bodies;

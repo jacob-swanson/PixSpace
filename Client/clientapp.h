@@ -80,6 +80,8 @@ private slots:
      */
     void sendClientBody();
 
+    void bodyNotFound(Body* body);
+
 signals:
     /**
      * @brief tickFinished Emitted when a Simulation tick is finished

@@ -23,6 +23,7 @@ public:
 
     void tick(double deltaTime);
     void possess(Body *body);
+    Body* getPossessed();
     void unPossess();
     Vector getPosition();
     void read(QJsonObject &json);

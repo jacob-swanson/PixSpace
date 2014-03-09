@@ -12,6 +12,7 @@ ClientApp::ClientApp(QObject *parent) :
     this->showConnectionDialog();
 
     this->universe = new Universe();
+    connect(this->universe, SIGNAL(bodyNotFound(Body*)), this, SLOT(bodyNotFound(Body*)));
 
     this->tickTimer.setInterval(15);
     this->controller = new PlayerController();
@@ -23,6 +24,22 @@ ClientApp::ClientApp(QObject *parent) :
 
     connect(&this->tickTimer, SIGNAL(timeout()), this, SLOT(tickSimulation()));
     connect(this, SIGNAL(tickFinished()), this, SLOT(sendClientBody()));
+}
+
+void ClientApp::bodyNotFound(Body *body)
+{
+    if (body->getId() != this->controller->getPossessed()->getId())
+    {
+        RenderBody* b = dynamic_cast<RenderBody*>(body);
+        if (b != NULL)
+        {
+            this->scene->removeItem(b->getGraphicsItem());
+        }
+    }
+    else
+    {
+        this->universe->pushBodies(body);
+    }
 }
 
 void ClientApp::connectToServer(QString address, int port, QString name)
@@ -59,7 +76,7 @@ void ClientApp::connectionSuccessful()
     this->tickTimer.start();
 
     Ship* b = new Ship("FireflyShip", this->connection->getGreetingMessage());
-    b->setPosition(-2.0e8, -2.0e8);
+    b->setPosition(2.0e8, -2.0e8);
     this->controller->possess(b);
     this->universe->pushBodies(b);
 

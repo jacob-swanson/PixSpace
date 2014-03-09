@@ -159,6 +159,24 @@ void Universe::read(const QJsonObject &json)
             b->read(bodyObject);
         }
     }
+
+    foreach(Body* searchBody, this->bodies)
+    {
+        int num = -1;
+        for (int i = 0; i < bodyArray.size(); i++)
+        {
+            if (searchBody->getId() == bodyArray[i].toObject()["id"].toInt())
+            {
+                num = i;
+            }
+        }
+
+        if (num < 0)
+        {
+            this->removeBody(searchBody);
+            emit bodyNotFound(searchBody);
+        }
+    }
 }
 
 void Universe::write(QJsonObject &json) const

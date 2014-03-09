@@ -12,13 +12,7 @@ PlayerController::PlayerController(QObject *parent) :
 
 void PlayerController::tick(double deltaTime)
 {
-    // Testing to show rotation
-    RenderBody* body = dynamic_cast<RenderBody*>(this->getPossessed());
-    if (body != NULL)
-    {
-        double rotation = body->getRotation();
-        body->setRotation(rotation + 10 * deltaTime);
-    }
+    this->body->tick(deltaTime);
 }
 
 void PlayerController::possess(Body *body)

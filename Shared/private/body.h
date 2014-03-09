@@ -184,6 +184,18 @@ public:
     bool isServer();
 
     /**
+     * @brief getRotationRate Get the rotation rate of the Body (Units: degrees/sec)
+     * @return
+     */
+    double getRotationRate();
+
+    /**
+     * @brief setRotationRate Set the rotation rate of the Body (Units: degrees/sec)
+     * @param rotationRate
+     */
+    void setRotationRate(double rotationRate);
+
+    /**
      * @brief read Read in from the given JSON object
      * @param json
      */
@@ -207,6 +219,7 @@ protected:
 
     // Other variables
     double rotation;
+    double rotationRate;
     double diameter;
     QString name;
     bool serverBody;

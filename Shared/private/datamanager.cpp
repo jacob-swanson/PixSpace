@@ -94,7 +94,6 @@ QList<Body*> DataManager::loadBodies() const
 
     RenderBody* b1 = new RenderBody("Moon");
     RenderBody* b2 = new RenderBody("WaterPlanet");
-    RenderBody* b3 = new RenderBody("KittenCupPlanet");
     b1->setServer(true);
     b2->setServer(true);
 
@@ -102,20 +101,17 @@ QList<Body*> DataManager::loadBodies() const
     b1->setMass(7.3459e22);
     b1->setPosition(3.8e8, 0);
     b1->setVelocity(0, 1023);
+    b1->setRotationRate(10);
 
     // Earth
     b2->setMass(5.9721986e24);
     b2->setPosition(0, 0);
     b2->setMoveable(false);
-
-    b3->setMass(1);
-    b3->setPosition(2e8, 2e8);
-    b3->setVelocity(0, 0);
+    b2->setRotationRate(-20);
 
     // Add Earth and Sun to list
     bodies.push_back(b1);
     bodies.push_back(b2);
-    bodies.push_back(b3);
 
     return bodies;
 }

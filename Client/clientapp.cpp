@@ -85,6 +85,7 @@ void ClientApp::connectionSuccessful()
 
     Ship* b = new Ship("FireflyShip", this->connection->getGreetingMessage());
     b->setPosition(-2.0e8, -2.0e8);
+    b->setRotationRate(50);
     this->controller->possess(b);
     this->universe->pushBodies(b);
 

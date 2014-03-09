@@ -53,6 +53,12 @@ public:
      */
     bool sendMessage(const QString &message);
 
+    /**
+     * @brief Connection::getGreetingMessage Get the username that was sent to the other end
+     * @return
+     */
+    QString getGreetingMessage() const;
+
 signals:
     /**
      * @brief readyForUse Emitted when greetings have been exchanged

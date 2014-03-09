@@ -29,6 +29,11 @@ QString Connection::getName() const
     return this->username;
 }
 
+QString Connection::getGreetingMessage() const
+{
+    return this->greetingMessage;
+}
+
 bool Connection::sendMessage(const QString &message)
 {
     // Send a message
@@ -92,7 +97,7 @@ void Connection::processReadyRead()
         }
 
         // Set username to <NAME>@<IP>:<PORT>
-        username = QString(buffer) + '@' + this->peerAddress().toString() + ":" + QString::number(this->peerPort());
+        username = QString(buffer);// + '@' + this->peerAddress().toString() + ":" + QString::number(this->peerPort());
         this->currentDataType = Undefined;
         this->numBytesForCurrentDataType = 0;
         this->buffer.clear();

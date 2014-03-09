@@ -13,6 +13,7 @@
 #include <RenderBody>
 #include <Connection>
 #include <Universe>
+#include <Ship>
 
 #include "connectiondialog.h"
 #include "playercontroller.h"

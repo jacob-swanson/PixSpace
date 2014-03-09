@@ -17,7 +17,8 @@ SOURCES += private/body.cpp \
     private/vector.cpp \
     private/renderbody.cpp \
     private/datamanager.cpp \
-    private/connection.cpp
+    private/connection.cpp \
+    private/ship.cpp
 
 HEADERS += private/shared_global.h \
     private/body.h \
@@ -31,7 +32,9 @@ HEADERS += private/shared_global.h \
     RenderBody \
     private/datamanager.h \
     private/connection.h \
-    Connection
+    Connection \
+    private/ship.h \
+    Ship
 
 unix {
     target.path = /usr/lib

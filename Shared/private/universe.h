@@ -7,6 +7,7 @@
 
 #include "body.h"
 #include "renderbody.h"
+#include "ship.h"
 #include "shared_global.h"
 
 // Gravitational constant, G

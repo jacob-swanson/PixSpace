@@ -146,6 +146,19 @@ void ServerApp::displayConnection(Connection *connection)
 void ServerApp::displayDisconnection(QString username)
 {
     qDebug() << "User Disconnected: " << username;
+
+    // Get rid of their ship
+    for (int i = 0; i < this->universe->getBodies().count(); i++)
+    {
+        Ship* ship = dynamic_cast<Ship*>(this->universe->getBodies().at(i));
+        if (ship != NULL)
+        {
+            if (ship->getOwner() == username)
+            {
+                this->universe->removeBody(ship);
+            }
+        }
+    }
 }
 
 void ServerApp::broadcastBodies()

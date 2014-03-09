@@ -142,6 +142,12 @@ void Universe::read(const QJsonObject &json)
                 b->read(bodyObject);
                 this->pushBodies(b);
             }
+            else if (bodyObject["type"].toString() == "Ship")
+            {
+                b = new Ship();
+                b->read(bodyObject);
+                this->pushBodies(b);
+            }
             else
             {
                 qDebug() << "Could not load type: " << bodyObject["type"];

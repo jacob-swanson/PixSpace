@@ -53,7 +53,7 @@ void ClientApp::connectionSuccessful()
     this->scene->clear();
     this->tickTimer.start();
 
-    RenderBody* b = new RenderBody("FireflyShip");
+    Ship* b = new Ship("FireflyShip", this->connection->getGreetingMessage());
     b->setPosition(-2.0e8, -2.0e8);
     this->controller->possess(b);
     this->universe->pushBodies(b);
@@ -68,6 +68,8 @@ void ClientApp::displayConnectionError()
     this->connection->deleteLater();
 
     // Show the connection dialog
+    delete this->universe;
+    this->universe = new Universe();
     this->scene->clear();
     this->showConnectionDialog();
 }

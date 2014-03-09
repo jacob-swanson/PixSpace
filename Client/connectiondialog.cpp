@@ -13,7 +13,11 @@ ConnectionDialog::ConnectionDialog(QWidget *parent) :
     QIntValidator* portVal = new QIntValidator(0, 65535);
     this->ui->lineEditPort->setValidator(portVal);
 
-    // TODO: Validator for Name
+    // Validator to for name to be only English alphanumeric characters and between 1 and 50 characters
+    QRegularExpressionValidator* nameValid = new QRegularExpressionValidator(QRegularExpression("[a-z,A-Z,0-9]{1,50}"), this->ui->lineEditName);
+     this->ui->lineEditName->setValidator((nameValid));
+
+    // Allow only inputs which match an IP address to be entered
     QRegularExpressionValidator* ipValid = new QRegularExpressionValidator(QRegularExpression("^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$"), this->ui->lineEditAddress);
     this->ui->lineEditAddress->setValidator(ipValid);
 

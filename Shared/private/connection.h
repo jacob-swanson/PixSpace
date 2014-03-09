@@ -10,6 +10,32 @@
 
 static const int MaxBufferSize = 1024000;
 
+/**
+ * @brief The Connection class
+ * The connection goes through the following states:
+ * 1. WaitingForGreeting
+ * 2. ReadingGreeting
+ * 3. ReadyForUse
+ *
+ * WaitingForGreeting
+ *  In this state, the Connection will ignore all receiving data except for the greeting which will have the following format
+ *      GREETING SomeName
+ *  The purpose of the greeting is to share the name between the two Connections
+ *
+ * ReadingGreeting
+ *  This is a very short lived state. When the Connection is in WaitingForGreeting, and the Connection receives "GREETING ". It will stay in this state until the full greeting is read.
+ *
+ * ReadyForUse
+ *  The Connection is ready to be used in this state. It will emit the newMessage signal, and will send messages via sendMessage.
+ *
+ * General Format of Packets
+ *  <DataType> <Size (bytes)> <Message of Size>
+ *
+ * Timers
+ *  Ping messages are replied to
+ *  Pong messages reset the timeout timer
+ *  If transfer times out, it will be aborted.
+ */
 class Connection : public QTcpSocket
 {
     Q_OBJECT

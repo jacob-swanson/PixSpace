@@ -76,7 +76,7 @@ void ClientApp::connectionSuccessful()
     this->tickTimer.start();
 
     Ship* b = new Ship("FireflyShip", this->connection->getGreetingMessage());
-    b->setPosition(2.0e8, -2.0e8);
+    b->setPosition(-2.0e8, -2.0e8);
     this->controller->possess(b);
     this->universe->pushBodies(b);
 
@@ -158,9 +158,9 @@ int ClientApp::getPixelFromSimulation(const double value) const
 
 void ClientApp::sendClientBody()
 {
-    QJsonObject universeObject;
-    this->universe->write(universeObject);
+    QJsonObject shipObject;
+    this->controller->getPossessed()->write(shipObject);
 
-    QJsonDocument jsonDocument(universeObject);
+    QJsonDocument jsonDocument(shipObject);
     this->connection->sendMessage(jsonDocument.toJson());
 }

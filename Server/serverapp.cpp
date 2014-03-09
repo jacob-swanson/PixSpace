@@ -172,7 +172,24 @@ void ServerApp::broadcastBodies()
 
 void ServerApp::receiveMessage(QString username, QString message)
 {
-    QJsonDocument universeDocument = QJsonDocument::fromJson(message.toLocal8Bit());
+    QJsonDocument shipDocument = QJsonDocument::fromJson(message.toLocal8Bit());
+    QJsonObject shipObject = shipDocument.object();
 
-    this->universe->read(universeDocument.object());
+    Body* b = NULL;
+    foreach(Body* body, this->universe->getBodies())
+    {
+        if (body->getId() == shipObject["id"].toInt())
+        {
+            b = body;
+        }
+    }
+
+    if (b == NULL)
+    {
+        b = new Ship();
+        this->universe->pushBodies(b);
+    }
+
+    b->read(shipObject);
+
 }

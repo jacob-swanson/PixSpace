@@ -29,7 +29,16 @@ public:
     void write(QJsonObject &json);
 
 public slots:
+    /**
+     * @brief handleKeyPress Handles input when a key is pressed by the player
+     * @param key Int value of the key pressed
+     */
     void handleKeyPress(int key);
+    /**
+     * @brief handleKeyRelease Handles input when a key is released by the player
+     * @param key Int value of the key released
+     */
+    void handleKeyRelease(int key);
 
 private:
     RenderBody* body;

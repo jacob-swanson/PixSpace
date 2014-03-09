@@ -24,6 +24,11 @@ private:
      */
     void keyPressEvent(QKeyEvent *event);
     /**
+     * @brief keyPressEvent Executed when a key release event happens
+     * @param event Key press event
+     */
+    void keyReleaseEvent(QKeyEvent *event);
+    /**
      * @brief controllerMode Indicates whether to pass input to controller or parent
      */
     bool controllerMode;
@@ -34,6 +39,11 @@ signals:
      * @param key Value of the key pressed
      */
     void keyPressed(int key);
+    /**
+     * @brief keyRealeased Emitted when a key is pressed inside the graphics scene
+     * @param key Value of the key released
+     */
+    void keyReleased(int key);
 };
 
 #endif // CLIENTGRAPHICSSCENE_H

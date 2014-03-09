@@ -18,6 +18,8 @@ ClientApp::ClientApp(QObject *parent) :
 
     // Connect the keypress signal to the controller's keypress handler
     connect(this->scene, SIGNAL(keyPressed(int)), this->controller, SLOT(handleKeyPress(int)));
+    // Connect the key release signal to the controller's key release handler
+    connect(this->scene, SIGNAL(keyReleased(int)), this->controller, SLOT(handleKeyRelease(int)));
 
     connect(&this->tickTimer, SIGNAL(timeout()), this, SLOT(tickSimulation()));
     connect(this, SIGNAL(tickFinished()), this, SLOT(sendClientBody()));

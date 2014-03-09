@@ -67,3 +67,26 @@ void PlayerController::handleKeyPress(int key)
         qDebug() << "Turn ship right.";
     }
 }
+
+void PlayerController::handleKeyRelease(int key)
+{
+    // TODO: Handle more than just movement
+    // TDOO: Convert into calls to make ship stop moving
+    // A switch statement does not work as it seems to require constants, and keybindings will be loaded in later
+    if (key == keybindings.forward)
+    {
+        qDebug() << "Stop moving ship forward";
+    }
+    else if (key == keybindings.backward)
+    {
+        qDebug() << "Stop moving ship backward";
+    }
+    else if (key == keybindings.turnLeft)
+    {
+        qDebug() << "Stop turning ship left.";
+    }
+    else if (key == keybindings.turnRight)
+    {
+        qDebug() << "Stop turning ship right.";
+    }
+}

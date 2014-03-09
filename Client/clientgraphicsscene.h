@@ -11,6 +11,11 @@ class ClientGraphicsScene : public QGraphicsScene
 
 public:
     ClientGraphicsScene();
+    /**
+     * @brief setControllerMode Sets input to be passed to controller (true) or to be passed up to QGraphicsScene (false)
+     * @param controllerMode bool
+     */
+    void setControllerMode(bool controllerMode);
 
 private:
     /**
@@ -18,6 +23,10 @@ private:
      * @param event Key press event
      */
     void keyPressEvent(QKeyEvent *event);
+    /**
+     * @brief controllerMode Indicates whether to pass input to controller or parent
+     */
+    bool controllerMode;
 
 signals:
     /**

@@ -60,6 +60,9 @@ void ClientApp::connectionSuccessful()
     b->setPosition(-2.0e8, -2.0e8);
     this->controller->possess(b);
     this->universe->pushBodies(b);
+
+    // Swap the custom graphics scene keypress event handling to controller mode (keys control ship movement and actions rather than input to connection dialog)
+    this->scene->setControllerMode(true);
 }
 
 void ClientApp::displayConnectionError()

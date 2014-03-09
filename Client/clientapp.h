@@ -96,7 +96,7 @@ private:
     int getPixelFromSimulation(const double value) const;
 
     QGraphicsView* view;
-    QGraphicsScene* scene;
+    ClientGraphicsScene* scene;
     Connection* connection;
 
     Universe* universe;

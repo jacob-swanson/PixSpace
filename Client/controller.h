@@ -45,6 +45,7 @@ public:
      * @param json
      */
     virtual void write(QJsonObject &json) = 0;
+
 };
 
 #endif // CONTROLLER_H

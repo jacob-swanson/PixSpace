@@ -63,19 +63,19 @@ void PlayerController::handleKeyPress(int key)
     // A switch statement does not work as it seems to require constants, and keybindings will be loaded in later
     if (key == keybindings.forward)
     {
-        qDebug() << "Move ship forward";
+        emit thrustForward(true);
     }
     else if (key == keybindings.backward)
     {
-        qDebug() << "Move ship backward";
+        emit thrustReverse(true);
     }
     else if (key == keybindings.turnLeft)
     {
-        qDebug() << "Turn ship left.";
+        emit rotateLeft(true);
     }
     else if (key == keybindings.turnRight)
     {
-        qDebug() << "Turn ship right.";
+        emit rotateRight(true);
     }
 }
 
@@ -86,18 +86,18 @@ void PlayerController::handleKeyRelease(int key)
     // A switch statement does not work as it seems to require constants, and keybindings will be loaded in later
     if (key == keybindings.forward)
     {
-        qDebug() << "Stop moving ship forward";
+        emit thrustForward(false);
     }
     else if (key == keybindings.backward)
     {
-        qDebug() << "Stop moving ship backward";
+        emit thrustReverse(false);
     }
     else if (key == keybindings.turnLeft)
     {
-        qDebug() << "Stop turning ship left.";
+        emit rotateLeft(false);
     }
     else if (key == keybindings.turnRight)
     {
-        qDebug() << "Stop turning ship right.";
+        emit rotateRight(false);
     }
 }

@@ -88,6 +88,12 @@ private slots:
      */
     void bodyNotFound(Body* body);
 
+    // Handle rotation/thrust
+    void setThrustBackward(bool thrustBackward);
+    void setThrustForward(bool thrustForward);
+    void setRotateLeft(bool rotLeft);
+    void setRotateRight(bool rotRight);
+
 signals:
     /**
      * @brief tickFinished Emitted when a Simulation tick is finished
@@ -114,6 +120,12 @@ private:
     PlayerController* controller;
 
     QElapsedTimer timer;
+
+    // Rotation/Thrust flags
+    bool rotRight;
+    bool rotLeft;
+    bool thrustForward;
+    bool thrustBackward;
 };
 
 #endif // CLIENTAPP_H

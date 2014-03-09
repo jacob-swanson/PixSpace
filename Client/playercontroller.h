@@ -29,6 +29,7 @@ public:
     void read(QJsonObject &json);
     void write(QJsonObject &json);
 
+
 public slots:
     /**
      * @brief handleKeyPress Handles input when a key is pressed by the player
@@ -45,6 +46,11 @@ private:
     RenderBody* body;
     keybinding keybindings;
 
+signals:
+    void rotateLeft(bool);
+    void rotateRight(bool);
+    void thrustForward(bool);
+    void thrustReverse(bool);
 };
 
 #endif // PLAYERCONTROLLER_H

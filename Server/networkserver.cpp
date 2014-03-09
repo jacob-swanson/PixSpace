@@ -11,8 +11,6 @@ void NetworkServer::incomingConnection(qintptr socketDescriptor)
     Connection *connection = new Connection("Server", this);
     connection->setSocketDescriptor(socketDescriptor);
 
-    this->clients.push_back(connection);
-
     connect(connection, SIGNAL(disconnected()), this, SLOT(clientDisconnected()));
     connect(connection, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(displayError()));
     connect(connection, SIGNAL(newMessage(QString,QString)), this, SLOT(receiveMessage(QString,QString)));
@@ -38,6 +36,20 @@ void NetworkServer::clientDisconnected()
 void NetworkServer::clientConnected()
 {
     Connection *connection = qobject_cast<Connection*>(sender());
+
+    // Check if there is already a user connected
+    foreach (Connection* existingConnection, this->clients)
+    {
+        // If user is in the list, abort the new connection
+        if (existingConnection->getName() == connection->getName())
+        {
+            connection->abort();
+            return;
+        }
+    }
+
+    // Assuming everything went well (i.e. return didn't get called) add the connection to the list
+    this->clients.push_back(connection);
 
     emit newConnection(connection);
 }

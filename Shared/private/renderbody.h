@@ -82,8 +82,8 @@ private:
     QGraphicsPixmapItem *spriteGraphicsItem;
 
     // Asset Resource File Paths
-    const QString imagePath = ":/bodies/";
-    const QString maskPath = ":/bodies-mask/";
+    const static QString imagePath;
+    const static QString maskPath;
 };
 
 #endif // RENDERBODY_H

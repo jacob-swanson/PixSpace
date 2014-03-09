@@ -1,5 +1,8 @@
 #include "renderbody.h"
 
+const QString RenderBody::imagePath = ":/bodies/";
+const QString RenderBody::maskPath = ":/bodies-mask/";
+
 RenderBody::RenderBody() :
     Body()
 {

@@ -41,6 +41,12 @@ public:
      */
     void write(QJsonObject &json) const;
 
+    /**
+     * @brief tick Do any ship updates here
+     * @param deltaTime
+     */
+    void tick(double deltaTime);
+
 private:
     QString owner;
 };

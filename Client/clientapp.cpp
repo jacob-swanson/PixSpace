@@ -22,12 +22,6 @@ ClientApp::ClientApp(QObject *parent) :
     // Connect the key release signal to the controller's key release handler
     connect(this->scene, SIGNAL(keyReleased(int)), this->controller, SLOT(handleKeyRelease(int)));
 
-    // Connect functions to set the thrust/rotation flags to the signal
-    connect(this->controller, SIGNAL(rotateLeft(bool)), this, SLOT(setRotateLeft(bool)));
-    connect(this->controller, SIGNAL(rotateRight(bool)), this, SLOT(setRotateRight(bool)));
-    connect(this->controller, SIGNAL(thrustForward(bool)), this, SLOT(setThrustForward(bool)));
-    connect(this->controller, SIGNAL(thrustReverse(bool)), this, SLOT(setThrustBackward(bool)));
-
     connect(&this->tickTimer, SIGNAL(timeout()), this, SLOT(tickSimulation()));
     connect(this, SIGNAL(tickFinished()), this, SLOT(sendClientBody()));
 }
@@ -179,26 +173,4 @@ void ClientApp::sendClientBody()
 
     QJsonDocument jsonDocument(shipObject);
     this->connection->sendMessage(jsonDocument.toJson());
-}
-
-// Set rotation flags
-void ClientApp::setRotateLeft(bool rotLeft)
-{
-    this->rotLeft = rotLeft;
-}
-
-void ClientApp::setRotateRight(bool rotRight)
-{
-    this->rotRight = rotRight;
-}
-
-void ClientApp::setThrustForward(bool thrustForward)
-{
-    this->thrustForward = thrustForward;
-}
-
-void ClientApp::setThrustBackward(bool thrustBackward)
-{
-    this->thrustBackward = thrustBackward;
-
 }

@@ -35,3 +35,8 @@ void Ship::write(QJsonObject &json) const
     json["owner"] = this->owner;
     json["type"] = QString("Ship");
 }
+
+void Ship::tick(double deltaTime)
+{
+    // Do not call parent
+}

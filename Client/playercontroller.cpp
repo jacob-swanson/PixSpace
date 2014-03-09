@@ -13,6 +13,28 @@ PlayerController::PlayerController(QObject *parent) :
 void PlayerController::tick(double deltaTime)
 {
     this->body->tick(deltaTime);
+
+    if (rotLeft)
+    {
+        double rotation = this->body->getRotation();
+        this->body->setRotation(rotation - (this->body->getRotationRate() * deltaTime));
+    }
+
+    if (rotRight)
+    {
+        double rotation = this->body->getRotation();
+        this->body->setRotation(rotation + (this->body->getRotationRate() * deltaTime));
+    }
+
+    if (thrustForward)
+    {
+
+    }
+
+    if (thrustBackward)
+    {
+
+    }
 }
 
 void PlayerController::possess(Body *body)
@@ -57,19 +79,19 @@ void PlayerController::handleKeyPress(int key)
     // A switch statement does not work as it seems to require constants, and keybindings will be loaded in later
     if (key == keybindings.forward)
     {
-        emit thrustForward(true);
+        this->thrustForward = true;
     }
     else if (key == keybindings.backward)
     {
-        emit thrustReverse(true);
+        this->thrustBackward = true;
     }
     else if (key == keybindings.turnLeft)
     {
-        emit rotateLeft(true);
+        this->rotLeft = true;
     }
     else if (key == keybindings.turnRight)
     {
-        emit rotateRight(true);
+        this->rotRight = true;
     }
 }
 
@@ -80,18 +102,18 @@ void PlayerController::handleKeyRelease(int key)
     // A switch statement does not work as it seems to require constants, and keybindings will be loaded in later
     if (key == keybindings.forward)
     {
-        emit thrustForward(false);
+        this->thrustForward = false;
     }
     else if (key == keybindings.backward)
     {
-        emit thrustReverse(false);
+        this->thrustBackward = false;
     }
     else if (key == keybindings.turnLeft)
     {
-        emit rotateLeft(false);
+        this->rotLeft = false;
     }
     else if (key == keybindings.turnRight)
     {
-        emit rotateRight(false);
+        this->rotRight = false;
     }
 }

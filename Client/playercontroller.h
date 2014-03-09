@@ -46,11 +46,11 @@ private:
     RenderBody* body;
     keybinding keybindings;
 
-signals:
-    void rotateLeft(bool);
-    void rotateRight(bool);
-    void thrustForward(bool);
-    void thrustReverse(bool);
+    // Rotation/Thrust flags
+    bool rotRight;
+    bool rotLeft;
+    bool thrustForward;
+    bool thrustBackward;
 };
 
 #endif // PLAYERCONTROLLER_H

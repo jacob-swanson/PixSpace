@@ -94,6 +94,7 @@ void ClientApp::displayConnectionError()
     // Destroy the connection
     this->connection->disconnectFromHost();
 
+    this->scene->setControllerMode(false);
     // Show the connection dialog
     delete this->universe;
     this->universe = new Universe();

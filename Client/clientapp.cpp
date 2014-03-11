@@ -78,7 +78,7 @@ void ClientApp::connectionSuccessful()
     this->tickTimer.start();
 
     Ship* b = new Ship("FireflyShip", this->connection->getGreetingMessage());
-    b->setPosition(-2.0e8, -2.0e8);
+    b->setPosition(-4.0e8, -4.0e8);
     b->setRotationRate(50);
     this->controller->possess(b);
     this->universe->pushBodies(b);
@@ -117,10 +117,18 @@ void ClientApp::showConnectionDialog()
 
 void ClientApp::receiveMessage(QString username, QString message)
 {
-    QJsonDocument universeDocument = QJsonDocument::fromJson(message.toLocal8Bit());
+    QJsonParseError error;
+    QJsonDocument universeDocument = QJsonDocument::fromJson(message.toLocal8Bit(), &error);
 
     // Assuming the the message will be Universe JSON
-    this->universe->read(universeDocument.object());
+    if (!error.error)
+    {
+        this->universe->read(universeDocument.object());
+    }
+    else
+    {
+        qDebug() << "Error parsing JSON: " << error.errorString();
+    }
 }
 
 void ClientApp::tickSimulation()

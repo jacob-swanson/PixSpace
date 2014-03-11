@@ -172,23 +172,32 @@ void ServerApp::broadcastBodies()
 
 void ServerApp::receiveMessage(QString username, QString message)
 {
-    QJsonDocument shipDocument = QJsonDocument::fromJson(message.toLocal8Bit());
-    QJsonObject shipObject = shipDocument.object();
+    QJsonParseError error;
+    QJsonDocument shipDocument = QJsonDocument::fromJson(message.toLocal8Bit(), &error);
 
-    Body* b = NULL;
-    foreach(Body* body, this->universe->getBodies())
+    if (!error.error)
     {
-        if (body->getId() == shipObject["id"].toInt())
+        QJsonObject shipObject = shipDocument.object();
+
+        Body* b = NULL;
+        foreach(Body* body, this->universe->getBodies())
         {
-            b = body;
+            if (body->getId() == shipObject["id"].toInt())
+            {
+                b = body;
+            }
         }
-    }
 
-    if (b == NULL)
+        if (b == NULL)
+        {
+            b = new Ship();
+            this->universe->pushBodies(b);
+        }
+
+        b->read(shipObject);
+    }
+    else
     {
-        b = new Ship();
-        this->universe->pushBodies(b);
+        qDebug() << "Error parsing JSON: " << error.errorString();
     }
-
-    b->read(shipObject);
 }

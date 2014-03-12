@@ -21,6 +21,8 @@ ClientApp::ClientApp(QObject *parent) :
     connect(this->scene, SIGNAL(keyPressed(int)), this->controller, SLOT(handleKeyPress(int)));
     // Connect the key release signal to the controller's key release handler
     connect(this->scene, SIGNAL(keyReleased(int)), this->controller, SLOT(handleKeyRelease(int)));
+    // Connect the quit signal in the player controller to quitting the application
+    connect(this->controller, SIGNAL(exit()), this, SLOT(exitClient()));
 
     connect(&this->tickTimer, SIGNAL(timeout()), this, SLOT(tickSimulation()));
     connect(this, SIGNAL(tickFinished()), this, SLOT(sendClientBody()));

@@ -51,6 +51,10 @@ private:
     bool rotLeft;
     bool thrustForward;
     bool thrustBackward;
+
+ signals:
+    // Signal to quit application
+    void exit();
 };
 
 #endif // PLAYERCONTROLLER_H

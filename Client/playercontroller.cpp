@@ -93,6 +93,11 @@ void PlayerController::handleKeyPress(int key)
     {
         this->rotRight = true;
     }
+    // Escape key handling, launches dialog to quit. Not rebindable
+    else if (key == Qt::Key_Escape)
+    {
+        emit exit();
+    }
 }
 
 void PlayerController::handleKeyRelease(int key)

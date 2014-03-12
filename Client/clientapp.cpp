@@ -71,6 +71,9 @@ void ClientApp::show()
 
 void ClientApp::exitClient()
 {
+    // Destroy the connection before quitting
+    this->connection->disconnectFromHost();
+
     // Exit the application
     QCoreApplication::quit();
 }

@@ -88,6 +88,11 @@ private slots:
      */
     void bodyNotFound(Body* body);
 
+    /**
+     * @brief Disconnect Disconnects from the server and returns to server dialog
+     */
+    void Disconnect();
+
 signals:
     /**
      * @brief tickFinished Emitted when a Simulation tick is finished

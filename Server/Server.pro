@@ -7,8 +7,8 @@ QT       += core sql network
 
 QT       -= gui
 
-CONFIG   += console
 CONFIG   -= app_bundle
+QT   += uitools
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -16,8 +16,8 @@ TARGET = pixspaceserver
 TEMPLATE = app
 
 SOURCES += main.cpp \
-    serverapp.cpp \
-    networkserver.cpp
+    networkserver.cpp \
+    serverapp.cpp
 
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../Shared/release/ -lpixspace
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../Shared/debug/ -lpixspace
@@ -33,5 +33,9 @@ else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/
 else:unix: PRE_TARGETDEPS += $$OUT_PWD/../Shared/libpixspace.a
 
 HEADERS += \
-    serverapp.h \
-    networkserver.h
+    networkserver.h\
+    ui_serverapp.h \
+    serverapp.h
+
+FORMS += \
+    serverapp.ui

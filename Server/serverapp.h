@@ -1,5 +1,5 @@
-#ifndef APP_H
-#define APP_H
+#ifndef SERVERAPP_H
+#define SERVERAPP_H
 
 #include <QObject>
 #include <QSocketNotifier>
@@ -15,16 +15,19 @@
 
 #include "networkserver.h"
 
-class ServerApp : public QObject
+#include <QMainWindow>
+
+namespace Ui {
+class ServerApp;
+}
+
+class ServerApp : public QMainWindow
 {
     Q_OBJECT
-public:
-    explicit ServerApp(QObject *parent = 0);
 
-    // Unix signal handlers, called by system.
-    static void hupSignalHandler(int unused);
-    static void termSignalHandler(int unused);
-    static void intSignalHandler(int unused);
+public:
+    explicit ServerApp(QWidget *parent = 0);
+    ~ServerApp();
 
 signals:
     /**
@@ -69,34 +72,12 @@ public slots:
     void stop();
 
     /**
-     * @brief handleSigHup Called when SIGHUP occurs
-     */
-    void handleSigHup();
-
-    /**
-     * @brief handleSigTerm Called when SIGTERM occurs
-     */
-    void handleSigTerm();
-
-    /**
-     * @brief handleSigInt Called when SIGINT occurs
-     */
-    void handleSigInt();
-
-    /**
      * @brief broadcastBodies Broadcast the Universe to all
      */
     void broadcastBodies();
 
 private:
-    // Sockets
-    static int sighupFd[2];
-    static int sigtermFd[2];
-    static int sigintFd[2];
 
-    QSocketNotifier *snHup;
-    QSocketNotifier *snTerm;
-    QSocketNotifier *snInt;
 
     // Data structures
     Universe *universe;
@@ -106,6 +87,8 @@ private:
     // Timers
     QElapsedTimer timer;
     QTimer tickTimer;
+
+    Ui::ServerApp *ui;
 };
 
-#endif // APP_H
+#endif // SERVERAPP_H

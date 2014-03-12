@@ -66,7 +66,7 @@ void ClientApp::connectToServer(QString address, int port, QString name)
 void ClientApp::show()
 {
     // Show the client
-    this->view->show();
+    this->view->showMaximized();
 }
 
 void ClientApp::exitClient()

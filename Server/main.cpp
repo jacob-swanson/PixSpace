@@ -16,7 +16,6 @@ int main(int argc, char *argv[])
 
     // Setup database
     DataManager::instance()->setHostName("localhost");
-    DataManager::instance()->setHostName("localhost");
     DataManager::instance()->setPort(3306);
     DataManager::instance()->setDatabaseName("pixspace");
     DataManager::instance()->setUserName("pixspace");

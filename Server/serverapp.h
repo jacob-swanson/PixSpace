@@ -55,6 +55,12 @@ private slots:
      */
     void receiveMessage(QString username, QString message);
 
+    /**
+     * @brief updateNewSpeedValue Updates UI to reflect the slider's current value
+     * @param speed
+     */
+    void updateNewSpeedValue(int speed);
+
 public slots:
     /**
      * @brief tick Tick the simulation
@@ -77,6 +83,12 @@ public slots:
     void broadcastBodies();
 
 private:
+
+    /**
+     * @brief updateNewSpeedLabel Updates the speed label in the UI to the correct values
+     * @param speed
+     */
+    void updateNewSpeedLabel(int speed);
 
 
     // Data structures

@@ -11,7 +11,13 @@ ServerApp::ServerApp(QWidget *parent) :
     // Create objects
         this->universe = new Universe();
 
-        this->ui->speedDisplay->setText(QString::number(this->universe->getTimeAcceleration()));
+    // Setup speed labels and current position of slider
+        this->ui->speedLabel->setText("Current Time Acceleration:   " + QString::number(this->universe->getTimeAcceleration()));
+        this->ui->speedSlider->setSliderPosition(6);
+        this->updateNewSpeedLabel(10000);
+
+        // Connect slider to slot to update to a new speed value
+        connect (this->ui->speedSlider, SIGNAL(sliderMoved(int)), this, SLOT(updateNewSpeedValue(int)));
 
         // Load save data
         this->universe->setBodies(DataManager::instance()->loadBodies());
@@ -155,4 +161,39 @@ void ServerApp::receiveMessage(QString username, QString message)
     {
         ui->serverMessage->append("Error parsing JSON: " + error.errorString());
     }
+}
+
+void ServerApp::updateNewSpeedValue(int speed)
+{
+    // Map the current position of the slider to the time acceleration values
+    switch (speed)
+    {
+        // Real time
+    case 0:
+        this->updateNewSpeedLabel(1);
+        break;
+    case 1:
+        this->updateNewSpeedLabel(5);
+        break;
+    case 2:
+        this->updateNewSpeedLabel(10);
+        break;
+    case 3:
+        this->updateNewSpeedLabel(100);
+        break;
+    case 4:
+        this->updateNewSpeedLabel(1000);
+        break;
+    case 5:
+        this->updateNewSpeedLabel(10000);
+        break;
+    case 6:
+        this->updateNewSpeedLabel(100000);
+        break;
+    }
+}
+
+void ServerApp::updateNewSpeedLabel(int speed)
+{
+    this->ui->newSpeedLabel->setText("New Time Acceleration:        " + QString::number(speed));
 }

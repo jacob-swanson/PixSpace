@@ -195,3 +195,22 @@ void Universe::write(QJsonObject &json) const
 
     json["type"] = QString("Universe");
 }
+
+double Universe::getTimeAcceleration()
+{
+    return this->timeAcceleration;
+}
+
+bool Universe::setTimeAcceleration(double timeAcceleration)
+{
+    // Check if legal value for time acceleration
+    if (timeAcceleration == 1 || timeAcceleration == 5 || timeAcceleration == 10 || timeAcceleration == 50 || timeAcceleration == 100 || timeAcceleration == 1000
+            || timeAcceleration == 10000 || timeAcceleration == 100000)
+    {
+        this->timeAcceleration = timeAcceleration;
+        return true;
+    }
+
+    // If it isn't legal, return false
+    return false;
+}

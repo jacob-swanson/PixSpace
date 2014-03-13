@@ -71,6 +71,19 @@ public:
      */
     void write(QJsonObject &json) const;
 
+    /**
+     * @brief getTimeAcceleration Gets the time acceleration value
+     * @return double time acceleration
+     */
+    double getTimeAcceleration();
+
+    /**
+     * @brief setTimeAcceleration sets the time acceleration value, if invalid value reject
+     * @param timeAccelSelection Double value to replace timeAcceleration with, can only be 1, 5, 10, 50, 1 000, 10 000, or 100 000
+     */
+    bool setTimeAcceleration(double timeAcceleration);
+
+
 signals:
     /**
      * @brief stepFinished Signal emitted when simulateStep() completes

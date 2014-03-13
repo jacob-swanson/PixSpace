@@ -11,6 +11,12 @@ ServerApp::ServerApp(QWidget *parent) :
     // Create objects
         this->universe = new Universe();
 
+    // Get data from data manager fro labels in GUI
+        this->ui->sqlDBName->setText(DataManager::instance()->getDatabaseName());
+        this->ui->sqlHost->setText(DataManager::instance()->getHostName());
+        this->ui->sqlPort->setText(QString::number(DataManager::instance()->getPort()));
+        this->ui->sqlUserName->setText(DataManager::instance()->getUserName());
+
     // Setup speed labels and current position of slider
         this->ui->speedLabel->setText("Current Time Acceleration:   " + QString::number(this->universe->getTimeAcceleration()));
         this->ui->speedSlider->setSliderPosition(6);

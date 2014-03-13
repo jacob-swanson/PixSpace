@@ -11,8 +11,10 @@ ServerApp::ServerApp(QWidget *parent) :
     // Create objects
         this->universe = new Universe();
 
+        this->ui->speedDisplay->setText(QString::number(this->universe->getTimeAcceleration()));
+
         // Load save data
-        this->universe->setBodies(this->datamanager->loadBodies());
+        this->universe->setBodies(DataManager::instance()->loadBodies());
 
         // Start listening
         this->server = new NetworkServer(this);
@@ -49,7 +51,6 @@ void ServerApp::tick()
 
     // Update the simulation
     universe->simulateStep(deltaTime);
-    datamanager->saveBodies(universe->getBodies());
 }
 
 void ServerApp::start()
@@ -77,8 +78,7 @@ void ServerApp::stop()
     {
         tickTimer.stop();
         ui->serverMessage->append("Stopped simulation.");
-
-        datamanager->saveBodies(universe->getBodies());
+        DataManager::instance()->saveBodies(universe->getBodies());
         ui->serverMessage->append("Saved.");
 
         QMessageBox closeBox;

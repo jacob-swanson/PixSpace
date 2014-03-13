@@ -5,8 +5,9 @@
 #include <QGraphicsPixmapItem>
 #include <QString>
 #include <QImage>
+#include <QDebug>
 
-#include "datamanager.h"
+
 #include "body.h"
 #include "shared_global.h"
 

@@ -11,9 +11,9 @@
 #include <sys/socket.h>
 
 #include <Universe>
-#include <DataManager>
 
 #include "networkserver.h"
+#include "datamanager.h"
 
 #include <QMainWindow>
 
@@ -81,7 +81,6 @@ private:
 
     // Data structures
     Universe *universe;
-    DataManager *datamanager;
     NetworkServer *server;
 
     // Timers

@@ -1,5 +1,5 @@
 #include "datamanager.h"
-#include "renderbody.h"
+#include <RenderBody>
 
 DataManager* DataManager::m_Instance = 0;
 
@@ -31,17 +31,61 @@ void DataManager::drop()
 DataManager::DataManager()
 {
     db = QSqlDatabase::addDatabase( "QMYSQL3" );
-    db.setHostName( "localhost" );
-    db.setPort(3306);
-    db.setDatabaseName( "pixspace" );
-    db.setUserName( "pixspace" );
-    db.setPassword( "pixspace" );
+}
 
-    if ( !db.open() )
-    {
-        qDebug() << db.lastError();
-        qDebug() << "Error: Unable to connect due to above error";
-    }
+void DataManager::setHostName(QString hostName)
+{
+    this->db.setHostName(hostName);
+}
+
+void DataManager::setPort(int portNum)
+{
+    this->db.setPort(portNum);
+}
+
+void DataManager::setDatabaseName(QString dbName)
+{
+    this->db.setDatabaseName(dbName);
+}
+
+void DataManager::setUserName(QString dbUser)
+{
+    this->db.setUserName(dbUser);
+}
+
+void DataManager::setPassword(QString password)
+{
+    this->db.setPassword(password);
+}
+
+QString DataManager::getHostName()
+{
+    return db.hostName();
+}
+
+int DataManager::getPort()
+{
+    return db.port();
+}
+
+QString DataManager::getDatabaseName()
+{
+    return db.databaseName();
+}
+
+QString DataManager::getUserName()
+{
+    return db.userName();
+}
+
+QString DataManager::getLastError()
+{
+    return db.lastError().text();
+}
+
+bool DataManager::connect()
+{
+    return db.open();
 }
 
 bool DataManager::loadBodySprite(QString id, QByteArray *sprite, QByteArray *mask) const

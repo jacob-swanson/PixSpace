@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += gui widgets sql network
+QT       += gui widgets network
 
 TARGET = pixspace
 TEMPLATE = lib
@@ -16,7 +16,6 @@ SOURCES += private/body.cpp \
     private/universe.cpp \
     private/vector.cpp \
     private/renderbody.cpp \
-    private/datamanager.cpp \
     private/connection.cpp \
     private/ship.cpp
 
@@ -27,10 +26,8 @@ HEADERS += private/shared_global.h \
     Universe \
     Vector \
     Body \
-    DataManager \
     private/renderbody.h \
     RenderBody \
-    private/datamanager.h \
     private/connection.h \
     Connection \
     private/ship.h \

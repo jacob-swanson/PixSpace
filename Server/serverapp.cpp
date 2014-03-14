@@ -17,6 +17,9 @@ ServerApp::ServerApp(QWidget *parent) :
         this->ui->sqlPort->setText(QString::number(DataManager::instance()->getPort()));
         this->ui->sqlUserName->setText(DataManager::instance()->getUserName());
 
+    // Connect the DB save button to update function
+        connect(this->ui->saveSQL, SIGNAL(clicked()), this, SLOT(updateSQLConfig()));
+
     // Setup speed labels and current position of slider
         this->ui->speedLabel->setText("Current Time Acceleration:   " + QString::number(this->universe->getTimeAcceleration()));
         this->ui->speedSlider->setSliderPosition(6);
@@ -202,4 +205,24 @@ void ServerApp::updateNewSpeedValue(int speed)
 void ServerApp::updateNewSpeedLabel(int speed)
 {
     this->ui->newSpeedLabel->setText("New Time Acceleration:        " + QString::number(speed));
+}
+
+void ServerApp::updateSQLConfig()
+{
+    // Inform user action is being taken
+    QMessageBox applyingSave;
+    applyingSave.setText("Now updating the MySQL portion of server config file.");
+    applyingSave.setInformativeText("You must restart for these changes to take effect.");
+    applyingSave.setIcon(QMessageBox::Information);
+    applyingSave.exec();
+
+    // Kick out server message about configuration
+    this->ui->serverMessage->append("Updated SQL Configuration:");
+    this->ui->serverMessage->append("\tHostname: " + this->ui->sqlHost->text());
+    this->ui->serverMessage->append("\tPort:     " + this->ui->sqlPort->text());
+    this->ui->serverMessage->append("\tDatabase: " + this->ui->sqlDBName->text());
+    this->ui->serverMessage->append("\tUsername: " + this->ui->sqlUserName->text());
+    this->ui->serverMessage->append("\tPassword: *********");
+
+    // TODO: Write to file
 }

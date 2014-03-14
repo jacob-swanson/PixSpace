@@ -61,6 +61,11 @@ private slots:
      */
     void updateNewSpeedValue(int speed);
 
+    /**
+     * @brief updateSQLConfig Updates the server config file with new values for SQL stuff from the UI
+     */
+    void updateSQLConfig();
+
 public slots:
     /**
      * @brief tick Tick the simulation

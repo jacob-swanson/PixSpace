@@ -35,6 +35,11 @@ signals:
      */
     void finished();
 
+    /**
+     * @brief endTick Emmited at the end of each tick
+     */
+    void endTick(int);
+
 private slots:
     /**
      * @brief displayConnection Display the username of a new connection
@@ -62,9 +67,21 @@ private slots:
     void updateNewSpeedValue(int speed);
 
     /**
+     * @brief updateTimeAcceleration Updates the universes time acceleration value to reflect the slider's position
+     * @param speed
+     */
+    void updateTimeAcceleration(int speed);
+
+    /**
+     * @brief updateTimeAccelerationRequest Called when update button for time acceleration clicked
+     */
+    void updateTimeAccelerationRequest();
+
+    /**
      * @brief updateSQLConfig Updates the server config file with new values for SQL stuff from the UI
      */
     void updateSQLConfig();
+
 
 public slots:
     /**

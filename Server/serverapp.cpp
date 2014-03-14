@@ -23,7 +23,10 @@ ServerApp::ServerApp(QWidget *parent) :
     // Setup speed labels and current position of slider
         this->ui->speedLabel->setText("Current Time Acceleration:   " + QString::number(this->universe->getTimeAcceleration()));
         this->ui->speedSlider->setSliderPosition(6);
-        this->updateNewSpeedLabel(10000);
+        this->updateNewSpeedValue(this->ui->speedSlider->sliderPosition());
+
+        // Connect up the apply button
+        connect(this->ui->applySpeed, SIGNAL(clicked()), this, SLOT(updateTimeAccelerationRequest()));
 
         // Connect slider to slot to update to a new speed value
         connect (this->ui->speedSlider, SIGNAL(sliderMoved(int)), this, SLOT(updateNewSpeedValue(int)));
@@ -66,6 +69,9 @@ void ServerApp::tick()
 
     // Update the simulation
     universe->simulateStep(deltaTime);
+
+    // Emit a tick with the current slider position to perform acceleration update
+    emit endTick(this->ui->speedSlider->sliderPosition());
 }
 
 void ServerApp::start()
@@ -188,15 +194,17 @@ void ServerApp::updateNewSpeedValue(int speed)
         this->updateNewSpeedLabel(10);
         break;
     case 3:
+        this->updateNewSpeedLabel(50);
+    case 4:
         this->updateNewSpeedLabel(100);
         break;
-    case 4:
+    case 5:
         this->updateNewSpeedLabel(1000);
         break;
-    case 5:
+    case 6:
         this->updateNewSpeedLabel(10000);
         break;
-    case 6:
+    case 7:
         this->updateNewSpeedLabel(100000);
         break;
     }
@@ -205,6 +213,41 @@ void ServerApp::updateNewSpeedValue(int speed)
 void ServerApp::updateNewSpeedLabel(int speed)
 {
     this->ui->newSpeedLabel->setText("New Time Acceleration:        " + QString::number(speed));
+}
+
+void ServerApp::updateTimeAcceleration(int speed)
+{
+    disconnect(this, SIGNAL(endTick(int)), this, SLOT(updateTimeAcceleration(int)));
+    // Map the current position of the slider to the time acceleration values
+    switch (speed)
+    {
+        // Real time
+    case 0:
+        this->universe->setTimeAcceleration((double) 1);
+        break;
+    case 1:
+        this->universe->setTimeAcceleration((double) 5);
+        break;
+    case 2:
+        this->universe->setTimeAcceleration((double) 10);
+        break;
+    case 3:
+        this->universe->setTimeAcceleration((double) 50);
+    case 4:
+        this->universe->setTimeAcceleration((double) 100);
+        break;
+    case 5:
+        this->universe->setTimeAcceleration((double) 1000);
+        break;
+    case 6:
+        this->universe->setTimeAcceleration((double) 10000);
+        break;
+    case 7:
+        this->universe->setTimeAcceleration((double) 100000);
+        break;
+    }
+    // Update GUI
+    this->ui->speedLabel->setText("Current Time Acceleration:   " + QString::number(this->universe->getTimeAcceleration()));
 }
 
 void ServerApp::updateSQLConfig()
@@ -225,4 +268,10 @@ void ServerApp::updateSQLConfig()
     this->ui->serverMessage->append("\tPassword: *********");
 
     // TODO: Write to file
+}
+
+void ServerApp::updateTimeAccelerationRequest()
+{
+    // Request that time acceleration be updated at the end of the next tick
+    connect(this, SIGNAL(endTick(int)), this, SLOT(updateTimeAcceleration(int)));
 }

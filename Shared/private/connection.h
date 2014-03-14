@@ -85,6 +85,11 @@ public:
      */
     QString getGreetingMessage() const;
 
+    /**
+     * @brief getIPAddress Gets the username of the remote end
+     * @return QString
+     */
+    QString getRemoteIPAddress();
 signals:
     /**
      * @brief readyForUse Emitted when greetings have been exchanged

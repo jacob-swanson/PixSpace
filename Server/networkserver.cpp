@@ -85,10 +85,15 @@ void NetworkServer::receiveMessage(QString username, QString message)
 
 QString NetworkServer::getConnectedUsers()
 {
-    QString connectedUsers = "";
+    QString connectedUsers;
+
+    // Setup header of the tab
+    connectedUsers = "Username\t\tIP Address\n";
+
+    // Get all the usernames and IPs of connected users
     foreach (Connection* existingConnection, this->clients)
     {
-        connectedUsers = connectedUsers + existingConnection->getName() + "\n";
+        connectedUsers = connectedUsers + existingConnection->getName() + "\t\t" + existingConnection->getRemoteIPAddress() + "\n";
     }
 
     return connectedUsers;

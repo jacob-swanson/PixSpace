@@ -314,3 +314,8 @@ void Connection::processData()
     this->numBytesForCurrentDataType = 0;
     this->buffer.clear();
 }
+
+QString Connection::getRemoteIPAddress()
+{
+    return this->peerAddress().toString();
+}

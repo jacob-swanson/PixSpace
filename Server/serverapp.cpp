@@ -29,7 +29,7 @@ ServerApp::ServerApp(QWidget *parent) :
         connect(this->ui->applySpeed, SIGNAL(clicked()), this, SLOT(updateTimeAccelerationRequest()));
 
         // Connect slider to slot to update to a new speed value
-        connect (this->ui->speedSlider, SIGNAL(sliderMoved(int)), this, SLOT(updateNewSpeedValue(int)));
+        connect (this->ui->speedSlider, SIGNAL(valueChanged(int)), this, SLOT(updateNewSpeedValue(int)));
 
         // Load save data
         this->universe->setBodies(DataManager::instance()->loadBodies());

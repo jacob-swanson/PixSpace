@@ -24,6 +24,12 @@ public:
      */
     void broadcastJson(QByteArray message);
 
+    /**
+     * @brief getConnectedUsers Returns a string of connected users separated by \n
+     * @return QString
+     */
+    QString getConnectedUsers();
+
 signals:
     /**
      * @brief newConnection Emitted when a new Connection is received

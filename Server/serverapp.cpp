@@ -116,7 +116,15 @@ void ServerApp::stop()
 
 void ServerApp::displayConnection(Connection *connection)
 {
+    // Output message to server
     ui->serverMessage->append("User Connected: " + connection->getName());
+
+    // clear connected users tab
+    ui->connectedUsers->clear();
+
+    // Output all connected users on tab
+   ui->connectedUsers->setText(this->server->getConnectedUsers());
+
 }
 
 void ServerApp::displayDisconnection(QString username)
@@ -135,6 +143,12 @@ void ServerApp::displayDisconnection(QString username)
             }
         }
     }
+
+    // clear connected users tab
+    ui->connectedUsers->clear();
+
+    // Output all connected users on tab
+   ui->connectedUsers->setText(this->server->getConnectedUsers());
 }
 
 void ServerApp::broadcastBodies()

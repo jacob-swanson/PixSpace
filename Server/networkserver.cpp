@@ -82,3 +82,14 @@ void NetworkServer::receiveMessage(QString username, QString message)
 {
     emit newMessage(username, message);
 }
+
+QString NetworkServer::getConnectedUsers()
+{
+    QString connectedUsers = "";
+    foreach (Connection* existingConnection, this->clients)
+    {
+        connectedUsers = connectedUsers + existingConnection->getName() + "\n";
+    }
+
+    return connectedUsers;
+}

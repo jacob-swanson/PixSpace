@@ -37,7 +37,9 @@ ServerApp::ServerApp(QWidget *parent) :
         // Start listening
         this->server = new NetworkServer(this);
         // TODO: Get port from config
+        // Set port and display it
         this->server->listen(QHostAddress::Any, 6886);
+        this->ui->serverPort->setText(QString::number(6886));
 
         ui->serverMessage->append("Listening on: " + this->server->serverAddress().toString() + ":" + QString::number(this->server->serverPort()));
 

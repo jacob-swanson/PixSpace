@@ -1,7 +1,7 @@
 #ifndef PLAYERCONTROLLER_H
 #define PLAYERCONTROLLER_H
 
-#include <RenderBody>
+#include <Ship>
 #include <Vector>
 #include <QDebug>
 #include <QMessageBox>
@@ -21,7 +21,7 @@ class PlayerController : public Controller
 {
     Q_OBJECT
 public:
-    explicit PlayerController(QObject *parent = 0);
+    explicit PlayerController(Universe* universe, QObject *parent = 0);
 
     void tick(double deltaTime);
     void possess(Body *body);
@@ -30,7 +30,7 @@ public:
     Vector getPosition();
     void read(QJsonObject &json);
     void write(QJsonObject &json);
-
+    void setUniverse(Universe* universe);
 
 public slots:
     /**
@@ -45,7 +45,8 @@ public slots:
     void handleKeyRelease(int key);
 
 private:
-    RenderBody* body;
+    Ship* body;
+    Universe* universe;
     keybinding keybindings;
 
     // Rotation/Thrust flags

@@ -2,6 +2,7 @@
 #define SHIP_H
 
 #include "renderbody.h"
+#include "universe.h"
 
 class Ship : public RenderBody
 {
@@ -47,8 +48,36 @@ public:
      */
     void tick(double deltaTime);
 
+    /**
+     * @brief calculateForces Calculate forces due to gravity on the Ship
+     * @param bodies Universe's Bodies
+     */
+    void calculateForces(QList<Body*> bodies, double timeAcceleration, double deltaTime);
+
+    /**
+     * @brief increaseThrust Increase the thrust percentage
+     * @param deltaTime
+     */
+    void increaseThrust(double deltaTime);
+
+    /**
+     * @brief decreaseThrust Decrease the thrust percentage
+     * @param deltaTime
+     */
+    void decreaseThrust(double deltaTime);
+
+    /**
+     * @brief setThrust Set the maximum thrust for the ship (Units: N)
+     * @param thrust
+     */
+    void setMaxThrust(double maxThrust);
+
 private:
     QString owner;
+    double thrustPercentage;
+    double maxThrust;
+    double thrust;
+    const static double thrustRate = 0.5;
 };
 
 #endif // SHIP_H

@@ -15,7 +15,7 @@ ClientApp::ClientApp(QObject *parent) :
     connect(this->universe, SIGNAL(bodyNotFound(Body*)), this, SLOT(bodyNotFound(Body*)));
 
     this->tickTimer.setInterval(15);
-    this->controller = new PlayerController();
+    this->controller = new PlayerController(this->universe);
 
     // Connect the keypress signal to the controller's keypress handler
     connect(this->scene, SIGNAL(keyPressed(int)), this->controller, SLOT(handleKeyPress(int)));
@@ -85,8 +85,10 @@ void ClientApp::connectionSuccessful()
     this->tickTimer.start();
 
     Ship* b = new Ship("FireflyShip", this->connection->getGreetingMessage());
-    b->setPosition(-4.0e8, -4.0e8);
+    b->setPosition(-2.0e8, -2.0e8);
     b->setRotationRate(50);
+    b->setMass(2.8e5);
+    b->setMaxThrust(1e6);
     this->controller->possess(b);
     this->universe->pushBodies(b);
 
@@ -135,7 +137,7 @@ void ClientApp::receiveMessage(QString username, QString message)
     // Assuming the the message will be Universe JSON
     if (!error.error)
     {
-        this->universe->read(universeDocument.object());
+        this->universe->read(universeDocument.object(), this->connection->getGreetingMessage());
     }
     else
     {

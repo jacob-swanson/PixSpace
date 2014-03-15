@@ -154,8 +154,8 @@ QList<Body*> DataManager::loadBodies() const
     b2->setRotationRate(-20);
 
     // Add Earth and Sun to list
-    bodies.push_back(b1);
-    bodies.push_back(b2);
+    //bodies.push_back(b1);
+    //bodies.push_back(b2);
 
     return bodies;
 }

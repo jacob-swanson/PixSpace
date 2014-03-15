@@ -1,6 +1,6 @@
 #include "playercontroller.h"
 
-PlayerController::PlayerController(QObject *parent) :
+PlayerController::PlayerController(Universe* universe, QObject *parent) :
     Controller(parent)
 {
     // TODO: Load keybindings from storage (DB or local file) so that they can be user configured
@@ -8,12 +8,17 @@ PlayerController::PlayerController(QObject *parent) :
     this->keybindings.backward = Qt::Key_S;
     this->keybindings.turnLeft = Qt::Key_A;
     this->keybindings.turnRight = Qt::Key_D;
+
+    this->universe = universe;
+}
+
+void PlayerController::setUniverse(Universe* universe)
+{
+    this->universe = universe;
 }
 
 void PlayerController::tick(double deltaTime)
 {
-    this->body->tick(deltaTime);
-
     if (rotLeft)
     {
         double rotation = this->body->getRotation();
@@ -28,18 +33,21 @@ void PlayerController::tick(double deltaTime)
 
     if (thrustForward)
     {
-
+        this->body->increaseThrust(deltaTime);
     }
 
     if (thrustBackward)
     {
-
+        this->body->decreaseThrust(deltaTime);
     }
+
+    this->body->calculateForces(this->universe->getBodies(), this->universe->getTimeAcceleration(), deltaTime);
+    this->body->tick(deltaTime);
 }
 
 void PlayerController::possess(Body *body)
 {
-    this->body = dynamic_cast<RenderBody*>(body);
+    this->body = dynamic_cast<Ship*>(body);
 }
 
 Body* PlayerController::getPossessed()
@@ -59,7 +67,7 @@ Vector PlayerController::getPosition()
 
 void PlayerController::read(QJsonObject &json)
 {
-    this->body = new RenderBody();
+    this->body = new Ship();
     this->body->read(json["body"].toObject());
 }
 

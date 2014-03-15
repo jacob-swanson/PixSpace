@@ -106,7 +106,7 @@ void Universe::clearServerBodies()
     }
 }
 
-void Universe::read(const QJsonObject &json)
+void Universe::read(const QJsonObject &json, QString exclude)
 {
     // Read in the Universe
     this->timeAcceleration = json["timeacceleration"].toDouble();
@@ -156,7 +156,18 @@ void Universe::read(const QJsonObject &json)
         else
         {
             // Existing Body
-            b->read(bodyObject);
+            // Exclude the player's ship
+            if (!bodyObject["owner"].isUndefined())
+            {
+                if (bodyObject["owner"].toString() != exclude)
+                {
+                    b->read(bodyObject);
+                }
+            }
+            else
+            {
+                b->read(bodyObject);
+            }
         }
     }
 

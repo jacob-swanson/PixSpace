@@ -63,7 +63,7 @@ public:
      * @brief read Read in from the given JSON object
      * @param json
      */
-    void read(const QJsonObject &json);
+    void read(const QJsonObject &json, QString exclude);
 
     /**
      * @brief write Write to the given JSON object

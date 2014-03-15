@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QJsonObject>
 
-#include <Body>
+#include <Ship>
 
 class Controller : public QObject
 {

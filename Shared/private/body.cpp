@@ -17,8 +17,6 @@ Body::Body()
 void Body::tick(double deltaTime)
 {
     // Update the body
-
-    this->rotation += this->rotationRate * deltaTime;
 }
 
 Vector Body::getPosition() const

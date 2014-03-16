@@ -145,17 +145,17 @@ QList<Body*> DataManager::loadBodies() const
     b1->setMass(7.3459e22);
     b1->setPosition(3.8e8, 0);
     b1->setVelocity(0, 1023);
-    b1->setRotationRate(10);
+    b1->setRotationRate(-0.00015);
 
     // Earth
     b2->setMass(5.9721986e24);
     b2->setPosition(0, 0);
     b2->setMoveable(false);
-    b2->setRotationRate(-20);
+    b2->setRotationRate(0.0001);
 
     // Add Earth and Sun to list
-    //bodies.push_back(b1);
-    //bodies.push_back(b2);
+    bodies.push_back(b1);
+    bodies.push_back(b2);
 
     return bodies;
 }

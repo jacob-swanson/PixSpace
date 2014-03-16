@@ -62,6 +62,9 @@ void Universe::simulateStep(double deltaTime)
                 }
             }
 
+            // Do the Body's rotation
+            b1->setRotation(b1->getRotation() + (b1->getRotationRate() * this->timeAcceleration * deltaTime));
+
             // Tick the body after it has been moved
             b1->tick(deltaTime);
         }

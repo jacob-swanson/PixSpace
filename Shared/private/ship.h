@@ -55,16 +55,16 @@ public:
     void calculateForces(QList<Body*> bodies, double timeAcceleration, double deltaTime);
 
     /**
-     * @brief increaseThrust Increase the thrust percentage
+     * @brief increaseThrottle Increase the thrust percentage
      * @param deltaTime
      */
-    void increaseThrust(double deltaTime);
+    void increaseThrottle(double deltaTime);
 
     /**
-     * @brief decreaseThrust Decrease the thrust percentage
+     * @brief decreaseThrottle Decrease the thrust percentage
      * @param deltaTime
      */
-    void decreaseThrust(double deltaTime);
+    void decreaseThrottle(double deltaTime);
 
     /**
      * @brief setThrust Set the maximum thrust for the ship (Units: N)
@@ -74,9 +74,11 @@ public:
 
 private:
     QString owner;
-    double thrustPercentage;
+    double throttlePercentage;
     double maxThrust;
     double thrust;
+
+    // Rate at which the thrustPercentage increases
     const static double thrustRate = 0.5;
 };
 

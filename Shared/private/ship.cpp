@@ -6,7 +6,7 @@
 Ship::Ship() :
     RenderBody()
 {
-    this->thrustPercentage = 0.0;
+    this->throttlePercentage = 0.0;
     this->thrust = 0.0;
 }
 
@@ -14,7 +14,7 @@ Ship::Ship(QString asset, QString owner) :
     RenderBody(asset)
 {
     this->owner = owner;
-    this->thrustPercentage = 0.0;
+    this->throttlePercentage = 0.0;
     this->thrust = 0.0;
 }
 
@@ -33,6 +33,8 @@ void Ship::read(const QJsonObject &json)
     RenderBody::read(json);
 
     this->owner = json["owner"].toString();
+    this->throttlePercentage = json["throttle"].toDouble();
+    this->maxThrust = json["maxThrust"].toDouble();
 }
 
 void Ship::write(QJsonObject &json) const
@@ -40,6 +42,8 @@ void Ship::write(QJsonObject &json) const
     RenderBody::write(json);
 
     json["owner"] = this->owner;
+    json["throttle"] = this->throttlePercentage;
+    json["maxThrust"] = this->maxThrust;
     json["type"] = QString("Ship");
 }
 
@@ -95,34 +99,38 @@ void Ship::tick(double deltaTime)
     // Do not call parent
 }
 
-void Ship::increaseThrust(double deltaTime)
+void Ship::increaseThrottle(double deltaTime)
 {
-    if (this->thrustPercentage >= 0.0)
+    // Increase the thrustPercentage, and cap it at 1.0
+    if (this->throttlePercentage >= 0.0)
     {
-        this->thrustPercentage = this->thrustPercentage + this->thrustRate * deltaTime;
+        this->throttlePercentage = this->throttlePercentage + this->thrustRate * deltaTime;
     }
 
-    if (this->thrustPercentage > 1.0)
+    if (this->throttlePercentage > 1.0)
     {
-        this->thrustPercentage = 1.0;
+        this->throttlePercentage = 1.0;
     }
 
-    this->thrust = this->thrustPercentage * this->maxThrust;
+    // Adjust the current amount of thrust
+    this->thrust = this->throttlePercentage * this->maxThrust;
 }
 
-void Ship::decreaseThrust(double deltaTime)
+void Ship::decreaseThrottle(double deltaTime)
 {
-    if (this->thrustPercentage <= 1.0)
+    // Decrease the thrustPercentage, and cap it at 0.0
+    if (this->throttlePercentage <= 1.0)
     {
-        this->thrustPercentage = this->thrustPercentage - this->thrustRate * deltaTime;
+        this->throttlePercentage = this->throttlePercentage - this->thrustRate * deltaTime;
     }
 
-    if (this->thrustPercentage < 0.0)
+    if (this->throttlePercentage < 0.0)
     {
-        this->thrustPercentage = 0.0;
+        this->throttlePercentage = 0.0;
     }
 
-    this->thrust = this->thrustPercentage * this->maxThrust;
+    // Adjust the current amount of thrust
+    this->thrust = this->throttlePercentage * this->maxThrust;
 }
 
 void Ship::setMaxThrust(double maxThrust)

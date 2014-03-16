@@ -33,12 +33,12 @@ void PlayerController::tick(double deltaTime)
 
     if (thrustForward)
     {
-        this->body->increaseThrust(deltaTime);
+        this->body->increaseThrottle(deltaTime);
     }
 
     if (thrustBackward)
     {
-        this->body->decreaseThrust(deltaTime);
+        this->body->decreaseThrottle(deltaTime);
     }
 
     this->body->calculateForces(this->universe->getBodies(), this->universe->getTimeAcceleration(), deltaTime);

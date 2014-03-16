@@ -85,7 +85,7 @@ void ClientApp::connectionSuccessful()
     this->tickTimer.start();
 
     Ship* b = new Ship("FireflyShip", this->connection->getGreetingMessage());
-    b->setPosition(-2.0e8, -2.0e8);
+    b->setPosition(2.0e8, -2.0e8);
     b->setRotationRate(50);
     b->setMass(2.8e5);
     b->setMaxThrust(1e6);
@@ -163,14 +163,14 @@ void ClientApp::tickSimulation()
                 if (rb->createGraphic())
                 {
                     item = rb->getGraphicsItem();
-                    item->setPos(this->getPixelFromSimulation(b->getPosition().getX()), this->getPixelFromSimulation(b->getPosition().getY()));
+                    item->setPos(this->getPixelFromSimulation(b->getPosition().getX()), -1*this->getPixelFromSimulation(b->getPosition().getY()));
                     item->setRotation(rb->getRotation());
                     this->scene->addItem(item);
                 }
             }
             else
             {
-                item->setPos(this->getPixelFromSimulation(b->getPosition().getX()), this->getPixelFromSimulation(b->getPosition().getY()));
+                item->setPos(this->getPixelFromSimulation(b->getPosition().getX()), -1*this->getPixelFromSimulation(b->getPosition().getY()));
                 item->setRotation(rb->getRotation());
             }
         }

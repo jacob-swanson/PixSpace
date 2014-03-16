@@ -8,6 +8,7 @@ PlayerController::PlayerController(Universe* universe, QObject *parent) :
     this->keybindings.backward = Qt::Key_S;
     this->keybindings.turnLeft = Qt::Key_A;
     this->keybindings.turnRight = Qt::Key_D;
+    this->keybindings.center = Qt::Key_C;
 
     this->universe = universe;
 }
@@ -123,6 +124,11 @@ void PlayerController::handleKeyPress(int key)
         }
         // All other cases should just resume the game
 
+    }
+    // Handles centering when the key for centering is pressed
+    else if (key == keybindings.center)
+    {
+        emit center();
     }
 }
 

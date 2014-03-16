@@ -93,6 +93,11 @@ private slots:
      */
     void Disconnect();
 
+    /**
+     * @brief Center Centers the graphics scene on the user's ship
+     */
+    void Center();
+
 signals:
     /**
      * @brief tickFinished Emitted when a Simulation tick is finished

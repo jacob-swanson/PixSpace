@@ -15,6 +15,7 @@ struct keybinding
     int backward;
     int turnLeft;
     int turnRight;
+    int center;
 };
 
 class PlayerController : public Controller
@@ -60,6 +61,8 @@ private:
     void exit();
     // Signal to return to the server connection dialog
     void returnMenu();
+    // Signal to center scene on ship
+    void center();
 };
 
 #endif // PLAYERCONTROLLER_H

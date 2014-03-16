@@ -21,6 +21,10 @@ ClientApp::ClientApp(QObject *parent) :
     connect(this->scene, SIGNAL(keyPressed(int)), this->controller, SLOT(handleKeyPress(int)));
     // Connect the key release signal to the controller's key release handler
     connect(this->scene, SIGNAL(keyReleased(int)), this->controller, SLOT(handleKeyRelease(int)));
+
+    // Connect the center signal to the center function
+    connect(this->controller, SIGNAL(center()), this, SLOT(Center()));
+
     // Connect the quit signal in the player controller to quitting the application
     connect(this->controller, SIGNAL(exit()), this, SLOT(exitClient()));
     // Connect the returnMenu in the player controller to disconnecting from the server and going to the connection dialog
@@ -196,4 +200,9 @@ void ClientApp::sendClientBody()
 
     QJsonDocument jsonDocument(shipObject);
     this->connection->sendMessage(jsonDocument.toJson());
+}
+
+void ClientApp::Center()
+{
+    this->view->centerOn(dynamic_cast<Ship*>(this->controller->getPossessed())->getGraphicsItem());
 }

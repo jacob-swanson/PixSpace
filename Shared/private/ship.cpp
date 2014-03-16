@@ -88,8 +88,6 @@ void Ship::calculateForces(QList<Body*> bodies, double timeAcceleration, double 
         // Move me
         this->updatePosition(this->getVelocity() * timeAcceleration * deltaTime);
     }
-
-    qDebug() << this->getPosition().getX() << " " << this->getPosition().getY();
 }
 
 void Ship::tick(double deltaTime)
@@ -110,7 +108,6 @@ void Ship::increaseThrust(double deltaTime)
     }
 
     this->thrust = this->thrustPercentage * this->maxThrust;
-    qDebug() << this->thrustPercentage;
 }
 
 void Ship::decreaseThrust(double deltaTime)
@@ -126,7 +123,6 @@ void Ship::decreaseThrust(double deltaTime)
     }
 
     this->thrust = this->thrustPercentage * this->maxThrust;
-    qDebug() << this->thrustPercentage;
 }
 
 void Ship::setMaxThrust(double maxThrust)

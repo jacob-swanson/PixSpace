@@ -4,6 +4,7 @@
 #include <QMutex>
 #include <QString>
 #include <QDebug>
+#include <QHash>
 #include <QFile>
 #include <QtSql/QSqlQuery>
 #include <QtSql/QSqlQueryModel>
@@ -112,6 +113,18 @@ public:
      * @return QSTring
      */
     QString getUserName();
+
+    /**
+     * @brief parseconfig reads in a config file with keys/values separated
+     * by colons. Stores in a QHash as QString:QString
+     */
+    void parseconfig();
+
+    /**
+     * @brief createconfig makes a config file
+     */
+
+    void createconfig();
 
 
 private:

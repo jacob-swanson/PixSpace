@@ -15,6 +15,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     // Setup database
+    //DataManager::instance()->parseconfig(); //this reads in config.dat
     DataManager::instance()->setHostName("localhost");
     DataManager::instance()->setPort(3306);
     DataManager::instance()->setDatabaseName("pixspace");

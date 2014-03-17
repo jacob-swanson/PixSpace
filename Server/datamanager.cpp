@@ -160,4 +160,59 @@ QList<Body*> DataManager::loadBodies() const
     return bodies;
 }
 
+void DataManager::parseconfig()
+{
+    QFile file("config.dat");
+        QHash<QString, QString> config;
 
+        if (!file.open(QIODevice::ReadOnly))
+        {
+            qDebug() << "can't open file for reading" << qPrintable(file.errorString());
+        }
+        QTextStream in(&file);
+        while(!in.atEnd())
+        {
+            QString line = in.readLine();
+            QStringList tokens = line.split(":");
+            config.insert(tokens[0],tokens[1]);
+        }
+
+        //to test that values were stored in QHash properly
+            QHashIterator<QString, QString> iter(config);
+            while (iter.hasNext())
+            {
+                iter.next();
+                qDebug() << iter.key() << iter.value();
+            }
+
+        file.close();
+
+}
+
+void DataManager::createconfig()
+{
+        QHash<QString, QString> config;
+
+        config.insert("hostname", "localhost");
+        config.insert("port", "3306");
+        config.insert("dbname", "pixspace");
+        config.insert("username", "pixspace");
+        config.insert("password", "pixspace");
+
+        QFile file("config.dat");
+
+        if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+        {
+            qDebug() << "can't open file for writing" << qPrintable(file.errorString());
+        }
+        QTextStream out(&file);
+        QHashIterator<QString, QString> iter(config);
+        while (iter.hasNext())
+        {
+            iter.next();
+            qDebug() << iter.key() << iter.value();
+            out << iter.key() << ":" << iter.value() << endl;
+        }
+        file.flush();
+        file.close();
+}

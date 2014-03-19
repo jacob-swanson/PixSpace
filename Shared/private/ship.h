@@ -6,6 +6,7 @@
 
 class Ship : public RenderBody
 {
+    Q_OBJECT
 public:
     /**
      * @brief Ship Initialize default Ship
@@ -71,6 +72,13 @@ public:
      * @param thrust
      */
     void setMaxThrust(double maxThrust);
+
+signals:
+    /**
+     * @brief collisionOccured Emitted when a collision occurs with a serverside Body
+     * @param body
+     */
+    void collisionOccured(Body* body);
 
 private:
     QString owner;

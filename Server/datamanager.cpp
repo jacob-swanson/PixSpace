@@ -146,12 +146,14 @@ QList<Body*> DataManager::loadBodies() const
     b1->setPosition(3.8e8, 0);
     b1->setVelocity(0, 1023);
     b1->setRotationRate(-0.00015);
+    b1->setDiameter(3.4e6);
 
     // Earth
     b2->setMass(5.9721986e24);
     b2->setPosition(0, 0);
     b2->setMoveable(false);
     b2->setRotationRate(0.0001);
+    b2->setDiameter(1.27e7);
 
     // Add Earth and Sun to list
     bodies.push_back(b1);

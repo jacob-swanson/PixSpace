@@ -98,6 +98,11 @@ private slots:
      */
     void Center();
 
+    /**
+     * @brief respawnShip Respawn the controller's Ship
+     */
+    void respawnShip();
+
 signals:
     /**
      * @brief tickFinished Emitted when a Simulation tick is finished

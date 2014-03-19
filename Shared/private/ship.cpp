@@ -60,6 +60,12 @@ void Ship::calculateForces(QList<Body*> bodies, double timeAcceleration, double 
             // Magnitude of distance Vector
             double r = delta.length();
 
+            // Collision occured if distance is less than the sum of the radiuses
+            if (r < (b->getDiameter() / 2) + (this->getDiameter() / 2))
+            {
+                emit collisionOccured(b);
+            }
+
             // Force of gravity
             double combinedMass = this->getMass() * b->getMass();
             double r2 = r * r;

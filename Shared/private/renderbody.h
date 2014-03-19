@@ -16,6 +16,7 @@
  */
 class SHAREDSHARED_EXPORT RenderBody : public Body
 {
+    Q_OBJECT
 public:
     /**
      * @brief RenderBody Initialize a RenderBody without an asset. This can be dangerous.

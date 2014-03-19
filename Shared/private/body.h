@@ -5,6 +5,7 @@
 #include <QStack>
 #include <QJsonObject>
 #include <QtGlobal>
+#include <QObject>
 
 #include "vector.h"
 #include "shared_global.h"
@@ -12,13 +13,14 @@
 /**
  * @brief The Body class Base class for Bodies in the simulation
  */
-class SHAREDSHARED_EXPORT Body
+class SHAREDSHARED_EXPORT Body : public QObject
 {
+    Q_OBJECT
 public:
     /**
      * @brief Body Initialize a Body with default values (usually 0)
      */
-    Body();
+    Body(QObject *parent = 0);
 
     /**
      * @brief tick Stub function to be implemented by a child class

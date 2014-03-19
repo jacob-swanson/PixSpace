@@ -93,11 +93,19 @@ void ClientApp::connectionSuccessful()
     b->setRotationRate(50);
     b->setMass(2.8e5);
     b->setMaxThrust(1e6);
+    b->setDiameter(1e3);
     this->controller->possess(b);
     this->universe->pushBodies(b);
+    connect(b, SIGNAL(collisionOccured(Body*)), this, SLOT(respawnShip()));
 
     // Swap the custom graphics scene keypress event handling to controller mode (keys control ship movement and actions rather than input to connection dialog)
     this->scene->setControllerMode(true);
+}
+
+void ClientApp::respawnShip()
+{
+    this->controller->getPossessed()->setPosition(2.0e8, -2.0e8);
+    this->controller->getPossessed()->setVelocity(0, 0);
 }
 
 void ClientApp::displayConnectionError()

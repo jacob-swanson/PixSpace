@@ -1,6 +1,7 @@
 #include "body.h"
 
-Body::Body()
+Body::Body(QObject *parent) :
+    QObject(parent)
 {
     // Initialize stock body
     this->moveable = true;

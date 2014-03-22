@@ -17,7 +17,9 @@ SOURCES += private/body.cpp \
     private/vector.cpp \
     private/renderbody.cpp \
     private/connection.cpp \
-    private/ship.cpp
+    private/ship.cpp \
+    private/particle.cpp \
+    private/particleemitter.cpp
 
 HEADERS += private/shared_global.h \
     private/body.h \
@@ -31,7 +33,9 @@ HEADERS += private/shared_global.h \
     private/connection.h \
     Connection \
     private/ship.h \
-    Ship
+    Ship \
+    private/particle.h \
+    private/particleemitter.h
 
 unix {
     target.path = /usr/lib

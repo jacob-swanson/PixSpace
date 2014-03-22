@@ -13,6 +13,7 @@
         <file alias="RingworldPlanet">Assets/PNGS/Ringworld.png</file>
         <file alias="ShippyShip">Assets/PNGS/Shippy.png</file>
         <file alias="SpaceShuttleShip">Assets/PNGS/SpaceShuttle.png</file>
+        <file alias="Particle">Assets/PNGS/Particle.png</file>
     </qresource>
     <qresource prefix="/bodies-mask">
         <file alias="ColourfulShip">Assets/Masks/ColourfulShip.png</file>

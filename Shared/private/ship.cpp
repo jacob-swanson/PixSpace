@@ -102,7 +102,15 @@ void Ship::calculateForces(QList<Body*> bodies, double timeAcceleration, double 
 
 void Ship::tick(double deltaTime)
 {
-    // Do not call parent
+    if (this->throttlePercentage > 0.0)
+    {
+        this->emitter->setEnabled(true);
+    }
+    else
+    {
+        this->emitter->setEnabled(false);
+    }
+    this->emitter->tick(deltaTime);
 }
 
 void Ship::increaseThrottle(double deltaTime)
@@ -142,4 +150,20 @@ void Ship::decreaseThrottle(double deltaTime)
 void Ship::setMaxThrust(double maxThrust)
 {
     this->maxThrust = maxThrust;
+}
+
+bool Ship::createGraphic(QGraphicsScene *scene)
+{
+    bool ret = RenderBody::createGraphic(scene);
+    this->emitter = new ParticleEmitter(scene, ParticleFlags::RANDOMIZE_INITIAL_ROTATION, this);
+
+    this->emitter->setOffset(this->spriteGraphicsItem->boundingRect().height() / 2);
+    this->emitter->setScaleCurve(0.3, 1.0, 0.0);
+    this->emitter->setRedCurve(0.0, 1.0, 0.3);
+    this->emitter->setBlueCurve(0.0, 0.0, 1.0);
+    this->emitter->setGreenCurve(0.0, 0.6, 0.3);
+
+    this->emitter->setParticleLife(2.0);
+    this->emitter->setGenerationTime(0.1);
+    return ret;
 }

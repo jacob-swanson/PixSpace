@@ -172,7 +172,7 @@ void ClientApp::tickSimulation()
             // Update the graphical component
             if (item == NULL)
             {
-                if (rb->createGraphic())
+                if (rb->createGraphic(this->scene))
                 {
                     item = rb->getGraphicsItem();
                     item->setPos(this->getPixelFromSimulation(b->getPosition().getX()), -1*this->getPixelFromSimulation(b->getPosition().getY()));
@@ -186,6 +186,8 @@ void ClientApp::tickSimulation()
                 item->setRotation(rb->getRotation());
             }
         }
+
+        rb->tick(deltaTime);
     }
 
     this->controller->tick(deltaTime);

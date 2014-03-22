@@ -3,6 +3,7 @@
 
 #include "renderbody.h"
 #include "universe.h"
+#include "particleemitter.h"
 
 class Ship : public RenderBody
 {
@@ -73,6 +74,13 @@ public:
      */
     void setMaxThrust(double maxThrust);
 
+    /**
+     * @brief createGraphic Create the ParticleEmitter
+     * @param scene
+     * @return
+     */
+    bool createGraphic(QGraphicsScene *scene);
+
 signals:
     /**
      * @brief collisionOccured Emitted when a collision occurs with a serverside Body
@@ -88,6 +96,8 @@ private:
 
     // Rate at which the thrustPercentage increases
     const static double thrustRate = 0.5;
+
+    ParticleEmitter *emitter;
 };
 
 #endif // SHIP_H

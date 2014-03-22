@@ -32,7 +32,7 @@ public:
      * @brief createGraphic Create the QGraphicsPixmapItem with the mask applied
      * @return True if the graphic was created successfully, false otherwise
      */
-    bool createGraphic();
+    virtual bool createGraphic(QGraphicsScene* scene);
 
     /**
      * @brief tick Update RenderBody specific things
@@ -69,6 +69,12 @@ public:
      */
     void write(QJsonObject &json) const;
 
+    /**
+     * @brief getScreenPosition Get the pixel coordinates of the sprite on the screen
+     * @return
+     */
+    Vector getScreenPosition();
+
 private:
     /**
      * @brief applyMask Randomly generate the colors from the mask
@@ -77,11 +83,13 @@ private:
      */
     void applyMask(QImage* image, QImage* mask);
 
+protected:
     // QResource path
     QString assetPath;
 
     // GraphicsItem to be loaded into the QGraphicsScene
     QGraphicsPixmapItem *spriteGraphicsItem;
+    QGraphicsScene* scene;
 
     // Asset Resource File Paths
     const static QString imagePath;

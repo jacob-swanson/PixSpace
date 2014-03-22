@@ -10,6 +10,7 @@
 #include <Vector>
 
 #include "particle.h"
+#include "renderbody.h"
 
 struct ParticleFlags
 {
@@ -25,9 +26,16 @@ class ParticleEmitter : public QObject
 public:
     explicit ParticleEmitter(QGraphicsScene* scene, ParticleFlags::Value flags, QObject *parent = 0);
 
-    void getBezierCurve(double p0, double pc, double p2, double curve[]);
+    void setOffset(double offset);
 
-    double getBezierPoint(double t, double curve[]);
+    void setScaleCurve(double p0, double pc, double p2);
+    void setRedCurve(double p0, double pc, double p2);
+    void setBlueCurve(double p0, double pc, double p2);
+    void setGreenCurve(double p0, double pc, double p2);
+    void setParticleLife(double particleLife);
+    void setGenerationTime(double generationTime);
+
+    void setEnabled(bool enabled);
 
 signals:
 
@@ -35,6 +43,8 @@ public slots:
     void tick(double deltaTime);
 
 private:
+    void getBezierCurve(double p0, double pc, double p2, double curve[]);
+    double getBezierPoint(double t, double curve[]);
     double clamp(double value, double min, double max);
     QList<Particle*> particles;
 
@@ -43,12 +53,15 @@ private:
     double blueCurve[3];
     double greenCurve[3];
 
+    double offset;
     Vector position;
     Vector velocity;
     double generationTime;
     double particleLife;
+    bool enabled;
 
     QGraphicsScene* scene;
+    RenderBody* body;
 
     double timeAccumulator;
 

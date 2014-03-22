@@ -17,8 +17,10 @@ RenderBody::RenderBody(QString assetPath) :
     this->assetPath = assetPath;
 }
 
-bool RenderBody::createGraphic()
+bool RenderBody::createGraphic(QGraphicsScene* scene)
 {
+    this->scene = scene;
+
     // Create QImages so they can be manipulated pixel by pixel
     QImage image(this->imagePath + this->assetPath);
     QImage mask(this->maskPath + this->assetPath);
@@ -150,4 +152,12 @@ void RenderBody::write(QJsonObject &json) const
 
     json["asset"] = this->assetPath;
     json["type"] = QString("RenderBody");
+}
+
+Vector RenderBody::getScreenPosition()
+{
+    return Vector(
+                this->spriteGraphicsItem->x() + (this->spriteGraphicsItem->boundingRect().width()/2),
+                this->spriteGraphicsItem->y() + (this->spriteGraphicsItem->boundingRect().height()/2)
+                 );
 }

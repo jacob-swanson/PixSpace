@@ -114,7 +114,7 @@ void ParticleEmitter::tick(double deltaTime)
         particle->addPosition(this->velocity * deltaTime);
 
         // Apply scale curve
-        double percentLife = particle->getLife() / this->particleLife;
+        double percentLife = clamp(particle->getLife() / this->particleLife, 0.0, 1.0);
         particle->setScale(clamp(this->getBezierPoint(percentLife, this->scaleCurve), 0.0, 1.0));
 
         // Apply color curve

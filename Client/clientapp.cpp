@@ -44,6 +44,8 @@ void ClientApp::bodyNotFound(Body *body)
         {
             this->scene->removeItem(b->getGraphicsItem());
         }
+        // TODO: If it is a Ship, stop the particle effects
+        // TODO: Delete the Ship
     }
     else
     {

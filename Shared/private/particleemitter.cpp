@@ -6,6 +6,7 @@
 ParticleEmitter::ParticleEmitter(QGraphicsScene* scene, ParticleFlags::Value flags, QObject *parent) :
     QObject(parent)
 {
+    // If the parent is a RenderBody, particles will be generated with respect to its location
     RenderBody* body = dynamic_cast<RenderBody*>(parent);
     if (body != NULL)
     {
@@ -83,6 +84,7 @@ void ParticleEmitter::tick(double deltaTime)
             Particle* particle = new Particle(this->scene, ":/bodies/Particle");
             if (this->body != NULL)
             {
+                // Calculate the position where the Particle will spawn
                 Vector dir;
                 dir.setY(qCos(this->body->getRotation() * PI / 180));
                 dir.setX(-1*qSin(this->body->getRotation() * PI / 180));
@@ -104,6 +106,7 @@ void ParticleEmitter::tick(double deltaTime)
             this->particles.push_back(particle);
         }
 
+        // Reset the timer
         this->timeAccumulator = 0.0;
     }
 

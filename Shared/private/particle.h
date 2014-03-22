@@ -17,6 +17,10 @@ class Particle : public QObject
 public:
     explicit Particle(QGraphicsScene *scene, QString resource, QObject *parent = 0);
 
+    /**
+     * @brief addPosition Add a delta to the Particle's position
+     * @param position
+     */
     void addPosition(Vector position);
 
     /**
@@ -26,14 +30,33 @@ public:
      */
     double addLife(double deltaTime);
 
+    /**
+     * @brief getLife Get number of seconds the particle has been alive
+     * @return
+     */
     double getLife();
 
+    /**
+     * @brief remove Remove the Particle from the scene
+     */
     void remove();
 
+    /**
+     * @brief setScale Set the graphicial scale of the Particle
+     * @param scale
+     */
     void setScale(double scale);
 
+    /**
+     * @brief setColor Set the color of the Particle
+     * @param color
+     */
     void setColor(QColor color);
 
+    /**
+     * @brief setRotation Set the rotation of the Particle
+     * @param rotation
+     */
     void setRotation(double rotation);
 
 private:

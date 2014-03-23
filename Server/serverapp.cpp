@@ -11,7 +11,7 @@ ServerApp::ServerApp(QWidget *parent) :
     // Create objects
         this->universe = new Universe();
 
-    // Get data from data manager fro labels in GUI
+    // Get data from data manager for labels in GUI
         this->ui->sqlDBName->setText(DataManager::instance()->getDatabaseName());
         this->ui->sqlHost->setText(DataManager::instance()->getHostName());
         this->ui->sqlPort->setText(QString::number(DataManager::instance()->getPort()));

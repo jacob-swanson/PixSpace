@@ -236,3 +236,8 @@ void Body::scheduleDelete()
 {
     this->deleteLater();
 }
+
+void Body::setID(int ID)
+{
+    this->id = ID;
+}

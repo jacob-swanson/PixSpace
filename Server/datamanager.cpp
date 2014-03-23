@@ -133,31 +133,34 @@ void DataManager::saveBodies(QList<Body*> bodies) const
 
 QList<Body*> DataManager::loadBodies() const
 {
-    // Create Moon and Earth
     QList<Body*> bodies;
 
-    RenderBody* b1 = new RenderBody("Moon");
-    RenderBody* b2 = new RenderBody("WaterPlanet");
-    b1->setServer(true);
-    b2->setServer(true);
+    QSqlQuery query;
+    query.prepare("SELECT id, mass, positionx, positiony, velocityx, velocityy, rotationRate, diameter, resourceID "
+                  "FROM body "
+                  "WHERE 1");
+    query.exec();
 
-    // Moon
-    b1->setMass(7.3459e22);
-    b1->setPosition(3.8e8, 0);
-    b1->setVelocity(0, 1023);
-    b1->setRotationRate(-0.00015);
-    b1->setDiameter(3.4e6);
+    qDebug() << query.size();
 
-    // Earth
-    b2->setMass(5.9721986e24);
-    b2->setPosition(0, 0);
-    b2->setMoveable(false);
-    b2->setRotationRate(0.0001);
-    b2->setDiameter(1.27e7);
-
-    // Add Earth and Sun to list
-    //bodies.push_back(b1);
-    //bodies.push_back(b2);
+    // Load all bodies stored in DB
+    while (query.next())
+    {
+        RenderBody* b1 = new RenderBody(query.value(8).toString());
+        b1->setServer(true);
+        b1->setID(query.value(0).toInt());
+        b1->setMass(query.value(1).toDouble());
+        b1->setPosition(query.value(2).toDouble(),  query.value(3).toDouble());
+        b1->setVelocity(query.value(4).toDouble(), query.value(5).toDouble());
+        b1->setRotationRate( query.value(6).toDouble());
+        b1->setDiameter(query.value(7).toDouble());
+        bodies.push_back(b1);
+        // If Earth, set not moveable flag
+        if (b1->getId() == 0)
+        {
+            b1->setMoveable(false);
+        }
+    }
 
     return bodies;
 }

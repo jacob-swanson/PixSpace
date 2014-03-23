@@ -214,6 +214,11 @@ public:
      */
     virtual void scheduleDelete();
 
+    /**
+     * @brief setID Because it just wasn't worth rewriting all the constructors to do this at creation
+     */
+    virtual void setID(int ID);
+
 protected:
     // Simulation variables
     Vector position;

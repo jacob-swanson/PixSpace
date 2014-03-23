@@ -19,6 +19,9 @@ ParticleEmitter::ParticleEmitter(QGraphicsScene* scene, ParticleFlags::Value fla
     // Default values
     this->particleLife = 20.0;
     this->generationTime = 2.0;
+    this->offset = 0.0;
+    this->enabled = false;
+    this->timeAccumulator = 0.0;
 }
 
 void ParticleEmitter::setScaleCurve(double p0, double pc, double p2)

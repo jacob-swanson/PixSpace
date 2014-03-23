@@ -11,6 +11,11 @@ PlayerController::PlayerController(Universe* universe, QObject *parent) :
     this->keybindings.center = Qt::Key_C;
 
     this->universe = universe;
+
+    this->rotRight = false;
+    this->rotLeft = false;
+    this->thrustForward = false;
+    this->thrustBackward = false;
 }
 
 void PlayerController::setUniverse(Universe* universe)

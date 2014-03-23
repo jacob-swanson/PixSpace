@@ -86,6 +86,7 @@ void ClientApp::exitClient()
 void ClientApp::connectionSuccessful()
 {
     // Clear out the scene to prepair for the game loading
+    // TODO: Remove ConnectionDialog from memory
     this->scene->clear();
     this->tickTimer.start();
 

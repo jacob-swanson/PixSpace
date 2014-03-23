@@ -15,6 +15,11 @@ public:
     Ship();
 
     /**
+     * @brief scheduleDelete Do any cleanup work, and schedule the Object for deletion
+     */
+    void scheduleDelete();
+
+    /**
      * @brief Ship Initialize a Ship with an owner
      * @param owner
      */
@@ -95,7 +100,7 @@ private:
     double thrust;
 
     // Rate at which the thrustPercentage increases
-    const static double thrustRate = 0.5;
+    double thrustRate;
 
     ParticleEmitter *emitter;
 };

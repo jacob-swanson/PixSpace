@@ -9,7 +9,6 @@ Particle::Particle(QGraphicsScene *scene, QString resource, QObject *parent) :
     this->scene->addItem(this->graphicsItem);
 }
 
-
 void Particle::remove()
 {
     // Remove the item from the scene

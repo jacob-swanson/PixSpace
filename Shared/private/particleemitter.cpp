@@ -1,5 +1,6 @@
 #include <qmath.h>
 #include "particleemitter.h"
+#include <cmath>
 
 #define PI 3.14159265
 
@@ -66,9 +67,16 @@ void ParticleEmitter::getBezierCurve(double p0, double pc, double p2, double cur
 
 double ParticleEmitter::getBezierPoint(double t, double curve[])
 {
-    return (curve[0]*(t*t))
-            + (curve[1]*2*t*(1-t))
-            + (curve[2]*(1-t)*(1-t));
+    double point = (curve[0]*(t*t)) + (curve[1]*2*t*(1-t)) + (curve[2]*(1-t)*(1-t));
+
+    if (isnan(point))
+    {
+        return 0.0;
+    }
+    else
+    {
+        return point;
+    }
 }
 
 void ParticleEmitter::tick(double deltaTime)
@@ -158,5 +166,12 @@ void ParticleEmitter::setOffset(double offset)
     this->offset = offset;
 }
 
-
-
+void ParticleEmitter::clear()
+{
+    foreach (Particle* particle, this->particles)
+    {
+        particle->remove();
+        this->particles.removeOne(particle);
+        particle->deleteLater();
+    }
+}

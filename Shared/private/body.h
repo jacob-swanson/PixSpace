@@ -209,6 +209,11 @@ public:
      */
     virtual void write(QJsonObject &json) const;
 
+    /**
+     * @brief scheduleDelete Schedule the Object for deletion
+     */
+    virtual void scheduleDelete();
+
 protected:
     // Simulation variables
     Vector position;

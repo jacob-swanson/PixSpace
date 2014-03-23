@@ -232,4 +232,7 @@ void Body::write(QJsonObject &json) const
     json["type"] = QString("Body");
 }
 
-
+void Body::scheduleDelete()
+{
+    this->deleteLater();
+}

@@ -88,6 +88,11 @@ public:
      */
     void setEnabled(bool enabled);
 
+    /**
+     * @brief clear Remove all particles
+     */
+    void clear();
+
 signals:
 
 public slots:

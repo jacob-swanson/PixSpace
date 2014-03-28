@@ -211,6 +211,7 @@ void ServerApp::updateNewSpeedValue(int speed)
         break;
     case 3:
         this->updateNewSpeedLabel(50);
+        break;
     case 4:
         this->updateNewSpeedLabel(100);
         break;
@@ -249,6 +250,7 @@ void ServerApp::updateTimeAcceleration(int speed)
         break;
     case 3:
         this->universe->setTimeAcceleration((double) 50);
+        break;
     case 4:
         this->universe->setTimeAcceleration((double) 100);
         break;

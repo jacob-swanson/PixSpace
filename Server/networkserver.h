@@ -3,6 +3,7 @@
 
 #include <QTcpServer>
 #include <QList>
+#include <QMessageBox>
 
 #include <Connection>
 

@@ -154,6 +154,7 @@ void ClientApp::receiveMessage(QString username, QString message)
     }
     else
     {
+        // Non-fatal error, left as qDebug in case needed in the future, but definitely shouldn't grab at user's attention
         qDebug() << "Error parsing JSON: " << error.errorString();
     }
 }
@@ -179,6 +180,13 @@ void ClientApp::tickSimulation()
                     item->setPos(this->getPixelFromSimulation(b->getPosition().getX()), -1*this->getPixelFromSimulation(b->getPosition().getY()));
                     item->setRotation(rb->getRotation());
                     this->scene->addItem(item);
+                }
+                else
+                {
+                    QMessageBox errorBox;
+                    errorBox.setText("A fatal error has occurred. Pixspace will now exit.");
+                    errorBox.exec();
+                    emit exitClient();
                 }
             }
             else

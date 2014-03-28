@@ -1,5 +1,6 @@
 #include "datamanager.h"
 #include <RenderBody>
+#include <QMessageBox>
 #include <QDebug>
 
 DataManager* DataManager::m_Instance = 0;
@@ -169,12 +170,16 @@ QList<Body*> DataManager::loadBodies() const
 
 void DataManager::parseconfig()
 {
-    QFile file("config.dat");
+    QString fileName = "config.dat";
+    QFile file(fileName);
         QHash<QString, QString> config;
 
         if (!file.open(QIODevice::ReadOnly))
         {
-            qDebug() << "can't open file for reading" << qPrintable(file.errorString());
+            QMessageBox errorBox;
+            errorBox.setText("Can't open config file " + fileName + " for reading.");
+            errorBox.setInformativeText(qPrintable(file.errorString()));
+            errorBox.exec();
         }
         QTextStream in(&file);
         while(!in.atEnd())
@@ -198,6 +203,9 @@ void DataManager::parseconfig()
 
 void DataManager::createconfig()
 {
+        QString fileName = "config.dat";
+        QFile file(fileName);
+
         QHash<QString, QString> config;
 
         config.insert("hostname", "localhost");
@@ -206,11 +214,12 @@ void DataManager::createconfig()
         config.insert("username", "pixspace");
         config.insert("password", "pixspace");
 
-        QFile file("config.dat");
-
         if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
         {
-            qDebug() << "can't open file for writing" << qPrintable(file.errorString());
+            QMessageBox errorBox;
+            errorBox.setText("Can't open config file " + fileName + " for writing.");
+            errorBox.setInformativeText(qPrintable(file.errorString()));
+            errorBox.exec();
         }
         QTextStream out(&file);
         QHashIterator<QString, QString> iter(config);

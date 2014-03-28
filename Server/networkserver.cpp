@@ -67,7 +67,13 @@ void NetworkServer::displayError()
 {
     Connection *connection = qobject_cast<Connection*>(sender());
 
-    qDebug() << "The following error occured: " << connection->errorString();
+    // Display all non-Closing connection errors
+    if (connection->errorString() != "The remote host closed the connection")
+    {
+        QMessageBox errorBox;
+        errorBox.setText("The following network error occured: " + connection->errorString());
+        errorBox.exec();
+    }
 }
 
 void NetworkServer::broadcastJson(QByteArray message)

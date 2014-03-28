@@ -27,14 +27,18 @@ bool RenderBody::createGraphic(QGraphicsScene* scene)
 
     if (image.isNull())
     {
-        qDebug() << "There was a problem loading asset: " << this->imagePath + this->assetPath;
+        QMessageBox errorBox;
+        errorBox.setText("There was a problem loading asset: " + this->imagePath + this->assetPath);
+        errorBox.exec();
         return false;
     }
 
     // Not a fatal error
     if (mask.isNull())
     {
-        qDebug() << "There was a problem loading asset: " << this->maskPath + this->assetPath;
+        QMessageBox errorBox;
+        errorBox.setText("There was a problem loading asset: " + this->maskPath + this->assetPath);
+        errorBox.exec();
     }
 
     // Apply image filters
@@ -49,7 +53,9 @@ bool RenderBody::createGraphic(QGraphicsScene* scene)
 
     if (pixmap.isNull())
     {
-        qDebug() << "There was a problem creating a pixmap for asset: " << this->imagePath + this->assetPath;
+        QMessageBox errorBox;
+        errorBox.setText("There was a problem creating a pixmap for asset: " + this->imagePath + this->assetPath);
+        errorBox.exec();
         return false;
     }
     else

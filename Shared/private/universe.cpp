@@ -153,7 +153,9 @@ void Universe::read(const QJsonObject &json, QString exclude)
             }
             else
             {
-                qDebug() << "Could not load type: " << bodyObject["type"];
+                QMessageBox errorBox;
+                errorBox.setText("Could not load type: " + bodyObject["type"].toString());
+                errorBox.exec();
             }
         }
         else

@@ -6,7 +6,7 @@
 #include <QString>
 #include <QImage>
 #include <QDebug>
-
+#include <QMessageBox>
 
 #include "body.h"
 #include "shared_global.h"

@@ -1,5 +1,6 @@
 #include "datamanager.h"
 #include <RenderBody>
+#include <QDebug>
 
 DataManager* DataManager::m_Instance = 0;
 
@@ -106,29 +107,28 @@ bool DataManager::loadBodySprite(QString id, QByteArray *sprite, QByteArray *mas
         return true;
     }
 
-    qDebug() << "Sprite for: " << id << " not found in database.";
-
     return false;
 }
 
 void DataManager::saveBodies(QList<Body*> bodies) const
 {
-    QFile logFile("orbit.data");
-
-    if (logFile.open(QFile::WriteOnly | QFile::Append)) {
-        QTextStream out(&logFile);
-
-        foreach(Body* b, bodies)
+    QSqlQuery query;
+    query.prepare("UPDATE body "
+                  "SET positionx=?, positiony=?, velocityx=?, velocityy=? "
+                  "WHERE id=?");
+    foreach(Body* b, bodies)
+    {
+        // Output x and y position of a moveable body
+        if (b->isMoveable())
         {
-            // Output x and y position of a moveable body
-            if (b->isMoveable())
-            {
-                //qDebug() << qSetRealNumberPrecision(10) << b->getPosition().getX() << " " << b->getPosition().getY();// << " " << b->getAcceleration().getX() << " " << b->getAcceleration().getY() << " " << b->getVelocity().getX() << " " << b->getVelocity().getY();
-                out << qSetRealNumberPrecision(10) << b->getPosition().getX() << " " << b->getPosition().getY() << "\n";// << " " << b->getAcceleration().getX() << " " << b->getAcceleration().getY() << " " << b->getVelocity().getX() << " " << b->getVelocity().getY();
-            }
+            query.addBindValue(b->getPosition().getX());
+            query.addBindValue(b->getPosition().getY());
+            query.addBindValue(b->getVelocity().getX());
+            query.addBindValue(b->getVelocity().getY());
+            query.addBindValue(b->getId());
+            query.exec();
         }
     }
-
 }
 
 QList<Body*> DataManager::loadBodies() const
@@ -140,8 +140,6 @@ QList<Body*> DataManager::loadBodies() const
                   "FROM body "
                   "WHERE 1");
     query.exec();
-
-    qDebug() << query.size();
 
     // Load all bodies stored in DB
     while (query.next())

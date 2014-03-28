@@ -3,7 +3,6 @@
 
 #include <Ship>
 #include <Vector>
-#include <QDebug>
 #include <QMessageBox>
 
 #include "controller.h"

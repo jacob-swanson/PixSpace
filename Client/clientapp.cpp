@@ -56,10 +56,6 @@ void ClientApp::bodyNotFound(Body *body)
 void ClientApp::connectToServer(QString address, int port, QString name)
 {
     // Connect to a server
-    qDebug() << "Address: " << address;
-    qDebug() << "Port: " << port;
-    qDebug() << "Name: " << name;
-
     this->connection = new Connection(name, this);
     this->connection->connectToHost(address, port);
 
@@ -91,9 +87,10 @@ void ClientApp::connectionSuccessful()
     this->tickTimer.start();
 
     Ship* b = new Ship("FireflyShip", this->connection->getGreetingMessage());
-    b->setPosition(2.0e8, -2.0e8);
+    b->setPosition(0.0, 4.2e7);
+    b->setVelocity(0, 3.1);
     b->setRotationRate(50);
-    b->setMass(2.8e5);
+    b->setMass(10.8e2);
     b->setMaxThrust(1e6);
     b->setDiameter(1e3);
     this->controller->possess(b);
@@ -112,7 +109,9 @@ void ClientApp::respawnShip()
 
 void ClientApp::displayConnectionError()
 {
-    qDebug() << "Connection error: " << this->connection->errorString();
+    QMessageBox errorBox;
+    errorBox.setText("Connection error: " + this->connection->errorString());
+    errorBox.exec();
 
     this->Disconnect();
 }

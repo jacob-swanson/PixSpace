@@ -1,8 +1,6 @@
 #include "connectiondialog.h"
 #include "ui_connectiondialog.h"
 
-#include <QDebug>
-
 ConnectionDialog::ConnectionDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ConnectionDialog)

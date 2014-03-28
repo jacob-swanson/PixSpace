@@ -219,6 +219,20 @@ public:
      */
     virtual void setID(int ID);
 
+    /**
+     * @brief setMasks Sets all the mask values at once
+     * @param primaryMaskRed
+     * @param primaryMaskGreen
+     * @param primaryMaskBlue
+     * @param secondaryMaskRed
+     * @param secondaryMaskGreen
+     * @param secondaryMaskBlue
+     * @param tertiaryMaskRed
+     * @param tertiaryMaskGreen
+     * @param tertiaryMaskBlue
+     */
+    void setMasks(int primaryMaskRed, int primaryMaskGreen, int primaryMaskBlue, int secondaryMaskRed, int secondaryMaskGreen, int secondaryMaskBlue, int tertiaryMaskRed, int tertiaryMaskGreen, int tertiaryMaskBlue);
+
 protected:
     // Simulation variables
     Vector position;
@@ -235,6 +249,17 @@ protected:
     double diameter;
     QString name;
     bool serverBody;
+
+    // Colors
+    int primaryMaskRed;
+    int primaryMaskGreen;
+    int primaryMaskBlue;
+    int secondaryMaskRed;
+    int secondaryMaskGreen;
+    int secondaryMaskBlue;
+    int tertiaryMaskRed;
+    int tertiaryMaskGreen;
+    int tertiaryMaskBlue;
 
 private:
     int id;

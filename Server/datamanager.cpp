@@ -136,7 +136,8 @@ QList<Body*> DataManager::loadBodies() const
     QList<Body*> bodies;
 
     QSqlQuery query;
-    query.prepare("SELECT id, mass, positionx, positiony, velocityx, velocityy, rotationRate, diameter, resourceID "
+    query.prepare("SELECT id, mass, positionx, positiony, velocityx, velocityy, rotationRate, diameter, resourceID, "
+                  "primaryMaskRed, primaryMaskBlue, primaryMaskGreen, secondaryMaskRed, secondaryMaskBlue, secondaryMaskGreen, tertiaryMaskRed, tertiaryMaskBlue, tertiaryMaskGreen "
                   "FROM body "
                   "WHERE 1");
     query.exec();
@@ -152,6 +153,9 @@ QList<Body*> DataManager::loadBodies() const
         b1->setVelocity(query.value(4).toDouble(), query.value(5).toDouble());
         b1->setRotationRate( query.value(6).toDouble());
         b1->setDiameter(query.value(7).toDouble());
+        b1->setMasks(query.value(9).toInt(), query.value(10).toInt(), query.value(11).toInt(),
+                     query.value(12).toInt(), query.value(13).toInt(), query.value(14).toInt(),
+                     query.value(15).toInt(), query.value(16).toInt(), query.value(17).toInt());
         bodies.push_back(b1);
         // If Earth, set not moveable flag
         if (b1->getId() == 0)

@@ -202,6 +202,12 @@ void Body::read(const QJsonObject &json)
 
     this->setDiameter(json["diameter"].toDouble());
     this->setRotation(json["rotation"].toDouble());
+
+    this->setMasks(json["primaryMaskRed"].toInt(), json["primaryMaskBlue"].toInt(),
+            json["primaryMaskGreen"].toInt(), json["secondaryMaskRed"].toInt(),
+            json["secondaryMaskBlue"].toInt(), json["secondaryMaskGreen"].toInt(),
+            json["tertiaryMaskRed"].toInt(), json["tertiaryMaskBlue"].toInt(),
+            json["tertiaryMaskGreen"].toInt());
 }
 
 void Body::write(QJsonObject &json) const
@@ -229,6 +235,19 @@ void Body::write(QJsonObject &json) const
     json["server"] = this->serverBody;
     json["rotationRate"] = this->rotationRate;
 
+    // Colors
+    json["primaryMaskRed"] = this->primaryMaskRed;
+    json["primaryMaskBlue"] = this->primaryMaskBlue;
+    json["primaryMaskGreen"] = this->primaryMaskGreen;
+
+    json["secondaryMaskRed"] = this->secondaryMaskRed;
+    json["secondaryMaskBlue"] = this->secondaryMaskBlue;
+    json["secondaryMaskGreen"] = this->secondaryMaskGreen;
+
+    json["tertiaryMaskRed"] = this->tertiaryMaskRed;
+    json["tertiaryMaskBlue"] = this->tertiaryMaskBlue;
+    json["tertiaryMaskGreen"] = this->tertiaryMaskGreen;
+
     json["type"] = QString("Body");
 }
 
@@ -240,4 +259,19 @@ void Body::scheduleDelete()
 void Body::setID(int ID)
 {
     this->id = ID;
+}
+
+void Body::setMasks(int primaryMaskRed, int primaryMaskGreen, int primaryMaskBlue, int secondaryMaskRed, int secondaryMaskGreen, int secondaryMaskBlue, int tertiaryMaskRed, int tertiaryMaskGreen, int tertiaryMaskBlue)
+{
+    this->primaryMaskRed = primaryMaskRed;
+    this->primaryMaskGreen = primaryMaskGreen;
+    this->primaryMaskBlue = primaryMaskBlue;
+
+    this->secondaryMaskRed = secondaryMaskRed;
+    this->secondaryMaskGreen = secondaryMaskGreen;
+    this->secondaryMaskBlue = secondaryMaskBlue;
+
+    this->tertiaryMaskRed = tertiaryMaskRed;
+    this->tertiaryMaskGreen = tertiaryMaskGreen;
+    this->tertiaryMaskBlue = tertiaryMaskBlue;
 }

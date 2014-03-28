@@ -1,3 +1,4 @@
 DROP DATABASE pixspace;
 DROP USER 'pixspace';
+FLUSH PRIVILEGES;
 

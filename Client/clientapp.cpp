@@ -1,4 +1,5 @@
 #include "clientapp.h"
+#include <QDebug>
 
 ClientApp::ClientApp(QObject *parent) :
     QObject(parent)
@@ -120,6 +121,11 @@ void ClientApp::Disconnect()
 {
     // Destroy the connection
     this->connection->disconnectFromHost();
+
+    // Disconnect signals and slots
+    disconnect(this->connection, SIGNAL(readyForUse()), this, SLOT(connectionSuccessful()));
+    disconnect(this->connection, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(displayConnectionError()));
+    disconnect(this->connection, SIGNAL(newMessage(QString,QString)), this, SLOT(receiveMessage(QString,QString)));
 
     this->scene->setControllerMode(false);
     // Show the connection dialog

@@ -24,6 +24,7 @@ Ship::Ship(QString asset, QString owner) :
     this->owner = owner;
     this->throttlePercentage = 0.0;
     this->thrust = 0.0;
+    this->thrustRate = 0.5;
 }
 
 QString Ship::getOwner()

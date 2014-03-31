@@ -83,6 +83,9 @@ private slots:
     void updateSQLConfig();
 
 
+
+    void on_loadSQL_clicked();
+
 public slots:
     /**
      * @brief tick Tick the simulation

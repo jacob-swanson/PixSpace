@@ -16,6 +16,7 @@ ClientApp::ClientApp(QObject *parent) :
     connect(this->universe, SIGNAL(bodyNotFound(Body*)), this, SLOT(bodyNotFound(Body*)));
 
     this->tickTimer.setInterval(15);
+    this->timer.start();
     this->controller = new PlayerController(this->universe);
 
     // Connect the keypress signal to the controller's keypress handler
@@ -168,6 +169,7 @@ void ClientApp::receiveMessage(QString username, QString message)
 void ClientApp::tickSimulation()
 {
     double deltaTime = ((double)this->timer.restart()/1000.0);
+    if (deltaTime )
 
     foreach(Body* b, this->universe->getBodies())
     {

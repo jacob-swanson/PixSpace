@@ -5,7 +5,7 @@ Universe::Universe() :
     QObject(0)
 {
     // Set 100,000x time acceleration
-    this->timeAcceleration = 10000;
+    this->timeAcceleration = 1;
 }
 
 void Universe::simulateStep(double deltaTime)

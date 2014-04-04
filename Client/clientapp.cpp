@@ -5,10 +5,15 @@ ClientApp::ClientApp(QObject *parent) :
     QObject(parent)
 {
     // Setup the GraphicsView and GraphicsScene
-    this->view = new QGraphicsView();
+    this->view = new ClientGraphicsView();
     view->setBackgroundBrush(QBrush(Qt::black, Qt::SolidPattern));
     this->scene = new ClientGraphicsScene;
+
     view->setScene(this->scene);
+    view->setDragMode(QGraphicsView::ScrollHandDrag);
+    view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    view->setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
 
     this->showConnectionDialog();
 
@@ -214,7 +219,7 @@ void ClientApp::tickSimulation()
 
 int ClientApp::getPixelFromSimulation(const double value) const
 {
-    double newValue = value / 1000000.0;
+    double newValue = value / 100000.0;
     double roundedValue = round(newValue);
 
     return (int)roundedValue;

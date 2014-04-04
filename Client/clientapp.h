@@ -4,7 +4,6 @@
 #include <cmath>
 
 #include <QObject>
-#include <QGraphicsView>
 #include <QCoreApplication>
 #include <QGraphicsProxyWidget>
 #include <QGraphicsScene>
@@ -19,6 +18,7 @@
 
 #include "connectiondialog.h"
 #include "playercontroller.h"
+#include "clientgraphicsview.h"
 #include "clientgraphicsscene.h"
 
 class ClientApp : public QObject
@@ -118,7 +118,7 @@ private:
      */
     int getPixelFromSimulation(const double value) const;
 
-    QGraphicsView* view;
+    ClientGraphicsView* view;
     ClientGraphicsScene* scene;
     Connection* connection;
 

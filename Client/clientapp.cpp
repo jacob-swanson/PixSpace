@@ -188,7 +188,6 @@ void ClientApp::tickSimulation()
                 {
                     item = rb->getGraphicsItem();
                     double scale = ((double)rb->getDiameter() / 100000.0)/ (double)item->boundingRect().width();
-                    qDebug() << scale;
                     item->setScale(scale);
                     item->setPos(this->getPixelFromSimulation(b->getPosition().getX()), -1*this->getPixelFromSimulation(b->getPosition().getY()));
                     item->setRotation(rb->getRotation());

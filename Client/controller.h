@@ -22,7 +22,7 @@ public:
      * @brief posssess Take control of a Body
      * @param body
      */
-    virtual void possess(Body* body) = 0;
+    virtual void possess(Ship* body) = 0;
 
     /**
      * @brief unPossess Release control of a Body

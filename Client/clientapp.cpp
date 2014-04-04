@@ -6,14 +6,10 @@ ClientApp::ClientApp(QObject *parent) :
 {
     // Setup the GraphicsView and GraphicsScene
     this->view = new ClientGraphicsView();
-    view->setBackgroundBrush(QBrush(Qt::black, Qt::SolidPattern));
-    this->scene = new ClientGraphicsScene;
+    this->view->setBackgroundBrush(QBrush(Qt::black, Qt::SolidPattern));
 
-    view->setScene(this->scene);
-    view->setDragMode(QGraphicsView::ScrollHandDrag);
-    view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    view->setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
+    this->scene = new ClientGraphicsScene;
+    this->view->setScene(this->scene);
 
     this->showConnectionDialog();
 
@@ -102,6 +98,7 @@ void ClientApp::connectionSuccessful()
     b->setDiameter(1e3);
     this->controller->possess(b);
     this->universe->pushBodies(b);
+    this->view->setController(this->controller);
     connect(b, SIGNAL(collisionOccured(Body*)), this, SLOT(respawnShip()));
 
     // Swap the custom graphics scene keypress event handling to controller mode (keys control ship movement and actions rather than input to connection dialog)

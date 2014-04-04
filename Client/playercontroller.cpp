@@ -51,12 +51,12 @@ void PlayerController::tick(double deltaTime)
     this->body->tick(deltaTime);
 }
 
-void PlayerController::possess(Body *body)
+void PlayerController::possess(Ship *body)
 {
-    this->body = dynamic_cast<Ship*>(body);
+    this->body = body;
 }
 
-Body* PlayerController::getPossessed()
+Ship* PlayerController::getPossessed()
 {
     return this->body;
 }

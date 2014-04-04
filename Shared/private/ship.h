@@ -86,6 +86,12 @@ public:
      */
     bool createGraphic(QGraphicsScene *scene);
 
+    /**
+     * @brief getThrottle Get the throttle percentage
+     * @return
+     */
+    double getThrottle();
+
 signals:
     /**
      * @brief collisionOccured Emitted when a collision occurs with a serverside Body

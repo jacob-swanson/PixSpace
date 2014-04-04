@@ -176,3 +176,8 @@ bool Ship::createGraphic(QGraphicsScene *scene)
     this->emitter->setGenerationTime(0.1);
     return ret;
 }
+
+double Ship::getThrottle()
+{
+    return this->throttlePercentage;
+}

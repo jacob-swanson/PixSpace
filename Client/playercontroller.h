@@ -24,8 +24,8 @@ public:
     explicit PlayerController(Universe* universe, QObject *parent = 0);
 
     void tick(double deltaTime);
-    void possess(Body *body);
-    Body* getPossessed();
+    void possess(Ship *body);
+    Ship* getPossessed();
     void unPossess();
     Vector getPosition();
     void read(QJsonObject &json);

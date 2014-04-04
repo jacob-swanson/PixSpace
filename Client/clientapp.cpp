@@ -90,8 +90,8 @@ void ClientApp::connectionSuccessful()
     this->tickTimer.start();
 
     Ship* b = new Ship("FireflyShip", this->connection->getGreetingMessage());
-    b->setPosition(0.0, 4.2e7);
-    b->setVelocity(0, 3.1);
+    b->setPosition(4.2e7, 0.0);
+    b->setVelocity(0.0, 1.7e3);
     b->setRotationRate(50);
     b->setMass(10.8e2);
     b->setMaxThrust(1e6);
@@ -107,8 +107,9 @@ void ClientApp::connectionSuccessful()
 
 void ClientApp::respawnShip()
 {
-    this->controller->getPossessed()->setPosition(2.0e8, -2.0e8);
-    this->controller->getPossessed()->setVelocity(0, 0);
+    this->controller->getPossessed()->setPosition(4.2e7, 0.0);
+    this->controller->getPossessed()->setVelocity(0.0, 1.7e3);
+    this->controller->getPossessed()->setAcceleration(Vector(0.0, 0.0));
 }
 
 void ClientApp::displayConnectionError()

@@ -95,7 +95,7 @@ void ClientApp::connectionSuccessful()
     b->setRotationRate(50);
     b->setMass(10.8e2);
     b->setMaxThrust(1e6);
-    b->setDiameter(1e3);
+    b->setDiameter(1e7);
     this->controller->possess(b);
     this->universe->pushBodies(b);
     this->view->setController(this->controller);
@@ -187,6 +187,9 @@ void ClientApp::tickSimulation()
                 if (rb->createGraphic(this->scene))
                 {
                     item = rb->getGraphicsItem();
+                    double scale = ((double)rb->getDiameter() / 100000.0)/ (double)item->boundingRect().width();
+                    qDebug() << scale;
+                    item->setScale(scale);
                     item->setPos(this->getPixelFromSimulation(b->getPosition().getX()), -1*this->getPixelFromSimulation(b->getPosition().getY()));
                     item->setRotation(rb->getRotation());
                     this->scene->addItem(item);

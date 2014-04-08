@@ -4,6 +4,9 @@
 #include <QDialog>
 #include <QStyleFactory>
 #include <QStringList>
+#include <QColorDialog>
+#include <QColor>
+#include <QMessageBox>
 
 namespace Ui {
 class ConnectionDialog;
@@ -47,10 +50,22 @@ private slots:
      */
     void updateShipImage(QString);
 
+    /**
+     * @brief colorSelect When a color button is pushed, handles getting input
+     */
+    void colorSelectPrim();
+    void colorSelectSec();
+    void colorSelectTert();
+
 private:
     Ui::ConnectionDialog *ui;
     static const QString imagePath;
     static const QString maskPath;
+
+    // Mask colors
+    QColor* color1;
+    QColor* color2;
+    QColor* color3;
 };
 
 #endif // CONNECTIONDIALOG_H

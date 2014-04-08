@@ -33,6 +33,26 @@ ConnectionDialog::ConnectionDialog(QWidget *parent) :
     // Connect signals
     connect(this->ui->pushButtonJoin, SIGNAL(clicked()), this, SLOT(connectButtonClicked()));
     connect(this->ui->pushButtonQuit, SIGNAL(clicked()), this, SLOT(quitButtonClicked()));
+
+    // Connect color buttons to color selection slot
+    connect(this->ui->primColor, SIGNAL(clicked()), this, SLOT(colorSelectPrim()));
+    connect(this->ui->secColor, SIGNAL(clicked()), this, SLOT(colorSelectSec()));
+    connect(this->ui->tertColor, SIGNAL(clicked()), this, SLOT(colorSelectTert()));
+
+    // Set default values for color selection
+    this->color1 = new QColor(Qt::magenta);
+    this->color2 = new QColor(Qt::black);
+    this->color3 = new QColor(Qt::gray);
+    QPixmap* colorDisplay = new QPixmap(25, 25);
+    colorDisplay->fill(*this->color1);
+    this->ui->primColorImage->setPixmap(*colorDisplay);
+    colorDisplay->fill(*this->color2);
+    this->ui->secColorImage->setPixmap(*colorDisplay);
+    colorDisplay->fill(*this->color3);
+    this->ui->tertColorImage->setPixmap(*colorDisplay);
+
+    // Set image to current label
+    this->updateShipImage(this->ui->shipNames->currentText());
 }
 
 ConnectionDialog::~ConnectionDialog()
@@ -61,6 +81,55 @@ void ConnectionDialog::updateShipImage(QString shipName)
     QImage image(this->imagePath + shipName);
 
     // Apply current mask
+    QImage mask(this->maskPath + shipName);
+
+    // Colors in mask to replace in image
+    // Red, Blue, Green
+    QColor primaryMask;
+    primaryMask.setRed(255);
+    QColor secondaryMask;
+    secondaryMask.setBlue(255);
+    QColor tertiaryMask;
+    tertiaryMask.setGreen(255);
+
+    if (image.isNull())
+    {
+        QMessageBox errorBox;
+        errorBox.setText("There was a problem loading asset: " + this->imagePath + shipName);
+        errorBox.exec();
+        return;
+    }
+
+    // Not a fatal error
+    if (mask.isNull())
+    {
+        QMessageBox errorBox;
+        errorBox.setText("There was a problem loading asset: " + this->maskPath + shipName);
+        errorBox.exec();
+    }
+
+    // Loop through each pixel in the images
+    for (int x = 0; x < mask.size().width(); x++)
+    {
+        for (int y = 0; y < mask.size().height(); y++)
+        {
+            // For red in mask, replace with primary
+            if (mask.pixel(x, y) == primaryMask.rgb())
+            {
+                image.setPixel(x, y, this->color1->rgb());
+            }
+            // For blue in mask, replace with secondary
+            else if (mask.pixel(x, y) == secondaryMask.rgb())
+            {
+                image.setPixel(x, y, this->color2->rgb());
+            }
+            // For green in mask, replace with tertiary
+            else if (mask.pixel(x, y) == tertiaryMask.rgb())
+            {
+                image.setPixel(x, y, this->color3->rgb());
+            }
+        }
+    }
 
     // Put into pixmap
     QPixmap pixmap;
@@ -68,3 +137,50 @@ void ConnectionDialog::updateShipImage(QString shipName)
 
     this->ui->shipImage->setPixmap(pixmap);
 }
+
+void ConnectionDialog::colorSelectPrim()
+{
+    QColorDialog* primColorDiag = new QColorDialog();
+
+    *this->color1 = primColorDiag->getColor();
+
+    QPixmap* colorDisplay = new QPixmap(25, 25);
+    colorDisplay->fill(*this->color1);
+
+    this->ui->primColorImage->setPixmap(*colorDisplay);
+
+    // Set image to current label
+    this->updateShipImage(this->ui->shipNames->currentText());
+}
+
+void ConnectionDialog::colorSelectSec()
+{
+    QColorDialog* ColorDiag = new QColorDialog();
+
+    *this->color2 = ColorDiag->getColor();
+
+    QPixmap* colorDisplay = new QPixmap(25, 25);
+    colorDisplay->fill(*this->color2);
+
+    this->ui->secColorImage->setPixmap(*colorDisplay);
+
+    // Set image to current label
+    this->updateShipImage(this->ui->shipNames->currentText());
+}
+
+void ConnectionDialog::colorSelectTert()
+{
+    QColorDialog* ColorDiag = new QColorDialog();
+
+    *this->color3 = ColorDiag->getColor();
+
+    QPixmap* colorDisplay = new QPixmap(25, 25);
+    colorDisplay->fill(*this->color3);
+
+    this->ui->tertColorImage->setPixmap(*colorDisplay);
+
+    // Set image to current label
+    this->updateShipImage(this->ui->shipNames->currentText());
+}
+
+

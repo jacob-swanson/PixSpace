@@ -149,3 +149,32 @@ void TestVector::TestNotEquals()
 
     QVERIFY(v != v2);
 }
+
+void TestVector::TestRead()
+{
+    Vector v;
+    QJsonObject vectorObject;
+
+    vectorObject["x"] = 1.0;
+    vectorObject["y"] = 1.0;
+
+    v.read(vectorObject);
+
+    QCOMPARE(v, Vector(1.0, 1.0));
+}
+
+void TestVector::TestWrite()
+{
+    Vector v(1.0, 1.0);
+
+    QJsonObject expectedObject;
+
+    expectedObject["x"] = 1.0;
+    expectedObject["y"] = 1.0;
+
+    QJsonObject vectorObject;
+
+    v.write(vectorObject);
+
+    QCOMPARE(vectorObject, expectedObject);
+}

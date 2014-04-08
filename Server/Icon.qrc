@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/icon">
+        <file>PeegSpace.png</file>
+    </qresource>
+</RCC>

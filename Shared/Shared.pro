@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       -= gui
+QT       += gui widgets network
 
 TARGET = pixspace
 TEMPLATE = lib
@@ -13,24 +13,29 @@ CONFIG += staticlib
 DEFINES += SHARED_LIBRARY
 
 SOURCES += private/body.cpp \
-    private/simpledatamanager.cpp \
     private/universe.cpp \
     private/vector.cpp \
-    private/serverapp.cpp
+    private/renderbody.cpp \
+    private/connection.cpp \
+    private/ship.cpp \
+    private/particle.cpp \
+    private/particleemitter.cpp
 
 HEADERS += private/shared_global.h \
     private/body.h \
-    private/datamanager.h \
-    private/simpledatamanager.h \
     private/universe.h \
     private/vector.h \
-    private/serverapp.h \
-    SimpleDataManager \
     Universe \
     Vector \
     Body \
-    DataManager \
-    ServerApp
+    private/renderbody.h \
+    RenderBody \
+    private/connection.h \
+    Connection \
+    private/ship.h \
+    Ship \
+    private/particle.h \
+    private/particleemitter.h
 
 unix {
     target.path = /usr/lib

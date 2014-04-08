@@ -2,6 +2,7 @@
 #define TST_TESTBODY_H
 
 #include <QObject>
+#include <QtTest>
 
 class TestBody : public QObject
 {
@@ -22,6 +23,8 @@ private Q_SLOTS:
 //    void testTick();
     void testAffectedByGravity();
     void testForces();
+    void TestRead();
+    void TestWrite();
 
 };
 

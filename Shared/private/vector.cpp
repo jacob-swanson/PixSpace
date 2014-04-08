@@ -1,4 +1,3 @@
-#include <cmath>
 #include "vector.h"
 
 Vector::Vector()
@@ -27,6 +26,7 @@ Vector Vector::normalized() const
         return Vector(0,0);
     }
 
+    // Normalize
     double x = this->x / length;
     double y = this->y / length;
 
@@ -130,7 +130,7 @@ Vector& Vector::operator/=(const double& right)
 
 bool Vector::operator==(const Vector& right) const
 {
-    // Equals comparison, all elements equal
+    // Equals comparison, all components equal
     if (this->x == right.getX() && this->y == right.getY())
     {
         return true;
@@ -143,7 +143,7 @@ bool Vector::operator==(const Vector& right) const
 
 bool Vector::operator!=(const Vector& right) const
 {
-    // Not equals comparison, one element different
+    // Not equals comparison, one component different
     if (this->x != right.getX() || this->y != right.getY())
     {
         return true;
@@ -192,5 +192,21 @@ Vector Vector::sub(const Vector& right) const
 
     Vector result(x, y);
     return result;
-
 }
+
+void Vector::read(const QJsonObject &json)
+{
+    // Read in from JSON object
+    this->setX(json["x"].toDouble());
+    this->setY(json["y"].toDouble());
+}
+
+void Vector::write(QJsonObject &json) const
+{
+    // Write to JSON object
+    json["x"] = this->x;
+    json["y"] = this->y;
+
+    json["type"] = QString("Vector");
+}
+

@@ -1,7 +1,14 @@
 #ifndef VECTOR_H
 #define VECTOR_H
+
+#include <QJsonObject>
+#include <cmath>
+
 #include "shared_global.h"
 
+/**
+ * @brief The Vector class Base 2D vector implemented using doubles
+ */
 class SHAREDSHARED_EXPORT Vector
 {
 public:
@@ -68,6 +75,18 @@ public:
     // Relational and comparison operators
     bool operator==(const Vector& right) const;
     bool operator!=(const Vector& right) const;
+
+    /**
+     * @brief read Read in from the given JSON object
+     * @param json
+     */
+    void read(const QJsonObject &json);
+
+    /**
+     * @brief write Write to the given JSON object
+     * @param json
+     */
+    void write(QJsonObject &json) const;
 
 private:
     double x, y;

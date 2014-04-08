@@ -1,48 +1,42 @@
-#include <QCoreApplication>
+#include <QApplication>
 #include <QTimer>
-#include <signal.h>
 #include <QDebug>
-#include <ServerApp>
+#include <QtGlobal>
+#include <QObject>
+#include <QMessageBox>
 
-// Source: http://qt-project.org/doc/qt-5/unix-signals.html
-static int setup_unix_signal_handlers()
-{
-    struct sigaction hup, term, sigint;
+#include <signal.h>
 
-    hup.sa_handler = ServerApp::hupSignalHandler;
-    sigemptyset(&hup.sa_mask);
-    hup.sa_flags = 0;
-    hup.sa_flags |= SA_RESTART;
-
-    if (sigaction(SIGHUP, &hup, 0) > 0)
-       return 1;
-
-    term.sa_handler = ServerApp::termSignalHandler;
-    sigemptyset(&term.sa_mask);
-    term.sa_flags |= SA_RESTART;
-
-    if (sigaction(SIGTERM, &term, 0) > 0)
-       return 2;
-
-    sigint.sa_handler = ServerApp::intSignalHandler;
-    sigemptyset(&sigint.sa_mask);
-    sigint.sa_flags |= SA_RESTART;
-
-    if (sigaction(SIGINT, &sigint, 0) > 0)
-       return 3;
-
-    return 0;
-}
+#include "serverapp.h"
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication a(argc, argv);
-    setup_unix_signal_handlers();
+    qsrand(time(NULL));
+    QApplication a(argc, argv);
 
-    ServerApp* app = new ServerApp(&a);
-    QObject::connect(app, SIGNAL(finished()), &a, SLOT(quit()));
+    // Setup database
+    //DataManager::instance()->parseconfig(); //this reads in config.dat
+    DataManager::instance()->setHostName("localhost");
+    DataManager::instance()->setPort(3306);
+    DataManager::instance()->setDatabaseName("pixspace");
+    DataManager::instance()->setUserName("root");
+    DataManager::instance()->setPassword("root");
+    // Connect to DB, connect and check for error, if failed report error and close
+    if (!DataManager::instance()->connect())
+    {
+        QMessageBox errorMessage;
+        errorMessage.setText("PixSpace Server has failed to launch.");
+        errorMessage.setInformativeText("Error reported by Database was:\n" + DataManager::instance()->getLastError());
+        errorMessage.setIcon(QMessageBox::Warning);
+        errorMessage.exec();
+        return 0;
+    }
 
-    QTimer::singleShot(0, app, SLOT(start()));
+    ServerApp app;
+    app.show();
+
+    QObject::connect(&app, SIGNAL(finished()), &a, SLOT(quit()));
+    QTimer::singleShot(0, &app, SLOT(start()));
 
     return a.exec();
 }

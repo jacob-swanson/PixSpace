@@ -1,0 +1,33 @@
+<RCC>
+    <qresource prefix="/bodies">
+        <file alias="ColourfulShip">Assets/PNGS/ColourfulShip.png</file>
+        <file alias="DuckShip">Assets/PNGS/Duck.png</file>
+        <file alias="FireflyShip">Assets/PNGS/Firefly.png</file>
+        <file alias="FlyingSaucerShip">Assets/PNGS/FlyingSaucerShip.png</file>
+        <file alias="KittenCupPlanet">Assets/PNGS/KittenCupPlanet.png</file>
+        <file alias="Moon">Assets/PNGS/Moon.png</file>
+        <file alias="PigShip">Assets/PNGS/PeegSpace.png</file>
+        <file alias="WaterPlanet">Assets/PNGS/Planet1.png</file>
+        <file alias="GasPlanet">Assets/PNGS/Planet2.png</file>
+        <file alias="PlanetTreckShip">Assets/PNGS/PlanetTrek.png</file>
+        <file alias="RingworldPlanet">Assets/PNGS/Ringworld.png</file>
+        <file alias="ShippyShip">Assets/PNGS/Shippy.png</file>
+        <file alias="SpaceShuttleShip">Assets/PNGS/SpaceShuttle.png</file>
+        <file alias="Particle">Assets/PNGS/Particle.png</file>
+    </qresource>
+    <qresource prefix="/bodies-mask">
+        <file alias="ColourfulShip">Assets/Masks/ColourfulShip.png</file>
+        <file alias="DuckShip">Assets/Masks/Duck.png</file>
+        <file alias="FireflyShip">Assets/Masks/Firefly.png</file>
+        <file alias="FlyingSaucerShip">Assets/Masks/FlyingSaucerShip.png</file>
+        <file alias="KittenCupPlanet">Assets/Masks/KittenCupPlanet.png</file>
+        <file alias="Moon">Assets/Masks/Moon.png</file>
+        <file alias="PigShip">Assets/Masks/PeegSpace.png</file>
+        <file alias="WaterPlanet">Assets/Masks/Planet1.png</file>
+        <file alias="GasPlanet">Assets/Masks/Planet2.png</file>
+        <file alias="PlanetTreckShip">Assets/Masks/PlanetTrek.png</file>
+        <file alias="RingworldPlanet">Assets/Masks/Ringworld.png</file>
+        <file alias="ShippyShip">Assets/Masks/Shippy.png</file>
+        <file alias="SpaceShuttleShip">Assets/Masks/SpaceShuttle.png</file>
+    </qresource>
+</RCC>

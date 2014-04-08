@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QStyleFactory>
+#include <QStringList>
 
 namespace Ui {
 class ConnectionDialog;
@@ -23,7 +24,7 @@ signals:
      * @param port
      * @param name
      */
-    void connectToServer(QString address, int port, QString name);
+    void connectToServer(QString address, int port, QString name, QString shipName);
 
     /**
      * @brief quit Emitted when the "Quit Game" button is pressed
@@ -41,8 +42,15 @@ private slots:
      */
     void quitButtonClicked();
 
+    /**
+     * @brief updateShipImage Show the pixmap for the ship currently selected
+     */
+    void updateShipImage(QString);
+
 private:
     Ui::ConnectionDialog *ui;
+    static const QString imagePath;
+    static const QString maskPath;
 };
 
 #endif // CONNECTIONDIALOG_H

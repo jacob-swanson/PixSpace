@@ -54,11 +54,12 @@ void ClientApp::bodyNotFound(Body *body)
     }
 }
 
-void ClientApp::connectToServer(QString address, int port, QString name)
+void ClientApp::connectToServer(QString address, int port, QString name, QString shipName)
 {
     // Connect to a server
     this->connection = new Connection(name, this);
     this->connection->connectToHost(address, port);
+    this->shipName = shipName;
 
     connect(this->connection, SIGNAL(readyForUse()), this, SLOT(connectionSuccessful()));
     connect(this->connection, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(displayConnectionError()));
@@ -87,7 +88,7 @@ void ClientApp::connectionSuccessful()
     this->scene->clear();
     this->tickTimer.start();
 
-    Ship* b = new Ship("FireflyShip", this->connection->getGreetingMessage());
+    Ship* b = new Ship(this->shipName, this->connection->getGreetingMessage());
     b->setPosition(4.2e7, 0.0);
     b->setVelocity(0.0, 1.7e3);
     b->setRotationRate(50);
@@ -146,8 +147,8 @@ void ClientApp::showConnectionDialog()
 
     this->view->centerOn(item);
 
-    connect(dialog, SIGNAL(connectToServer(QString,int,QString)),
-            this, SLOT(connectToServer(QString,int,QString)));
+    connect(dialog, SIGNAL(connectToServer(QString,int,QString, QString)),
+            this, SLOT(connectToServer(QString,int,QString, QString)));
     connect(dialog, SIGNAL(quit()), this, SLOT(exitClient()));
 }
 

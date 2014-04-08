@@ -42,7 +42,7 @@ private slots:
      * @param port
      * @param name
      */
-    void connectToServer(QString address, int port, QString name);
+    void connectToServer(QString address, int port, QString name, QString shipName);
 
     /**
      * @brief exitClient Exit the application
@@ -129,6 +129,8 @@ private:
     PlayerController* controller;
 
     QElapsedTimer timer;
+
+    QString shipName;
 };
 
 #endif // CLIENTAPP_H

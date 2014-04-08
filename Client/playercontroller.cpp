@@ -113,7 +113,6 @@ void PlayerController::handleKeyPress(int key)
         QMessageBox quitBox;
         quitBox.setText("Do you really want to quit?");
         QPushButton *quitButton = quitBox.addButton("Quit to Desktop", QMessageBox::DestructiveRole);
-        QPushButton *toMenu = quitBox.addButton("Quit to Connection Screen", QMessageBox::ActionRole);
         QPushButton *resume = quitBox.addButton("Return to Pixspace", QMessageBox::RejectRole);
         quitBox.exec();
 
@@ -121,11 +120,6 @@ void PlayerController::handleKeyPress(int key)
         if (quitBox.clickedButton() == (QAbstractButton*) quitButton)
         {
             emit exit();
-        }
-        // If user selects returning to the menu (i.e. to connect to a new server)
-        if (quitBox.clickedButton() == (QAbstractButton*) toMenu)
-        {
-            emit returnMenu();
         }
         // All other cases should just resume the game
 

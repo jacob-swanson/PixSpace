@@ -19,8 +19,8 @@ int main(int argc, char *argv[])
     DataManager::instance()->setHostName("localhost");
     DataManager::instance()->setPort(3306);
     DataManager::instance()->setDatabaseName("pixspace");
-    DataManager::instance()->setUserName("pixspace");
-    DataManager::instance()->setPassword("pixspace");
+    DataManager::instance()->setUserName("root");
+    DataManager::instance()->setPassword("root");
     // Connect to DB, connect and check for error, if failed report error and close
     if (!DataManager::instance()->connect())
     {

@@ -30,8 +30,6 @@ ClientApp::ClientApp(QObject *parent) :
 
     // Connect the quit signal in the player controller to quitting the application
     connect(this->controller, SIGNAL(exit()), this, SLOT(exitClient()));
-    // Connect the returnMenu in the player controller to disconnecting from the server and going to the connection dialog
-    connect(this->controller, SIGNAL(returnMenu()), this, SLOT(Disconnect()));
 
     connect(&this->tickTimer, SIGNAL(timeout()), this, SLOT(tickSimulation()));
     connect(this, SIGNAL(tickFinished()), this, SLOT(sendClientBody()));
@@ -96,6 +94,7 @@ void ClientApp::connectionSuccessful()
     b->setMass(10.8e2);
     b->setMaxThrust(1e6);
     b->setDiameter(1e7);
+
     this->controller->possess(b);
     this->universe->pushBodies(b);
     this->view->setController(this->controller);

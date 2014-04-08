@@ -58,8 +58,6 @@ private:
  signals:
     // Signal to quit application
     void exit();
-    // Signal to return to the server connection dialog
-    void returnMenu();
     // Signal to center scene on ship
     void center();
 };

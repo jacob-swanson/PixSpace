@@ -26,7 +26,7 @@ ServerApp::ServerApp(QWidget *parent) :
 
     // Setup speed labels and current position of slider
         this->ui->speedLabel->setText("Current Time Acceleration:   " + QString::number(this->universe->getTimeAcceleration()));
-        this->ui->speedSlider->setSliderPosition(6);
+        this->ui->speedSlider->setSliderPosition(0);
         this->updateNewSpeedValue(this->ui->speedSlider->sliderPosition());
 
         // Connect up the apply button

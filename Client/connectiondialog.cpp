@@ -39,10 +39,22 @@ ConnectionDialog::ConnectionDialog(QWidget *parent) :
     connect(this->ui->secColor, SIGNAL(clicked()), this, SLOT(colorSelectSec()));
     connect(this->ui->tertColor, SIGNAL(clicked()), this, SLOT(colorSelectTert()));
 
-    // Set default values for color selection
-    this->color1 = new QColor(Qt::magenta);
-    this->color2 = new QColor(Qt::black);
-    this->color3 = new QColor(Qt::gray);
+    // Set default values for color selection - randomize so players don't share colors too often
+    this->color1 = new QColor();
+    this->color1->setRed(rand() % 256);
+    this->color1->setGreen(rand() % 256);
+    this->color1->setBlue(rand() % 256);
+
+    this->color2 = new QColor();
+    this->color2->setRed(rand() % 256);
+    this->color2->setGreen(rand() % 256);
+    this->color2->setBlue(rand() % 256);
+
+    this->color3 = new QColor();
+    this->color3->setRed(rand() % 256);
+    this->color3->setGreen(rand() % 256);
+    this->color3->setBlue(rand() % 256);
+
     QPixmap* colorDisplay = new QPixmap(25, 25);
     colorDisplay->fill(*this->color1);
     this->ui->primColorImage->setPixmap(*colorDisplay);

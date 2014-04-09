@@ -24,7 +24,7 @@ ConnectionDialog::ConnectionDialog(QWidget *parent) :
 
     // Put ships names in a QStringList
     QStringList ships;
-    ships << "PigShip" << "KittenCupPlanet" << "ColourfulShip" << "DuckShip" << "FireflyShip" << "FlyingSaucerShip" << "PlanetTreckShip" << "RingworldPlanet" << "ShippyShip" << "SpaceShuttleShip";
+    ships << "PigShip" << "KittenCupPlanet" << "ColourfulShip" << "DuckShip" << "FireflyShip" << "FlyingSaucerShip" << "PlanetTreckShip" << "RingworldPlanet" << "ShippyShip" << "SpaceShuttleShip" << "TARDISShip";
     this->ui->shipNames->addItems(ships);
 
     // Connect Combo box to update pixmap

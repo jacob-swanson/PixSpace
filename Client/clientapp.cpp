@@ -100,7 +100,7 @@ void ClientApp::connectionSuccessful()
     b->setVelocity(0.0, 1.7e3);
     b->setRotationRate(50);
     b->setMass(10.8e2);
-    b->setMaxThrust(1e6);
+    b->setMaxThrust(1e3);
     b->setDiameter(1e7);
     b->setMasks(this->primColor.red(), this->primColor.green(), this->primColor.blue(), this->secColor.red(), this->secColor.green(), this->secColor.blue(), this->tertColor.red(), this->tertColor.green(), this->tertColor.blue());
 

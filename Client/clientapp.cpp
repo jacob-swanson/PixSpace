@@ -11,6 +11,7 @@ ClientApp::ClientApp(QObject *parent) :
     this->scene = new ClientGraphicsScene;
     this->view->setScene(this->scene);
 
+    this->connection = NULL;
     this->showConnectionDialog();
 
     this->universe = new Universe();
@@ -78,7 +79,10 @@ void ClientApp::show()
 void ClientApp::exitClient()
 {
     // Destroy the connection before quitting
-    this->connection->disconnectFromHost();
+    if (this->connection != NULL)
+    {
+        this->connection->disconnectFromHost();
+    }
 
     // Exit the application
     QCoreApplication::quit();
@@ -121,8 +125,6 @@ void ClientApp::displayConnectionError()
     QMessageBox errorBox;
     errorBox.setText("Connection error: " + this->connection->errorString());
     errorBox.exec();
-
-    this->exitClient();
 }
 
 void ClientApp::showConnectionDialog()

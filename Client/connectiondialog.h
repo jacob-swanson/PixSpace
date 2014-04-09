@@ -27,7 +27,7 @@ signals:
      * @param port
      * @param name
      */
-    void connectToServer(QString address, int port, QString name, QString shipName);
+    void connectToServer(QString address, int port, QString name, QString shipName, QColor primColor, QColor secColor, QColor tertColor);
 
     /**
      * @brief quit Emitted when the "Quit Game" button is pressed

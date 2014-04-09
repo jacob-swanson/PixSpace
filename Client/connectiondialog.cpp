@@ -67,7 +67,7 @@ void ConnectionDialog::connectButtonClicked()
     QString name = !this->ui->lineEditName->text().isEmpty() ? this->ui->lineEditName->text() : this->ui->lineEditName->placeholderText();
     QString shipName = this->ui->shipNames->currentText();
 
-    emit connectToServer(address, port, name, shipName);
+    emit connectToServer(address, port, name, shipName, *this->color1, *this->color2, *this->color3);
 }
 
 void ConnectionDialog::quitButtonClicked()

@@ -10,6 +10,7 @@
 #include <QJsonDocument>
 #include <QKeyEvent>
 #include <QElapsedTimer>
+#include <QColor>
 
 #include <RenderBody>
 #include <Connection>
@@ -42,7 +43,7 @@ private slots:
      * @param port
      * @param name
      */
-    void connectToServer(QString address, int port, QString name, QString shipName);
+    void connectToServer(QString address, int port, QString name, QString shipName, QColor primColor, QColor secColor, QColor tertColor);
 
     /**
      * @brief exitClient Exit the application
@@ -130,7 +131,11 @@ private:
 
     QElapsedTimer timer;
 
+    // Ship customization
     QString shipName;
+    QColor primColor;
+    QColor secColor;
+    QColor tertColor;
 };
 
 #endif // CLIENTAPP_H

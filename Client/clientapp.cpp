@@ -54,12 +54,15 @@ void ClientApp::bodyNotFound(Body *body)
     }
 }
 
-void ClientApp::connectToServer(QString address, int port, QString name, QString shipName)
+void ClientApp::connectToServer(QString address, int port, QString name, QString shipName, QColor primColor, QColor secColor, QColor tertColor)
 {
     // Connect to a server
     this->connection = new Connection(name, this);
     this->connection->connectToHost(address, port);
     this->shipName = shipName;
+    this->primColor = primColor;
+    this->secColor = secColor;
+    this->tertColor = tertColor;
 
     connect(this->connection, SIGNAL(readyForUse()), this, SLOT(connectionSuccessful()));
     connect(this->connection, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(displayConnectionError()));
@@ -95,6 +98,7 @@ void ClientApp::connectionSuccessful()
     b->setMass(10.8e2);
     b->setMaxThrust(1e6);
     b->setDiameter(1e7);
+    b->setMasks(this->primColor.red(), this->primColor.green(), this->primColor.blue(), this->secColor.red(), this->secColor.green(), this->secColor.blue(), this->tertColor.red(), this->tertColor.green(), this->tertColor.blue());
 
     this->controller->possess(b);
     this->universe->pushBodies(b);
@@ -147,8 +151,8 @@ void ClientApp::showConnectionDialog()
 
     this->view->centerOn(item);
 
-    connect(dialog, SIGNAL(connectToServer(QString,int,QString, QString)),
-            this, SLOT(connectToServer(QString,int,QString, QString)));
+    connect(dialog, SIGNAL(connectToServer(QString,int,QString, QString, QColor, QColor, QColor)),
+            this, SLOT(connectToServer(QString,int,QString, QString, QColor, QColor, QColor)));
     connect(dialog, SIGNAL(quit()), this, SLOT(exitClient()));
 }
 

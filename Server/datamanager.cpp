@@ -21,6 +21,11 @@ DataManager* DataManager::instance()
     return m_Instance;
 }
 
+DataManager::~DataManager()
+{
+    this->instance()->drop();
+}
+
 void DataManager::drop()
 {
     static QMutex mutex;
@@ -88,27 +93,6 @@ QString DataManager::getLastError()
 bool DataManager::connect()
 {
     return db.open();
-}
-
-bool DataManager::loadBodySprite(QString id, QByteArray *sprite, QByteArray *mask) const
-{
-    QSqlQuery query;
-    query.prepare("SELECT sprite, mask "
-                  "FROM body NATURAL JOIN sprite "
-                  "WHERE id=?");
-    query.bindValue(0, id);
-
-    query.exec();
-
-    if (query.next())
-    {
-        *sprite = query.value(0).toByteArray();
-        *mask = query.value(1).toByteArray();
-
-        return true;
-    }
-
-    return false;
 }
 
 void DataManager::saveBodies(QList<Body*> bodies) const

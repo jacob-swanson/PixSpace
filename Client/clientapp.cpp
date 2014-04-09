@@ -122,25 +122,7 @@ void ClientApp::displayConnectionError()
     errorBox.setText("Connection error: " + this->connection->errorString());
     errorBox.exec();
 
-    this->Disconnect();
-}
-
-void ClientApp::Disconnect()
-{
-    // Destroy the connection
-    this->connection->disconnectFromHost();
-
-    // Disconnect signals and slots
-    disconnect(this->connection, SIGNAL(readyForUse()), this, SLOT(connectionSuccessful()));
-    disconnect(this->connection, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(displayConnectionError()));
-    disconnect(this->connection, SIGNAL(newMessage(QString,QString)), this, SLOT(receiveMessage(QString,QString)));
-
-    this->scene->setControllerMode(false);
-    // Show the connection dialog
-    delete this->universe;
-    this->universe = new Universe();
-    this->scene->clear();
-    this->showConnectionDialog();
+    this->exitClient();
 }
 
 void ClientApp::showConnectionDialog()

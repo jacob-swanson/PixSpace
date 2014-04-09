@@ -336,8 +336,8 @@ void ServerApp::updateTimeAccelerationRequest()
     connect(this, SIGNAL(endTick(int)), this, SLOT(updateTimeAcceleration(int)));
 }
 
-
-void ServerApp::on_loadSQL_clicked()
+// TODO Move to separate class
+/*void ServerApp::on_loadSQL_clicked()
 {
     QString fileName = "config.dat";
     QFile file(fileName);
@@ -413,4 +413,4 @@ void ServerApp::on_loadSQL_clicked()
 
     file.close();
 
-}
+}*/

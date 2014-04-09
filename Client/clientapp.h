@@ -90,11 +90,6 @@ private slots:
     void bodyNotFound(Body* body);
 
     /**
-     * @brief Disconnect Disconnects from the server and returns to server dialog
-     */
-    void Disconnect();
-
-    /**
      * @brief Center Centers the graphics scene on the user's ship
      */
     void Center();

@@ -18,11 +18,6 @@ PlayerController::PlayerController(Universe* universe, QObject *parent) :
     this->thrustBackward = false;
 }
 
-void PlayerController::setUniverse(Universe* universe)
-{
-    this->universe = universe;
-}
-
 void PlayerController::tick(double deltaTime)
 {
     if (rotLeft)
@@ -59,31 +54,6 @@ void PlayerController::possess(Ship *body)
 Ship* PlayerController::getPossessed()
 {
     return this->body;
-}
-
-void PlayerController::unPossess()
-{
-    this->body = NULL;
-}
-
-Vector PlayerController::getPosition()
-{
-    return this->body->getPosition();
-}
-
-void PlayerController::read(QJsonObject &json)
-{
-    this->body = new Ship();
-    this->body->read(json["body"].toObject());
-}
-
-void PlayerController::write(QJsonObject &json)
-{
-    QJsonObject bodyObject;
-    this->body->write(bodyObject);
-
-    json["body"] = bodyObject;
-    json["type"] = QString("PlayerController");
 }
 
 void PlayerController::handleKeyPress(int key)

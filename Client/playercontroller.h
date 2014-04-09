@@ -26,11 +26,6 @@ public:
     void tick(double deltaTime);
     void possess(Ship *body);
     Ship* getPossessed();
-    void unPossess();
-    Vector getPosition();
-    void read(QJsonObject &json);
-    void write(QJsonObject &json);
-    void setUniverse(Universe* universe);
 
 public slots:
     /**

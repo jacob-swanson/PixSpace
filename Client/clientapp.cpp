@@ -97,7 +97,7 @@ void ClientApp::connectionSuccessful()
 
     Ship* b = new Ship(this->shipName, this->connection->getGreetingMessage());
     b->setPosition(4.2e7, 0.0);
-    b->setVelocity(0.0, 1.7e3);
+    b->setVelocity(0.0, 1e3);
     b->setRotationRate(50);
     b->setMass(10.8e2);
     b->setMaxThrust(1e3);
@@ -116,7 +116,7 @@ void ClientApp::connectionSuccessful()
 void ClientApp::respawnShip()
 {
     this->controller->getPossessed()->setPosition(4.2e7, 0.0);
-    this->controller->getPossessed()->setVelocity(0.0, 1.7e3);
+    this->controller->getPossessed()->setVelocity(0.0, 1e3);
     this->controller->getPossessed()->setAcceleration(Vector(0.0, 0.0));
     this->controller->getPossessed()->setThrottle(0.0);
 }

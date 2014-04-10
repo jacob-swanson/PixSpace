@@ -16,11 +16,11 @@ int main(int argc, char *argv[])
 
     // Setup database
     //DataManager::instance()->parseconfig(); //this reads in config.dat
-    DataManager::instance()->setHostName("localhost");
+    DataManager::instance()->setHostName("127.0.0.1");
     DataManager::instance()->setPort(3306);
     DataManager::instance()->setDatabaseName("pixspace");
-    DataManager::instance()->setUserName("pixspace");
-    DataManager::instance()->setPassword("pixspace");
+    DataManager::instance()->setUserName("root");
+    DataManager::instance()->setPassword("root");
     // Connect to DB, connect and check for error, if failed report error and close
     if (!DataManager::instance()->connect())
     {

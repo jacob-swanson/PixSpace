@@ -6,13 +6,23 @@ Body::Body(QObject *parent) :
     // Initialize stock body
     this->moveable = true;
     this->affectedByGravity = true;
-    rotation = 0;
-    mass = 0;
-    diameter = 0;
-    rotationRate = 0;
+    this->rotation = 0;
+    this->mass = 0;
+    this->diameter = 0;
+    this->rotationRate = 0;
 
     this->id = qrand();
     this->serverBody = false;
+
+    this->primaryMaskRed = 0;
+    this->primaryMaskGreen = 0;
+    this->primaryMaskBlue = 0;
+    this->secondaryMaskRed = 0;
+    this->secondaryMaskGreen = 0;
+    this-> secondaryMaskBlue = 0;
+    this->tertiaryMaskRed = 0;
+    this->tertiaryMaskGreen = 0;
+    this->tertiaryMaskBlue = 0;
 }
 
 void Body::tick(double deltaTime)

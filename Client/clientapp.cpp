@@ -118,6 +118,7 @@ void ClientApp::respawnShip()
     this->controller->getPossessed()->setPosition(4.2e7, 0.0);
     this->controller->getPossessed()->setVelocity(0.0, 1.7e3);
     this->controller->getPossessed()->setAcceleration(Vector(0.0, 0.0));
+    this->controller->getPossessed()->setThrottle(0.0);
 }
 
 void ClientApp::displayConnectionError()

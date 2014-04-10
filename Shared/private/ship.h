@@ -87,10 +87,16 @@ public:
     bool createGraphic(QGraphicsScene *scene);
 
     /**
-     * @brief getThrottle Get the throttle percentage
+     * @brief getThrottle Get the throttle percentage (0.0 - 1.0)
      * @return
      */
     double getThrottle();
+
+    /**
+     * @brief setThrottle Set the throttle percentage (0.0 - 1.0)
+     * @param throttle
+     */
+    void setThrottle(double throttle);
 
 signals:
     /**

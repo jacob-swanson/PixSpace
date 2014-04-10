@@ -181,3 +181,12 @@ double Ship::getThrottle()
 {
     return this->throttlePercentage;
 }
+
+void Ship::setThrottle(double throttle)
+{
+    this->throttlePercentage = throttle;
+
+    // Adjust the current amount of thrust
+    this->thrust = this->throttlePercentage * this->maxThrust;
+}
+

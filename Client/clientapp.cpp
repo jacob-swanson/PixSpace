@@ -132,9 +132,8 @@ void ClientApp::showConnectionDialog()
 {
     // Setup the server connection dialog
     ConnectionDialog* dialog = new ConnectionDialog();
-    QGraphicsProxyWidget* item = this->scene->addWidget(dialog, Qt::Dialog | Qt::WindowTitleHint);
-
-    this->view->centerOn(item);
+    dialog->setModal(true);
+    dialog->show();
 
     connect(dialog, SIGNAL(connectToServer(QString,int,QString, QString, QColor, QColor, QColor)),
             this, SLOT(connectToServer(QString,int,QString, QString, QColor, QColor, QColor)));

@@ -98,6 +98,9 @@ void ConnectionDialog::connectButtonClicked()
     Configurator::instance()->updateConfig(config);
 
     emit connectToServer(address, port, name, shipName, *this->color1, *this->color2, *this->color3);
+
+    this->close();
+    this->deleteLater();
 }
 
 void ConnectionDialog::quitButtonClicked()

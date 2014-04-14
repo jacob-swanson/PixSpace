@@ -17,29 +17,57 @@ int main(int argc, char *argv[])
     // Setup database
     QHash<QString, QString> config = Configurator::instance()->getConfig();
     if (config.contains("Hostname"))
+    {
         DataManager::instance()->setHostName(config.value("Hostname"));
+    }
     else
+    {
         DataManager::instance()->setHostName("localhost");
+        config.insert("Hostname", "localhost");
+    }
 
     if (config.contains("Port"))
+    {
         DataManager::instance()->setPort(config.value("Port").toInt());
+    }
     else
+    {
         DataManager::instance()->setPort(6886);
+        config.insert("Port", "6886");
+    }
 
     if (config.contains("Database"))
+    {
         DataManager::instance()->setDatabaseName(config.value("Database"));
+    }
     else
+    {
         DataManager::instance()->setDatabaseName("pixspace");
+        config.insert("Database", "pixspace");
+    }
 
     if (config.contains("Username"))
+    {
         DataManager::instance()->setUserName(config.value("Username"));
+    }
     else
+    {
         DataManager::instance()->setUserName("pixspace");
+        config.insert("Username", "pixspace");
+    }
 
     if (config.contains("Password"))
+    {
         DataManager::instance()->setPassword(config.value("Password"));
+    }
     else
+    {
         DataManager::instance()->setPassword("pixspace");
+        config.insert("Password", "pixspace");
+    }
+
+    // Update new config
+    Configurator::instance()->updateConfig(config);
 
     // Connect to DB, connect and check for error, if failed report error and close
     if (!DataManager::instance()->connect())

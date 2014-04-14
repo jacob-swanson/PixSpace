@@ -46,7 +46,7 @@ VALUES (2, 7.3459e22, -3.8e8, 0, 0, -700, -0.00015, 3.4e6, "RingworldPlanet");
 
 #Moon
 INSERT INTO body (id, mass, positionx, positiony, velocityx, velocityy, rotationRate, diameter, resourceID) 
-VALUES (1, 7.3459e22, 3.8e8, 0, 0, 7000, -0.00015, 3.4e6, "Moon");
+VALUES (1, 7.3459e22, 3.8e8, 0, 0, 700, -0.00015, 3.4e6, "Moon");
 
 #Earth
 INSERT INTO body (id, mass, positionx, positiony, velocityx, velocityy, rotationRate, diameter, resourceID, primaryMaskRed, primaryMaskBlue, primaryMaskGreen, secondaryMaskRed, secondaryMaskBlue, secondaryMaskGreen, tertiaryMaskRed, tertiaryMaskBlue, tertiaryMaskGreen) 

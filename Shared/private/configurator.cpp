@@ -30,10 +30,13 @@ QHash<QString, QString> Configurator::getConfig()
 
     if (!file.open(QIODevice::ReadOnly))
     {
-        QMessageBox errorBox;
+        /*QMessageBox errorBox;
         errorBox.setText("Can't open config file " + fileName + " for reading.");
         errorBox.setInformativeText(qPrintable(file.errorString()));
-        errorBox.exec();
+        errorBox.exec();*/
+
+        // Not a fatal error, so using qDebug
+        qDebug() << "Can't open config file " + fileName + " for reading.";
 
         return QHash<QString, QString>();
     }
@@ -79,6 +82,7 @@ void Configurator::updateConfig(QHash<QString, QString> newConfig)
     //error message let's you know file is unavailable for editing
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
     {
+        // Is a fatal error
         QMessageBox errorBox;
         errorBox.setText("Can't open config file " + fileName + " for writing.");
         errorBox.setInformativeText(qPrintable(file.errorString()));

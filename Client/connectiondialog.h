@@ -8,6 +8,8 @@
 #include <QColor>
 #include <QMessageBox>
 
+#include <Configurator>
+
 namespace Ui {
 class ConnectionDialog;
 }

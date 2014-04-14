@@ -65,6 +65,15 @@ ConnectionDialog::ConnectionDialog(QWidget *parent) :
 
     // Set image to current label
     this->updateShipImage(this->ui->shipNames->currentText());
+
+    // Load from config file
+    QHash<QString, QString> config = Configurator::instance()->getConfig();
+    if (config.contains("Address"))
+        this->ui->lineEditAddress->setText(config.value("Address"));
+    if (config.contains("Port"))
+        this->ui->lineEditPort->setText(config.value("Port"));
+    if (config.contains("Name"))
+        this->ui->lineEditName->setText(config.value("Name"));
 }
 
 ConnectionDialog::~ConnectionDialog()
@@ -78,6 +87,13 @@ void ConnectionDialog::connectButtonClicked()
     int port = !this->ui->lineEditPort->text().isEmpty() ? this->ui->lineEditPort->text().toInt() : this->ui->lineEditPort->placeholderText().toInt();
     QString name = !this->ui->lineEditName->text().isEmpty() ? this->ui->lineEditName->text() : this->ui->lineEditName->placeholderText();
     QString shipName = this->ui->shipNames->currentText();
+
+    // Save config
+    QHash<QString, QString> config;
+    config.insert("Address", this->ui->lineEditAddress->text());
+    config.insert("Port", this->ui->lineEditPort->text());
+    config.insert("Name", this->ui->lineEditName->text());
+    Configurator::instance()->updateConfig(config);
 
     emit connectToServer(address, port, name, shipName, *this->color1, *this->color2, *this->color3);
 }

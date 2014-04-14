@@ -14,6 +14,9 @@
         <file alias="ShippyShip">Assets/PNGS/Shippy.png</file>
         <file alias="SpaceShuttleShip">Assets/PNGS/SpaceShuttle.png</file>
         <file alias="Particle">Assets/PNGS/Particle.png</file>
+        <file alias="TARDISShip">Assets/PNGS/TARDIS.png</file>
+        <file alias="AsteriodBody">Assets/PNGS/Asteriod.png</file>
+        <file alias="BirdofPreyShip">Assets/PNGS/BirdofPrey.png</file>
     </qresource>
     <qresource prefix="/bodies-mask">
         <file alias="ColourfulShip">Assets/Masks/ColourfulShip.png</file>
@@ -29,5 +32,8 @@
         <file alias="RingworldPlanet">Assets/Masks/Ringworld.png</file>
         <file alias="ShippyShip">Assets/Masks/Shippy.png</file>
         <file alias="SpaceShuttleShip">Assets/Masks/SpaceShuttle.png</file>
+        <file alias="TARDISShip">Assets/Masks/TARDIS.png</file>
+        <file alias="AsteriodBody">Assets/Masks/Asteriod.png</file>
+        <file alias="BirdofPreyShip">Assets/Masks/BirdofPrey.png</file>
     </qresource>
 </RCC>

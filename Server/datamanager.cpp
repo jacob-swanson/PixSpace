@@ -21,6 +21,11 @@ DataManager* DataManager::instance()
     return m_Instance;
 }
 
+DataManager::~DataManager()
+{
+    this->instance()->drop();
+}
+
 void DataManager::drop()
 {
     static QMutex mutex;
@@ -90,27 +95,6 @@ bool DataManager::connect()
     return db.open();
 }
 
-bool DataManager::loadBodySprite(QString id, QByteArray *sprite, QByteArray *mask) const
-{
-    QSqlQuery query;
-    query.prepare("SELECT sprite, mask "
-                  "FROM body NATURAL JOIN sprite "
-                  "WHERE id=?");
-    query.bindValue(0, id);
-
-    query.exec();
-
-    if (query.next())
-    {
-        *sprite = query.value(0).toByteArray();
-        *mask = query.value(1).toByteArray();
-
-        return true;
-    }
-
-    return false;
-}
-
 void DataManager::saveBodies(QList<Body*> bodies) const
 {
     QSqlQuery query;
@@ -168,67 +152,4 @@ QList<Body*> DataManager::loadBodies() const
     return bodies;
 }
 
-void DataManager::parseconfig()
-{
-    QString fileName = "config.dat";
-    QFile file(fileName);
-        QHash<QString, QString> config;
 
-        if (!file.open(QIODevice::ReadOnly))
-        {
-            QMessageBox errorBox;
-            errorBox.setText("Can't open config file " + fileName + " for reading.");
-            errorBox.setInformativeText(qPrintable(file.errorString()));
-            errorBox.exec();
-        }
-        QTextStream in(&file);
-        while(!in.atEnd())
-        {
-            QString line = in.readLine();
-            QStringList tokens = line.split(":");
-            config.insert(tokens[0],tokens[1]);
-        }
-
-        //to test that values were stored in QHash properly
-            QHashIterator<QString, QString> iter(config);
-            while (iter.hasNext())
-            {
-                iter.next();
-                qDebug() << iter.key() << iter.value();
-            }
-
-        file.close();
-
-}
-
-void DataManager::createconfig()
-{
-        QString fileName = "config.dat";
-        QFile file(fileName);
-
-        QHash<QString, QString> config;
-
-        config.insert("hostname", "localhost");
-        config.insert("port", "3306");
-        config.insert("dbname", "pixspace");
-        config.insert("username", "pixspace");
-        config.insert("password", "pixspace");
-
-        if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
-        {
-            QMessageBox errorBox;
-            errorBox.setText("Can't open config file " + fileName + " for writing.");
-            errorBox.setInformativeText(qPrintable(file.errorString()));
-            errorBox.exec();
-        }
-        QTextStream out(&file);
-        QHashIterator<QString, QString> iter(config);
-        while (iter.hasNext())
-        {
-            iter.next();
-            qDebug() << iter.key() << iter.value();
-            out << iter.key() << ":" << iter.value() << endl;
-        }
-        file.flush();
-        file.close();
-}

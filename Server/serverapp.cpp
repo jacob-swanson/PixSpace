@@ -26,7 +26,7 @@ ServerApp::ServerApp(QWidget *parent) :
 
     // Setup speed labels and current position of slider
         this->ui->speedLabel->setText("Current Time Acceleration:   " + QString::number(this->universe->getTimeAcceleration()));
-        this->ui->speedSlider->setSliderPosition(6);
+        this->ui->speedSlider->setSliderPosition(0);
         this->updateNewSpeedValue(this->ui->speedSlider->sliderPosition());
 
         // Connect up the apply button
@@ -289,12 +289,8 @@ void ServerApp::updateSQLConfig()
     this->ui->serverMessage->append("\tUsername: " + this->ui->sqlUserName->text());
     this->ui->serverMessage->append("\tPassword: *********");
 
-    // writes server settings to file config.dat
-    QString fileName = "config.dat";
-    QFile file(fileName);
 
     QHash<QString, QString> config;
-
     config.insert("Hostname", this->ui->sqlHost->text());
     config.insert("Port", this->ui->sqlPort->text());
     config.insert("Database", this->ui->sqlDBName->text());
@@ -304,113 +300,11 @@ void ServerApp::updateSQLConfig()
     //can test this by manually making file config.dat read only
     //error message let's you know file is unavailable for editing
 
-    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
-    {
-        QMessageBox errorBox;
-        errorBox.setText("Can't open config file " + fileName + " for writing.");
-        errorBox.setInformativeText(qPrintable(file.errorString()));
-        errorBox.exec();
-
-    }
-
-    //textstream is preferable to data stream for readability
-    QTextStream out(&file);
-    QHashIterator<QString, QString> iter(config);
-
-    while (iter.hasNext())
-    {
-        iter.next();
-        //qdebug line following is for testing output.
-        //qDebug() << iter.key() << iter.value();
-        out << iter.key() << ":" << iter.value() << endl;
-    }
-
-    file.flush();
-    file.close();
-
+    Configurator::instance()->updateConfig(config);
 }
 
 void ServerApp::updateTimeAccelerationRequest()
 {
     // Request that time acceleration be updated at the end of the next tick
     connect(this, SIGNAL(endTick(int)), this, SLOT(updateTimeAcceleration(int)));
-}
-
-
-void ServerApp::on_loadSQL_clicked()
-{
-    QString fileName = "config.dat";
-    QFile file(fileName);
-    QHash<QString, QString> config;
-
-    if (!file.open(QIODevice::ReadOnly))
-    {
-        QMessageBox errorBox;
-        errorBox.setText("Can't open config file " + fileName + " for reading.");
-        errorBox.setInformativeText(qPrintable(file.errorString()));
-        errorBox.exec();
-    }
-    QTextStream in(&file);
-    while(!in.atEnd())
-    {
-        QString line = in.readLine();
-        QStringList tokens = line.split(":");
-        config.insert(tokens[0],tokens[1]);
-    }
-
-
-
-    //to test that values were stored in QHash properly
-        QHashIterator<QString, QString> iter(config);
-        //this is how to find a particular key using hash.find()
-//        QHash<QString, QString>::const_iterator i = config.find("Database");
-//        if (i != config.end() && i.key() == "Database")
-//        {
-            //do work
-//        }
-
-        while (iter.hasNext())
-        {
-            iter.next();
-            if (iter.key() == "Database")
-            {
-                DataManager::instance()->setDatabaseName(iter.value());
-                 //tests it to make sure it loaded correctly
-                qDebug() << DataManager::instance()->getDatabaseName();
-
-            }
-
-            if (iter.key() == "Hostname")
-            {
-                DataManager::instance()->setHostName(iter.value());
-                 //tests it to make sure it loaded correctly
-                qDebug() << DataManager::instance()->getHostName();
-
-            }
-            if (iter.key() == "Port")
-            {
-                DataManager::instance()->setPort(iter.value().toInt());
-                 //tests it to make sure it loaded correctly
-                qDebug() << DataManager::instance()->getPort();
-
-            }
-
-            if (iter.key() == "Username")
-            {
-                DataManager::instance()->setUserName(iter.value());
-                 //tests it to make sure it loaded correctly
-                qDebug() << DataManager::instance()->getUserName();
-
-            }
-
-            if (iter.key() == "Password")
-            {
-                DataManager::instance()->setPassword(iter.value());
-
-            }
-            //qDebug() << iter.key() << iter.value();
-        }
-
-    file.close();
-
 }

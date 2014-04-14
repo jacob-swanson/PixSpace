@@ -24,17 +24,14 @@ public:
     static DataManager* instance();
 
     /**
+      * @breif ~DataManager drops the database connection
+      */
+    ~DataManager();
+
+    /**
      * @brief drop Destroy the singleton instance
      */
     static void drop();
-
-    /**
-     * @brief loadBodySprite Loads the data for a sprite
-     * @param id Id of the Sprite in the database
-     * @param sprite Returning variable for the sprite
-     * @return True if the art was loaded, false otherwise
-     */
-    bool loadBodySprite(QString id, QByteArray *sprite, QByteArray *mask) const;
 
     /**
      * @brief saveBodies Save a list of Bodies
@@ -110,21 +107,9 @@ public:
 
     /**
      * @brief getUserName Get the username for DB
-     * @return QSTring
+     * @return QString
      */
     QString getUserName();
-
-    /**
-     * @brief parseconfig reads in a config file with keys/values separated
-     * by colons. Stores in a QHash as QString:QString
-     */
-    void parseconfig();
-
-    /**
-     * @brief createconfig makes a config file
-     */
-
-    void createconfig();
 
 
 private:

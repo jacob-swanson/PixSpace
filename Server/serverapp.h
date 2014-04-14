@@ -11,6 +11,7 @@
 #include <sys/socket.h>
 
 #include <Universe>
+#include <Configurator>
 
 #include "networkserver.h"
 #include "datamanager.h"
@@ -82,9 +83,6 @@ private slots:
      */
     void updateSQLConfig();
 
-
-
-    void on_loadSQL_clicked();
 
 public slots:
     /**

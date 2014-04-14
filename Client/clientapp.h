@@ -10,6 +10,7 @@
 #include <QJsonDocument>
 #include <QKeyEvent>
 #include <QElapsedTimer>
+#include <QColor>
 
 #include <RenderBody>
 #include <Connection>
@@ -42,7 +43,7 @@ private slots:
      * @param port
      * @param name
      */
-    void connectToServer(QString address, int port, QString name);
+    void connectToServer(QString address, int port, QString name, QString shipName, QColor primColor, QColor secColor, QColor tertColor);
 
     /**
      * @brief exitClient Exit the application
@@ -89,11 +90,6 @@ private slots:
     void bodyNotFound(Body* body);
 
     /**
-     * @brief Disconnect Disconnects from the server and returns to server dialog
-     */
-    void Disconnect();
-
-    /**
      * @brief Center Centers the graphics scene on the user's ship
      */
     void Center();
@@ -129,6 +125,12 @@ private:
     PlayerController* controller;
 
     QElapsedTimer timer;
+
+    // Ship customization
+    QString shipName;
+    QColor primColor;
+    QColor secColor;
+    QColor tertColor;
 };
 
 #endif // CLIENTAPP_H

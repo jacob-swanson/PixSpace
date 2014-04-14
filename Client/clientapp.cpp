@@ -11,6 +11,7 @@ ClientApp::ClientApp(QObject *parent) :
     this->scene = new ClientGraphicsScene;
     this->view->setScene(this->scene);
 
+    this->connection = NULL;
     this->showConnectionDialog();
 
     this->universe = new Universe();
@@ -54,11 +55,15 @@ void ClientApp::bodyNotFound(Body *body)
     }
 }
 
-void ClientApp::connectToServer(QString address, int port, QString name)
+void ClientApp::connectToServer(QString address, int port, QString name, QString shipName, QColor primColor, QColor secColor, QColor tertColor)
 {
     // Connect to a server
     this->connection = new Connection(name, this);
     this->connection->connectToHost(address, port);
+    this->shipName = shipName;
+    this->primColor = primColor;
+    this->secColor = secColor;
+    this->tertColor = tertColor;
 
     connect(this->connection, SIGNAL(readyForUse()), this, SLOT(connectionSuccessful()));
     connect(this->connection, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(displayConnectionError()));
@@ -74,7 +79,10 @@ void ClientApp::show()
 void ClientApp::exitClient()
 {
     // Destroy the connection before quitting
-    this->connection->disconnectFromHost();
+    if (this->connection != NULL)
+    {
+        this->connection->disconnectFromHost();
+    }
 
     // Exit the application
     QCoreApplication::quit();
@@ -87,13 +95,14 @@ void ClientApp::connectionSuccessful()
     this->scene->clear();
     this->tickTimer.start();
 
-    Ship* b = new Ship("FireflyShip", this->connection->getGreetingMessage());
+    Ship* b = new Ship(this->shipName, this->connection->getGreetingMessage());
     b->setPosition(4.2e7, 0.0);
-    b->setVelocity(0.0, 1.7e3);
+    b->setVelocity(0.0, 1e3);
     b->setRotationRate(50);
     b->setMass(10.8e2);
-    b->setMaxThrust(1e6);
+    b->setMaxThrust(1e3);
     b->setDiameter(1e7);
+    b->setMasks(this->primColor.red(), this->primColor.green(), this->primColor.blue(), this->secColor.red(), this->secColor.green(), this->secColor.blue(), this->tertColor.red(), this->tertColor.green(), this->tertColor.blue());
 
     this->controller->possess(b);
     this->universe->pushBodies(b);
@@ -107,8 +116,9 @@ void ClientApp::connectionSuccessful()
 void ClientApp::respawnShip()
 {
     this->controller->getPossessed()->setPosition(4.2e7, 0.0);
-    this->controller->getPossessed()->setVelocity(0.0, 1.7e3);
+    this->controller->getPossessed()->setVelocity(0.0, 1e3);
     this->controller->getPossessed()->setAcceleration(Vector(0.0, 0.0));
+    this->controller->getPossessed()->setThrottle(0.0);
 }
 
 void ClientApp::displayConnectionError()
@@ -116,26 +126,6 @@ void ClientApp::displayConnectionError()
     QMessageBox errorBox;
     errorBox.setText("Connection error: " + this->connection->errorString());
     errorBox.exec();
-
-    this->Disconnect();
-}
-
-void ClientApp::Disconnect()
-{
-    // Destroy the connection
-    this->connection->disconnectFromHost();
-
-    // Disconnect signals and slots
-    disconnect(this->connection, SIGNAL(readyForUse()), this, SLOT(connectionSuccessful()));
-    disconnect(this->connection, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(displayConnectionError()));
-    disconnect(this->connection, SIGNAL(newMessage(QString,QString)), this, SLOT(receiveMessage(QString,QString)));
-
-    this->scene->setControllerMode(false);
-    // Show the connection dialog
-    delete this->universe;
-    this->universe = new Universe();
-    this->scene->clear();
-    this->showConnectionDialog();
 }
 
 void ClientApp::showConnectionDialog()
@@ -146,8 +136,8 @@ void ClientApp::showConnectionDialog()
 
     this->view->centerOn(item);
 
-    connect(dialog, SIGNAL(connectToServer(QString,int,QString)),
-            this, SLOT(connectToServer(QString,int,QString)));
+    connect(dialog, SIGNAL(connectToServer(QString,int,QString, QString, QColor, QColor, QColor)),
+            this, SLOT(connectToServer(QString,int,QString, QString, QColor, QColor, QColor)));
     connect(dialog, SIGNAL(quit()), this, SLOT(exitClient()));
 }
 

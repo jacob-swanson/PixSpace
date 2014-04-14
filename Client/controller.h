@@ -23,29 +23,6 @@ public:
      * @param body
      */
     virtual void possess(Ship* body) = 0;
-
-    /**
-     * @brief unPossess Release control of a Body
-     */
-    virtual void unPossess() = 0;
-
-    /**
-     * @brief getPosition Get the position of the controller
-     */
-    virtual Vector getPosition() = 0;
-
-    /**
-     * @brief read Read in the Controller from JSON
-     * @param json
-     */
-    virtual void read(QJsonObject &json) = 0;
-
-    /**
-     * @brief write Write out the controller to JSON
-     * @param json
-     */
-    virtual void write(QJsonObject &json) = 0;
-
 };
 
 #endif // CONTROLLER_H

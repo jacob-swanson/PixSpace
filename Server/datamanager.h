@@ -107,21 +107,9 @@ public:
 
     /**
      * @brief getUserName Get the username for DB
-     * @return QSTring
+     * @return QString
      */
     QString getUserName();
-
-    /**
-     * @brief parseconfig reads in a config file with keys/values separated
-     * by colons. Stores in a QHash as QString:QString
-     */
-    void parseconfig();
-
-    /**
-     * @brief createconfig makes a config file
-     */
-
-    void createconfig();
 
 
 private:

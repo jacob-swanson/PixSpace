@@ -160,7 +160,6 @@ void ClientApp::receiveMessage(QString username, QString message)
 void ClientApp::tickSimulation()
 {
     double deltaTime = ((double)this->timer.restart()/1000.0);
-    if (deltaTime )
 
     foreach(Body* b, this->universe->getBodies())
     {

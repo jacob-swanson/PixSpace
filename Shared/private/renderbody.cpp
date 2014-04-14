@@ -98,17 +98,6 @@ void RenderBody::applyMask(QImage* image, QImage* mask)
         tertiary.setGreen(this->tertiaryMaskGreen);
         tertiary.setBlue(this->tertiaryMaskBlue);
 
-        /*// Generate random colors using RGB values from 0 to 255
-        primary.setRed(rand() % 256);
-        primary.setBlue(rand() % 256);
-        primary.setGreen(rand() % 256);
-        secondary.setRed(rand() % 256);
-        secondary.setBlue(rand() % 256);
-        secondary.setGreen(rand() % 256);
-        tertiary.setRed(rand() % 256);
-        tertiary.setBlue(rand() % 256);
-        tertiary.setGreen(rand() % 256);*/
-
         // Loop through each pixel in the images
         for (int x = 0; x < mask->size().width(); x++)
         {

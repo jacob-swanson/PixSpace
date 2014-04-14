@@ -73,7 +73,6 @@ void Configurator::updateConfig(QHash<QString, QString> newConfig)
     {
         iter.next();
         oldConfig.insert(iter.key(), iter.value());
-        qDebug() << iter.key() << iter.value();
     }
 
     //can test this by manually making file config.dat read only
@@ -84,14 +83,13 @@ void Configurator::updateConfig(QHash<QString, QString> newConfig)
         errorBox.setText("Can't open config file " + fileName + " for writing.");
         errorBox.setInformativeText(qPrintable(file.errorString()));
         errorBox.exec();
-
     }
     else
     {
         //textstream is preferable to data stream for readability
         QTextStream out(&file);
         QHashIterator<QString, QString> outIter(oldConfig);
-        while (iter.hasNext())
+        while (outIter.hasNext())
         {
             outIter.next();
             //qdebug line following is for testing output.

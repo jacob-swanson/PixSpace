@@ -5,7 +5,7 @@
 #include <QObject>
 #include <QMessageBox>
 
-#include <signal.h>
+#include <Configurator>
 
 #include "serverapp.h"
 
@@ -15,12 +15,13 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     // Setup database
-    //DataManager::instance()->parseconfig(); //this reads in config.dat
-    DataManager::instance()->setHostName("127.0.0.1");
-    DataManager::instance()->setPort(3306);
-    DataManager::instance()->setDatabaseName("pixspace");
-    DataManager::instance()->setUserName("root");
-    DataManager::instance()->setPassword("root");
+    QHash<QString, QString> config = Configurator::instance()->getConfig();
+    DataManager::instance()->setHostName(config.value("Hostname"));
+    DataManager::instance()->setPort(config.value("Port").toInt());
+    DataManager::instance()->setDatabaseName(config.value("Database"));
+    DataManager::instance()->setUserName(config.value("Username"));
+    DataManager::instance()->setPassword(config.value("Password"));
+
     // Connect to DB, connect and check for error, if failed report error and close
     if (!DataManager::instance()->connect())
     {

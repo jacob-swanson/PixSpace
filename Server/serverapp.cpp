@@ -289,12 +289,8 @@ void ServerApp::updateSQLConfig()
     this->ui->serverMessage->append("\tUsername: " + this->ui->sqlUserName->text());
     this->ui->serverMessage->append("\tPassword: *********");
 
-    // writes server settings to file config.dat
-    QString fileName = "config.dat";
-    QFile file(fileName);
 
     QHash<QString, QString> config;
-
     config.insert("Hostname", this->ui->sqlHost->text());
     config.insert("Port", this->ui->sqlPort->text());
     config.insert("Database", this->ui->sqlDBName->text());

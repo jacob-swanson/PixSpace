@@ -16,11 +16,30 @@ int main(int argc, char *argv[])
 
     // Setup database
     QHash<QString, QString> config = Configurator::instance()->getConfig();
-    DataManager::instance()->setHostName(config.value("Hostname"));
-    DataManager::instance()->setPort(config.value("Port").toInt());
-    DataManager::instance()->setDatabaseName(config.value("Database"));
-    DataManager::instance()->setUserName(config.value("Username"));
-    DataManager::instance()->setPassword(config.value("Password"));
+    if (config.contains("Hostname"))
+        DataManager::instance()->setHostName(config.value("Hostname"));
+    else
+        DataManager::instance()->setHostName("localhost");
+
+    if (config.contains("Port"))
+        DataManager::instance()->setPort(config.value("Port").toInt());
+    else
+        DataManager::instance()->setPort(6886);
+
+    if (config.contains("Database"))
+        DataManager::instance()->setDatabaseName(config.value("Database"));
+    else
+        DataManager::instance()->setDatabaseName("pixspace");
+
+    if (config.contains("Username"))
+        DataManager::instance()->setUserName(config.value("Username"));
+    else
+        DataManager::instance()->setUserName("pixspace");
+
+    if (config.contains("Password"))
+        DataManager::instance()->setPassword(config.value("Password"));
+    else
+        DataManager::instance()->setPassword("pixspace");
 
     // Connect to DB, connect and check for error, if failed report error and close
     if (!DataManager::instance()->connect())
@@ -30,6 +49,7 @@ int main(int argc, char *argv[])
         errorMessage.setInformativeText("Error reported by Database was:\n" + DataManager::instance()->getLastError());
         errorMessage.setIcon(QMessageBox::Warning);
         errorMessage.exec();
+
         return 0;
     }
 

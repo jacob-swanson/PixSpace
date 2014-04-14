@@ -64,6 +64,8 @@ ConnectionDialog::ConnectionDialog(QWidget *parent) :
     this->ui->tertColorImage->setPixmap(*colorDisplay);
 
     // Set image to current label
+    int randIndex = qrand() % this->ui->shipNames->count();
+    this->ui->shipNames->setCurrentIndex(randIndex);
     this->updateShipImage(this->ui->shipNames->currentText());
 
     // Load from config file

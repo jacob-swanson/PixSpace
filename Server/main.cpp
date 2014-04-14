@@ -32,8 +32,8 @@ int main(int argc, char *argv[])
     }
     else
     {
-        DataManager::instance()->setPort(6886);
-        config.insert("Port", "6886");
+        DataManager::instance()->setPort(3306);
+        config.insert("Port", "3306");
     }
 
     if (config.contains("Database"))

@@ -1,11 +1,4 @@
 #include "configurator.h"
-#include <QMutex>
-#include <QFile>
-#include <QHash>
-#include <QMessageBox>
-#include <QString>
-#include <QTextStream>
-#include <QDebug>
 
 Configurator* Configurator::m_Instance = 0;
 
@@ -29,67 +22,84 @@ Configurator::Configurator()
 {
 }
 
-void Configurator::parseconfig()
+QHash<QString, QString> Configurator::getConfig()
 {
     QString fileName = "config.dat";
     QFile file(fileName);
-        QHash<QString, QString> config;
+    QHash<QString, QString> config;
 
-        if (!file.open(QIODevice::ReadOnly))
-        {
-            QMessageBox errorBox;
-            errorBox.setText("Can't open config file " + fileName + " for reading.");
-            errorBox.setInformativeText(qPrintable(file.errorString()));
-            errorBox.exec();
-        }
-        QTextStream in(&file);
-        while(!in.atEnd())
-        {
-            QString line = in.readLine();
-            QStringList tokens = line.split(":");
-            config.insert(tokens[0],tokens[1]);
-        }
+    if (!file.open(QIODevice::ReadOnly))
+    {
+        QMessageBox errorBox;
+        errorBox.setText("Can't open config file " + fileName + " for reading.");
+        errorBox.setInformativeText(qPrintable(file.errorString()));
+        errorBox.exec();
 
-        //to test that values were stored in QHash properly
-            QHashIterator<QString, QString> iter(config);
-            while (iter.hasNext())
-            {
-                iter.next();
-                qDebug() << iter.key() << iter.value();
-            }
+        return QHash<QString, QString>();
+    }
 
-        file.close();
+    QTextStream in(&file);
+    while(!in.atEnd())
+    {
+        QString line = in.readLine();
+        QStringList tokens = line.split(":");
+        config.insert(tokens[0],tokens[1]);
+    }
 
+    //to test that values were stored in QHash properly
+    QHashIterator<QString, QString> iter(config);
+    while (iter.hasNext())
+    {
+        iter.next();
+        qDebug() << iter.key() << iter.value();
+    }
+
+    file.close();
+
+    return config;
 }
 
-void Configurator::createconfig()
+void Configurator::updateConfig(QHash<QString, QString> newConfig)
 {
-        QString fileName = "config.dat";
-        QFile file(fileName);
+    // writes server settings to file config.dat
+    QString fileName = "config.dat";
+    QFile file(fileName);
 
-        QHash<QString, QString> config;
+    QHash<QString, QString> oldConfig = this->getConfig();
 
-        config.insert("hostname", "localhost");
-        config.insert("port", "3306");
-        config.insert("dbname", "pixspace");
-        config.insert("username", "pixspace");
-        config.insert("password", "pixspace");
+    // Merge new and old config
+    QHashIterator<QString, QString> iter(newConfig);
+    while (iter.hasNext())
+    {
+        iter.next();
+        oldConfig.insert(iter.key(), iter.value());
+        qDebug() << iter.key() << iter.value();
+    }
 
-        if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
-        {
-            QMessageBox errorBox;
-            errorBox.setText("Can't open config file " + fileName + " for writing.");
-            errorBox.setInformativeText(qPrintable(file.errorString()));
-            errorBox.exec();
-        }
+    //can test this by manually making file config.dat read only
+    //error message let's you know file is unavailable for editing
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+        QMessageBox errorBox;
+        errorBox.setText("Can't open config file " + fileName + " for writing.");
+        errorBox.setInformativeText(qPrintable(file.errorString()));
+        errorBox.exec();
+
+    }
+    else
+    {
+        //textstream is preferable to data stream for readability
         QTextStream out(&file);
-        QHashIterator<QString, QString> iter(config);
+        QHashIterator<QString, QString> outIter(oldConfig);
         while (iter.hasNext())
         {
-            iter.next();
-            qDebug() << iter.key() << iter.value();
-            out << iter.key() << ":" << iter.value() << endl;
+            outIter.next();
+            //qdebug line following is for testing output.
+            //qDebug() << iter.key() << iter.value();
+            out << outIter.key() << ":" << outIter.value() << endl;
         }
+
         file.flush();
         file.close();
+    }
 }

@@ -1,5 +1,12 @@
 #ifndef CONFIGURATOR_H
 #define CONFIGURATOR_H
+#include <QMutex>
+#include <QFile>
+#include <QHash>
+#include <QMessageBox>
+#include <QString>
+#include <QTextStream>
+#include <QDebug>
 
 class Configurator
 {
@@ -8,15 +15,17 @@ public:
     static Configurator* instance();
 
     /**
-     * @brief parseconfig reads in a config file with keys/values separated
-     * by colons. Stores in a QHash as QString:QString
+     * @brief getConfig Return config file
+     * @return
      */
-    void parseconfig();
+    QHash<QString, QString> getConfig();
 
     /**
-     * @brief createconfig makes a config file
+     * @brief updateConfig Update config file
+     * @param newConfig
      */
-    void createconfig();
+    void updateConfig(QHash<QString, QString> newConfig);
+
 
 private:
     // Hide constructor

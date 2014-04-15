@@ -42,7 +42,15 @@ ServerApp::ServerApp(QWidget *parent) :
     this->server = new NetworkServer(this);
     // TODO: Get port from config
     // Set port and display it
-    this->server->listen(QHostAddress::Any, 6886);
+    bool success =this->server->listen(QHostAddress::Any, 6886);
+    if (!success)
+    {
+        QMessageBox errorMessage;
+        errorMessage.setText("PixSpace Server has failed to launch.");
+        errorMessage.setInformativeText("PixSpace Server was unable to bind to port 6886.");
+        errorMessage.setIcon(QMessageBox::Warning);
+        errorMessage.exec();
+    }
     this->ui->serverPort->setText(QString::number(6886));
 
     ui->serverMessage->append("Listening on: " + this->server->serverAddress().toString() + ":" + QString::number(this->server->serverPort()));

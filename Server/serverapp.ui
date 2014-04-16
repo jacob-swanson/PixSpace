@@ -163,13 +163,6 @@
                 </spacer>
                </item>
                <item>
-                <widget class="QPushButton" name="loadSQL">
-                 <property name="text">
-                  <string>Load From File</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
                 <widget class="QPushButton" name="saveSQL">
                  <property name="text">
                   <string>Save</string>

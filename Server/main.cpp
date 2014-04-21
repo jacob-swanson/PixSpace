@@ -32,8 +32,8 @@ int main(int argc, char *argv[])
     }
     else
     {
-        DataManager::instance()->setPort(6886);
-        config.insert("Port", "6886");
+        DataManager::instance()->setPort(3306);
+        config.insert("Port", "3306");
     }
 
     if (config.contains("Database"))
@@ -74,11 +74,11 @@ int main(int argc, char *argv[])
     {
         QMessageBox errorMessage;
         errorMessage.setText("PixSpace Server has failed to launch.");
-        errorMessage.setInformativeText("Error reported by Database was:\n" + DataManager::instance()->getLastError());
+        errorMessage.setInformativeText("The simulation component will not function until the error below is resolved.\n\nError reported by Database was:\n" + DataManager::instance()->getLastError());
         errorMessage.setIcon(QMessageBox::Warning);
         errorMessage.exec();
 
-        return 0;
+        //return 0;
     }
 
     ServerApp app;

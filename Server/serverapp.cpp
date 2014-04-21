@@ -13,53 +13,61 @@ ServerApp::ServerApp(QWidget *parent) :
     ui->setupUi(this);
 
     // Create objects
-        this->universe = new Universe();
+    this->universe = new Universe();
 
     // Get data from data manager for labels in GUI
-        this->ui->sqlDBName->setText(DataManager::instance()->getDatabaseName());
-        this->ui->sqlHost->setText(DataManager::instance()->getHostName());
-        this->ui->sqlPort->setText(QString::number(DataManager::instance()->getPort()));
-        this->ui->sqlUserName->setText(DataManager::instance()->getUserName());
+    this->ui->sqlDBName->setText(DataManager::instance()->getDatabaseName());
+    this->ui->sqlHost->setText(DataManager::instance()->getHostName());
+    this->ui->sqlPort->setText(QString::number(DataManager::instance()->getPort()));
+    this->ui->sqlUserName->setText(DataManager::instance()->getUserName());
 
     // Connect the DB save button to update function
-        connect(this->ui->saveSQL, SIGNAL(clicked()), this, SLOT(updateSQLConfig()));
+    connect(this->ui->saveSQL, SIGNAL(clicked()), this, SLOT(updateSQLConfig()));
 
     // Setup speed labels and current position of slider
-        this->ui->speedLabel->setText("Current Time Acceleration:   " + QString::number(this->universe->getTimeAcceleration()));
-        this->ui->speedSlider->setSliderPosition(0);
-        this->updateNewSpeedValue(this->ui->speedSlider->sliderPosition());
+    this->ui->speedLabel->setText("Current Time Acceleration:   " + QString::number(this->universe->getTimeAcceleration()));
+    this->ui->speedSlider->setSliderPosition(0);
+    this->updateNewSpeedValue(this->ui->speedSlider->sliderPosition());
 
-        // Connect up the apply button
-        connect(this->ui->applySpeed, SIGNAL(clicked()), this, SLOT(updateTimeAccelerationRequest()));
+    // Connect up the apply button
+    connect(this->ui->applySpeed, SIGNAL(clicked()), this, SLOT(updateTimeAccelerationRequest()));
 
-        // Connect slider to slot to update to a new speed value
-        connect (this->ui->speedSlider, SIGNAL(valueChanged(int)), this, SLOT(updateNewSpeedValue(int)));
+    // Connect slider to slot to update to a new speed value
+    connect (this->ui->speedSlider, SIGNAL(valueChanged(int)), this, SLOT(updateNewSpeedValue(int)));
 
-        // Load save data
-        this->universe->setBodies(DataManager::instance()->loadBodies());
+    // Load save data
+    this->universe->setBodies(DataManager::instance()->loadBodies());
 
-        // Start listening
-        this->server = new NetworkServer(this);
-        // TODO: Get port from config
-        // Set port and display it
-        this->server->listen(QHostAddress::Any, 6886);
-        this->ui->serverPort->setText(QString::number(6886));
+    // Start listening
+    this->server = new NetworkServer(this);
+    // TODO: Get port from config
+    // Set port and display it
+    bool success =this->server->listen(QHostAddress::Any, 6886);
+    if (!success)
+    {
+        QMessageBox errorMessage;
+        errorMessage.setText("PixSpace Server has failed to launch.");
+        errorMessage.setInformativeText("PixSpace Server was unable to bind to port 6886.");
+        errorMessage.setIcon(QMessageBox::Warning);
+        errorMessage.exec();
+    }
+    this->ui->serverPort->setText(QString::number(6886));
 
-        ui->serverMessage->append("Listening on: " + this->server->serverAddress().toString() + ":" + QString::number(this->server->serverPort()));
+    ui->serverMessage->append("Listening on: " + this->server->serverAddress().toString() + ":" + QString::number(this->server->serverPort()));
 
-        // Connect signals for TCP server
-        connect(server, SIGNAL(newConnection(Connection*)), this, SLOT(displayConnection(Connection*)));
-        connect(server, SIGNAL(disconnection(QString)), this, SLOT(displayDisconnection(QString)));
-        connect(this->universe, SIGNAL(stepFinished()), this, SLOT(broadcastBodies()));
-        connect(server, SIGNAL(newMessage(QString,QString)), this, SLOT(receiveMessage(QString,QString)));
+    // Connect signals for TCP server
+    connect(server, SIGNAL(newConnection(Connection*)), this, SLOT(displayConnection(Connection*)));
+    connect(server, SIGNAL(disconnection(QString)), this, SLOT(displayDisconnection(QString)));
+    connect(this->universe, SIGNAL(stepFinished()), this, SLOT(broadcastBodies()));
+    connect(server, SIGNAL(newMessage(QString,QString)), this, SLOT(receiveMessage(QString,QString)));
 
-        // Connect quit button to stop
-        connect(ui->quitServerButton, SIGNAL(clicked()), this, SLOT(stop()));
+    // Connect quit button to stop
+    connect(ui->quitServerButton, SIGNAL(clicked()), this, SLOT(stop()));
 
-        // Setup timers
-        // TODO: Get time from the config
-        tickTimer.setInterval(30);
-        connect(&tickTimer, SIGNAL(timeout()), this, SLOT(tick()));
+    // Setup timers
+    // TODO: Get time from the config
+    tickTimer.setInterval(30);
+    connect(&tickTimer, SIGNAL(timeout()), this, SLOT(tick()));
 }
 
 ServerApp::~ServerApp()

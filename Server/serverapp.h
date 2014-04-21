@@ -113,7 +113,6 @@ private:
      */
     void updateNewSpeedLabel(int speed);
 
-
     // Data structures
     Universe *universe;
     NetworkServer *server;

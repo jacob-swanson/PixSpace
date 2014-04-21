@@ -72,8 +72,8 @@ ConnectionDialog::ConnectionDialog(QWidget *parent) :
     QHash<QString, QString> config = Configurator::instance()->getConfig();
     if (config.contains("Address"))
         this->ui->lineEditAddress->setText(config.value("Address"));
-    if (config.contains("Port"))
-        this->ui->lineEditPort->setText(config.value("Port"));
+    if (config.contains("ServerPort"))
+        this->ui->lineEditPort->setText(config.value("ServerPort"));
     if (config.contains("Name"))
         this->ui->lineEditName->setText(config.value("Name"));
 }
@@ -93,7 +93,7 @@ void ConnectionDialog::connectButtonClicked()
     // Save config
     QHash<QString, QString> config;
     config.insert("Address", this->ui->lineEditAddress->text());
-    config.insert("Port", this->ui->lineEditPort->text());
+    config.insert("ServerPort", this->ui->lineEditPort->text());
     config.insert("Name", this->ui->lineEditName->text());
     Configurator::instance()->updateConfig(config);
 

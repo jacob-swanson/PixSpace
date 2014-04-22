@@ -1,5 +1,13 @@
 PixSpace README
 
+Pilot a large, and often comedic ship throughout the strange solar system of PixSpace!
+Visit gas giants, so large you can see them from huge distances away, but so low in mass 
+you’d be flung off their surface if you beamed down! Orbit a strange ocean dominated planet
+which orbits no sun. Hit tiny rogue asteroids as you attempt to escape orbit. Above all, 
+zoom out so far that your ship becomes a single pixel - and all the while, zoom past other 
+players, some of whom may be ducks, pigs, or even kittens in cups.
+
+
 Database Creation
  In order to run the PixSpace Server, you will first need to setup a MySQL 
  database. If you want to run the scripts yourself, the creation script is 

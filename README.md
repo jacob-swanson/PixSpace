@@ -1,4 +1,4 @@
-# PixSpace README
+# PixSpace
 
 Pilot a large, and often comedic ship throughout the strange solar system of PixSpace!
 Visit gas giants, so large you can see them from huge distances away, but so low in mass 

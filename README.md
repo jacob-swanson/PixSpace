@@ -14,7 +14,6 @@ In order to run the PixSpace Server, you will first need to setup a MySQL databa
 The database creation script can be executed with the following command.
 ```
 mysql -u root -p -h DB_HOSTNAME < db_scripts/mysql_db_create.sql
- 
 ```
 
 ## Building PixSpace
@@ -47,11 +46,11 @@ To execute PixSpace Client run
 ```
 
 ## Client Controls
-W - Increase Throttle
-S - Decrease Throttle
-A - Rotate Left
-D - Rotate Right
-C - Center on Ship
-Mouse Wheel Scroll Up - Zoom In
-Mouse Wheel Scroll Down - Zoom Out
-Mouse Drag - Move View
+- W - Increase Throttle
+- S - Decrease Throttle
+- A - Rotate Left
+- D - Rotate Right
+- C - Center on Ship
+- Mouse Wheel Scroll Up - Zoom In
+- Mouse Wheel Scroll Down - Zoom Out
+- Mouse Drag - Move View
